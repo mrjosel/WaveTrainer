@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,56 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTi-dX-qIL">
+                                <rect key="frame" x="200" y="70" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="J9b-ly-OkZ"/>
+                                    <constraint firstAttribute="width" constant="200" id="KuF-ve-YXr"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfd-nd-zeX">
+                                <rect key="frame" x="279" y="320" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dma-Fi-5FQ">
+                                <rect key="frame" x="200" y="373" width="200" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Drp-C7-sMR">
+                                <rect key="frame" x="200" y="432" width="200" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="leading" secondItem="Dma-Fi-5FQ" secondAttribute="leading" id="0iD-bO-VIc"/>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="trailing" secondItem="Dma-Fi-5FQ" secondAttribute="trailing" id="26S-Db-iaf"/>
+                            <constraint firstItem="vfd-nd-zeX" firstAttribute="top" secondItem="QTi-dX-qIL" secondAttribute="bottom" constant="50" id="3zy-77-MDh"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="trailing" secondItem="QTi-dX-qIL" secondAttribute="trailing" id="6Iy-2p-xCQ"/>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="top" secondItem="Dma-Fi-5FQ" secondAttribute="bottom" constant="29" id="BfU-m8-pcI"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="top" secondItem="vfd-nd-zeX" secondAttribute="bottom" constant="32" id="GfW-xd-5vf"/>
+                            <constraint firstItem="QTi-dX-qIL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SjM-98-TSo"/>
+                            <constraint firstItem="QTi-dX-qIL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="UTG-xy-ivp"/>
+                            <constraint firstItem="vfd-nd-zeX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WMT-nF-g1v"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="leading" secondItem="QTi-dX-qIL" secondAttribute="leading" id="kC0-iV-Ze8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="barbellImageView" destination="QTi-dX-qIL" id="wts-Zp-mTT"/>
+                        <outlet property="barbellImageViewHeightConstraint" destination="J9b-ly-OkZ" id="fFN-d7-1wY"/>
+                        <outlet property="passwordTextField" destination="Drp-C7-sMR" id="ZxD-ia-PSZ"/>
+                        <outlet property="titleLabel" destination="vfd-nd-zeX" id="RnK-8L-V6z"/>
+                        <outlet property="userNameTextField" destination="Dma-Fi-5FQ" id="717-oY-VJs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="190" y="322"/>
         </scene>
     </scenes>
 </document>
