@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
     //outlets
     @IBOutlet weak var barbellImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var barbellImageViewHeightConstraint: NSLayoutConstraint! //TODO: USE FOR AUTO-SIZING
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -29,6 +28,24 @@ class LoginViewController: UIViewController {
         self.titleLabel.textColor = UIColor.whiteColor()
         self.view.backgroundColor = UIColor.blackColor()
         
+        //set delegates
+        self.userNameTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
+    }
+    
+    //perform the following before view appears
+    override func viewWillAppear(animated: Bool) {
+        
+        //subscribe to keyboard notifications to allow for view resizing
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    //perform the following before the view disappears
+    override func viewWillDisappear(animated: Bool) {
+        
+        //unsubscribe to keyboard notifications to prevent any race conditions
+        self.unsubscribeFromKeyboardNotifications()
     }
     
     override func didReceiveMemoryWarning() {

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -20,8 +21,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTi-dX-qIL">
                                 <rect key="frame" x="200" y="70" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="J9b-ly-OkZ"/>
-                                    <constraint firstAttribute="width" constant="200" id="KuF-ve-YXr"/>
+                                    <constraint firstAttribute="width" constant="200" id="Miq-pg-FwR"/>
+                                    <constraint firstAttribute="width" secondItem="QTi-dX-qIL" secondAttribute="height" multiplier="1:1" id="PvL-LJ-0MK"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfd-nd-zeX">
@@ -43,21 +44,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Drp-C7-sMR" firstAttribute="leading" secondItem="Dma-Fi-5FQ" secondAttribute="leading" id="0iD-bO-VIc"/>
-                            <constraint firstItem="Drp-C7-sMR" firstAttribute="trailing" secondItem="Dma-Fi-5FQ" secondAttribute="trailing" id="26S-Db-iaf"/>
-                            <constraint firstItem="vfd-nd-zeX" firstAttribute="top" secondItem="QTi-dX-qIL" secondAttribute="bottom" constant="50" id="3zy-77-MDh"/>
-                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="trailing" secondItem="QTi-dX-qIL" secondAttribute="trailing" id="6Iy-2p-xCQ"/>
-                            <constraint firstItem="Drp-C7-sMR" firstAttribute="top" secondItem="Dma-Fi-5FQ" secondAttribute="bottom" constant="29" id="BfU-m8-pcI"/>
-                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="top" secondItem="vfd-nd-zeX" secondAttribute="bottom" constant="32" id="GfW-xd-5vf"/>
-                            <constraint firstItem="QTi-dX-qIL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SjM-98-TSo"/>
-                            <constraint firstItem="QTi-dX-qIL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="UTG-xy-ivp"/>
-                            <constraint firstItem="vfd-nd-zeX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WMT-nF-g1v"/>
-                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="leading" secondItem="QTi-dX-qIL" secondAttribute="leading" id="kC0-iV-Ze8"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="top" secondItem="vfd-nd-zeX" secondAttribute="bottom" constant="32" id="LPn-ss-5aI"/>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="width" secondItem="QTi-dX-qIL" secondAttribute="width" id="McQ-2s-qKr"/>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="leading" secondItem="QTi-dX-qIL" secondAttribute="leading" id="RG0-dO-3jK"/>
+                            <constraint firstItem="vfd-nd-zeX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X7l-kq-wuj"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="leading" secondItem="QTi-dX-qIL" secondAttribute="leading" id="Z4y-a0-HVA"/>
+                            <constraint firstItem="Dma-Fi-5FQ" firstAttribute="width" secondItem="QTi-dX-qIL" secondAttribute="width" id="fPv-Yc-kF1"/>
+                            <constraint firstItem="vfd-nd-zeX" firstAttribute="top" secondItem="QTi-dX-qIL" secondAttribute="bottom" constant="50" id="i4c-SN-aku"/>
+                            <constraint firstItem="Drp-C7-sMR" firstAttribute="top" secondItem="Dma-Fi-5FQ" secondAttribute="bottom" constant="29" id="uCX-tw-gYe"/>
+                            <constraint firstItem="QTi-dX-qIL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ucM-3u-7w9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Drp-C7-sMR" secondAttribute="bottom" constant="138" id="xBS-Xz-EG0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="barbellImageView" destination="QTi-dX-qIL" id="wts-Zp-mTT"/>
-                        <outlet property="barbellImageViewHeightConstraint" destination="J9b-ly-OkZ" id="fFN-d7-1wY"/>
                         <outlet property="passwordTextField" destination="Drp-C7-sMR" id="ZxD-ia-PSZ"/>
                         <outlet property="titleLabel" destination="vfd-nd-zeX" id="RnK-8L-V6z"/>
                         <outlet property="userNameTextField" destination="Dma-Fi-5FQ" id="717-oY-VJs"/>
