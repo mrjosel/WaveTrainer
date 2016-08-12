@@ -24,9 +24,6 @@ extension UIViewController: UITextFieldDelegate {
         return true
     }
     
-    
-    //TODO: WORK WITH FORUMS ON BEST METHODS
-    //      UI CONSTRAINTS CONFLICT??????
     //-----Following methods all related to resizing view when keyboard appeara/dissappers-------------------------
     func subscribeToKeyboardNotifications() {
         //Keyboard show/hide notifications - func called in viewWillAppear
