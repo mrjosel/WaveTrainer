@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,15 @@ class LoginViewController: UIViewController {
         self.titleLabel.text = "Wave Trainer"   //TODO: make stylized version
         self.titleLabel.textColor = UIColor.whiteColor()
         self.view.backgroundColor = UIColor.blackColor()
+        self.userNameTextField.placeholder = "Username"
+        self.passwordTextField.placeholder = "Password"
+        //TODO:  JAZZ UP BUTTONS
+        self.signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
+        self.signUpButton.backgroundColor = UIColor.whiteColor()
+        self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.loginButton.setTitle("Login", forState: UIControlState.Normal)
+        self.loginButton.backgroundColor = UIColor.whiteColor()
+        self.loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
         //set delegates
         self.userNameTextField.delegate = self
