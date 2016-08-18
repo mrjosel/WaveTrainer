@@ -8,11 +8,6 @@
 
 import UIKit
 
-//direction used for UI adjustment of textFields
-enum Direction {
-    case Up, Down
-}
-
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //outlets
