@@ -18,6 +18,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
+    //vars
+    var keyboardAdjusted : Bool = false     //keeps track of whether keyboard is showing or not, false upon startup
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -95,15 +98,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //carry out following when keyboard is about to show
     func keyboardWillShow(notification: NSNotification) {
         
-        //adjust UIView to accomodate Keyboard
-        self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+        //only adjust if keyboard is not showing, else do nothing
+        if !self.keyboardAdjusted {
+            //adjust UIView to accomodate Keyboard
+            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+            
+            //keyboard is showing
+            self.keyboardAdjusted = true
+        }
     }
     
     //carry out following when keyboard is about to hide
     func keyboardWillHide(notification: NSNotification) {
         
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
-        self.view.frame.origin.y = 0//+= self.getKeyboardHeight(notification)
+        self.view.frame.origin.y = 0
+        
+        //keyboard no longer showing
+        self.keyboardAdjusted = false
     }
     
     //gets size of keyboard to be used in resizing the view
@@ -112,8 +124,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
     }
-    //------------------------------End of view resizing methods--------------------------------------------------
-    
+    //------------------------------End of view resizing methods-------------------------------------------------
     
 }
 
