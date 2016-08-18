@@ -17,10 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-    
-    //vars
-    var keyboardAdjusted : Bool = false     //keeps track of whether keyboard is showing or not, false upon startup
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -77,6 +74,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         //hide keyboard when enter key is hit
         textField.resignFirstResponder()
+        
+        //resume listening for keyboardWillShow
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         return true
     }
     
@@ -99,13 +99,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillShow(notification: NSNotification) {
         
         //only adjust if keyboard is not showing, else do nothing
-        if !self.keyboardAdjusted {
-            //adjust UIView to accomodate Keyboard
-            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
-            
-            //keyboard is showing
-            self.keyboardAdjusted = true
-        }
+        self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+        
+        //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
     }
     
     //carry out following when keyboard is about to hide
@@ -114,8 +111,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
         self.view.frame.origin.y = 0
         
-        //keyboard no longer showing
-        self.keyboardAdjusted = false
     }
     
     //gets size of keyboard to be used in resizing the view
