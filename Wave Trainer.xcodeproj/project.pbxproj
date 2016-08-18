@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
-		B7540FDF1D5E33570034D806 /* VCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FDE1D5E33560034D806 /* VCExtensions.swift */; };
 		B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */; };
 		B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */; };
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
@@ -18,7 +17,6 @@
 
 /* Begin PBXFileReference section */
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B7540FDE1D5E33560034D806 /* VCExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCExtensions.swift; sourceTree = "<group>"; };
 		B7EC15921D53AD6900C3D5F1 /* Wave Trainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wave Trainer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +40,6 @@
 		B7540FDA1D5E31F40034D806 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B7540FDE1D5E33560034D806 /* VCExtensions.swift */,
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
 			);
 			name = Controller;
@@ -176,7 +173,6 @@
 			files = (
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
-				B7540FDF1D5E33570034D806 /* VCExtensions.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

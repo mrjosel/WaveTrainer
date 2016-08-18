@@ -8,7 +8,12 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+//direction used for UI adjustment of textFields
+enum Direction {
+    case Up, Down
+}
+
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //outlets
     @IBOutlet weak var barbellImageView: UIImageView!
@@ -63,6 +68,56 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //----------delegate methods----------
+    //when textfield is selected
+    func textFieldDidBeginEditing(textField: UITextField) {
+        //LOL
+    }
+    
+    //when return key is hit
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        //hide keyboard when enter key is hit
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //-----Following methods all related to resizing view when keyboard appears/dissappers-------------------------
+    //subscribes to notifications from keyboard, usually called in a VCs viewWillAppear method
+    func subscribeToKeyboardNotifications() {
+        //adds notifications to notification center
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    //unsubscribes to notifications from keyboard, usually called in a VCs viewWillDisappear method
+    func unsubscribeFromKeyboardNotifications() {
+        //removes keyboard notifications from notification center
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    //carry out following when keyboard is about to show
+    func keyboardWillShow(notification: NSNotification) {
+        
+        //adjust UIView to accomodate Keyboard
+        self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+    }
+    
+    //carry out following when keyboard is about to hide
+    func keyboardWillHide(notification: NSNotification) {
+        
+        //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
+        self.view.frame.origin.y = 0//+= self.getKeyboardHeight(notification)
+    }
+    
+    //gets size of keyboard to be used in resizing the view
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.CGRectValue().height
+    }
+    //------------------------------End of view resizing methods--------------------------------------------------
     
     
 }
