@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,6 +35,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
         self.signUpButton.backgroundColor = UIColor.whiteColor()
         self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.signUpButton.addTarget(self, action: #selector(self.signUpButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        self.loginButton.addTarget(self, action: #selector(self.loginButtonPressed(_:)), forControlEvents: .TouchUpInside)
         self.loginButton.setTitle("Login", forState: UIControlState.Normal)
         self.loginButton.backgroundColor = UIColor.whiteColor()
         self.loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -59,17 +61,38 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    //login button pressed
+    func loginButtonPressed(sender: UIButton) {
+        
+        //get username and password text, pass into Workout Manager client
+        guard let username = self.userNameTextField.text, password = self.passwordTextField.text else {
+            //one or more fields empty, do nothing
+            return
+        }
+        
+        //pass fields into client
+        WorkoutManagerClinet.sharedInstance.login(username, password: password)
+    }
+    
+    //login button pressed
+    func signUpButtonPressed(sender: UIButton) {
+        
+        //get username and password text, pass into Workout Manager client
+        guard let username = self.userNameTextField.text, password = self.passwordTextField.text else {
+            //one or more fields empty, do nothing
+            return
+        }
+        
+        //pass fields into client
+        WorkoutManagerClinet.sharedInstance.signUp(username, password: password)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     //----------delegate methods----------
-    //when textfield is selected
-    func textFieldDidBeginEditing(textField: UITextField) {
-        //LOL
-    }
-    
     //when return key is hit
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         //hide keyboard when enter key is hit
