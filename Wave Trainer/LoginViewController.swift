@@ -69,9 +69,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //one or more fields empty, do nothing
             return
         }
-        
-        //pass fields into client
-        WorkoutManagerClinet.sharedInstance.login(username, password: password)
+        //ensure strings are not empty, if either is empty, do nothing
+        if username != "" && password != "" {
+            //pass fields into client
+            WorkoutManagerClinet.sharedInstance.login(username, password: password)
+        }
     }
     
     //login button pressed
@@ -82,9 +84,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //one or more fields empty, do nothing
             return
         }
-        
-        //pass fields into client
-        WorkoutManagerClinet.sharedInstance.signUp(username, password: password)
+        //ensure strings are not empty, if either is empty, do nothing
+        if username != "" && password != "" {
+            //pass fields into client
+            WorkoutManagerClinet.sharedInstance.signUp(username, password: password)
+        }
     }
     
     override func didReceiveMemoryWarning() {
