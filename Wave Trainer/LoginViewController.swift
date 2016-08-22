@@ -41,10 +41,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.loginButton.backgroundColor = UIColor.whiteColor()
         self.loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
+        //textField behavior
+        self.userNameTextField.clearsOnBeginEditing = true
+        self.userNameTextField.clearButtonMode = .WhileEditing
+        self.passwordTextField.clearsOnBeginEditing = true
+        self.passwordTextField.clearButtonMode = .WhileEditing
+        self.passwordTextField.secureTextEntry = true
+        
         //set delegates
         self.userNameTextField.delegate = self
         self.passwordTextField.delegate = self
-        
+
     }
     
     //perform the following before view appears
