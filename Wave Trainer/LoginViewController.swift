@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //unsubscribe to keyboard notifications to prevent any race conditions
         self.unsubscribeFromKeyboardNotifications()
     }
-    
+    //TODO:  INVESTIGATE HOW TO LOGIN AND HOW TO SIGNUP USING CLIENT
     //login button pressed
     func loginButtonPressed(sender: UIButton) {
         

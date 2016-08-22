@@ -22,15 +22,23 @@ class WorkoutManagerClinet: AnyObject {
         static let API_WIDE = "api/v2"
     }
     
+    //enpoints for client, not all endpoints from API are listed here, only those pertinent to app
+    struct Endpoints {
+        static let EXERCISE = "exercise"
+        static let EXERCISE_CATEGORY = "exercisecategory"
+        static let EXERCISE_IMAGE = "exerciseimage"
+        //TODO:  GET MORE RELEVANT ENDPOINTS
+    }
+    
     //logs in user
-    func login(username: String, password: String) -> Void {
+    func login(username: String, password: String) {
         print(username)
         print(password)
     }
     
     //signs up user for Workout Manager
-    func signUp(username: String, password: String) -> Void {
+    func signUp(username: String, password: String) {
         print(username, "is attempting to signup")
-        print(username, " wishes to use ", password, "for their password")
+        print(username, "wishes to use", password, "for their password")
     }
 }
