@@ -8,6 +8,13 @@
 
 import Foundation
 
+//enum for error in plate calculation
+enum PlateError :ErrorType {
+    case WeightLessThanBar
+    case IvalidWeight
+    case EmptyBar
+}
+
 //class that handles Workout Manager Client
 class WorkoutManagerClinet: AnyObject {
     
@@ -30,6 +37,59 @@ class WorkoutManagerClinet: AnyObject {
         //TODO:  GET MORE RELEVANT ENDPOINTS
     }
     
+    //available plate options for calculating plates on bars, empty until user creates
+    var plates : [Double] = [] {
+        didSet {
+            //if plates change, perform assending sort
+            plates = plates.sort(>)
+        }
+    }
+    
+    //bar weight, set by user
+    var barWeight : Double = 0
+    
+    //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
+    //output is always assuming unlimited number of plates for each available weight, therefore output is always comprised of largest available plates
+    func plateCalc(targetWeight: Double) throws -> [Double] {
+        
+        //check if targetWeight is greater than barWeight
+        guard targetWeight >= self.barWeight else {
+            //throw error
+            throw PlateError.WeightLessThanBar
+        }
+        
+        //check if targetWeight can be calculatd from barWeight and available plates
+        guard (targetWeight - self.barWeight) % plates.last! == 0 else {
+            //throw error
+            throw PlateError.IvalidWeight
+        }
+        
+        //remainder variable - get the weight that needs to be placed on one side of barbell, remove largest possible plate from remainder, continue iteration
+        var remainder = (targetWeight - self.barWeight) / 2
+        
+        //returned result
+        var result : [Double] = []
+        
+        //if remainder is already zero, throw EmptyBar
+        guard remainder != 0 else {
+            throw PlateError.EmptyBar
+        }
+        
+        //calculate plates
+        for plate in self.plates {
+            //as long as remainder is greater than the current plate, subtract the plate and append it to result
+            while remainder >= plate {
+                result.append(plate)
+                remainder -= plate
+            }
+        }
+        
+        //return array of plates
+        return result
+    }
+    
+    //----------
+    //FUTURE: CLOUD BASED SHARING POSSIBLE, MAY INVOLVE MIGRATION TO BaaS TYPE FRAMEWORK
     //logs in user
     func login(username: String, password: String) {
         print(username)
@@ -41,4 +101,5 @@ class WorkoutManagerClinet: AnyObject {
         print(username, "is attempting to signup")
         print(username, "wishes to use", password, "for their password")
     }
+    //----------
 }
