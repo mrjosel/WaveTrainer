@@ -7,12 +7,7 @@
 //
 
 import UIKit
-
-//direction used for UI adjustment of textFields
-enum Direction {
-    case Up, Down
-}
-
+//TODO: IMPLEMENT #IFDEF TO REMOVE INITIALVC AT BUILD
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //outlets
@@ -22,9 +17,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-    
-    //vars
-    var keyboardAdjusted : Bool = false     //keeps track of whether keyboard is showing or not, false upon startup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +35,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
         self.signUpButton.backgroundColor = UIColor.whiteColor()
         self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.signUpButton.addTarget(self, action: #selector(self.signUpButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        self.loginButton.addTarget(self, action: #selector(self.loginButtonPressed(_:)), forControlEvents: .TouchUpInside)
         self.loginButton.setTitle("Login", forState: UIControlState.Normal)
         self.loginButton.backgroundColor = UIColor.whiteColor()
         self.loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
+        //textField behavior
+        self.userNameTextField.clearsOnBeginEditing = true
+        self.userNameTextField.clearButtonMode = .WhileEditing
+        self.passwordTextField.clearsOnBeginEditing = true
+        self.passwordTextField.clearButtonMode = .WhileEditing
+        self.passwordTextField.secureTextEntry = true
+        
         //set delegates
         self.userNameTextField.delegate = self
         self.passwordTextField.delegate = self
-        
+
     }
     
     //perform the following before view appears
@@ -66,6 +67,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //unsubscribe to keyboard notifications to prevent any race conditions
         self.unsubscribeFromKeyboardNotifications()
     }
+    //TODO:  INVESTIGATE HOW TO LOGIN AND HOW TO SIGNUP USING CLIENT
+    //login button pressed
+    func loginButtonPressed(sender: UIButton) {
+        
+        //get username and password text, pass into Workout Manager client
+        guard let username = self.userNameTextField.text, password = self.passwordTextField.text else {
+            //one or more fields empty, do nothing
+            return
+        }
+        //ensure strings are not empty, if either is empty, do nothing
+        if username != "" && password != "" {
+            //pass fields into client
+            WorkoutManagerClinet.sharedInstance.login(username, password: password)
+        }
+    }
+    
+    //login button pressed
+    func signUpButtonPressed(sender: UIButton) {
+        
+        //transition to signupVC
+        //TODO: MODAL TRANSITION TO NEW VC
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,15 +96,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //----------delegate methods----------
-    //when textfield is selected
-    func textFieldDidBeginEditing(textField: UITextField) {
-        //LOL
-    }
-    
     //when return key is hit
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         //hide keyboard when enter key is hit
         textField.resignFirstResponder()
+        
+        //resume listening for keyboardWillShow
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         return true
     }
     
@@ -104,13 +125,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillShow(notification: NSNotification) {
         
         //only adjust if keyboard is not showing, else do nothing
-        if !self.keyboardAdjusted {
-            //adjust UIView to accomodate Keyboard
-            self.view.frame.origin.y -= self.getKeyboardHeight(notification)
-            
-            //keyboard is showing
-            self.keyboardAdjusted = true
-        }
+        self.view.frame.origin.y -= self.getKeyboardHeight(notification)
+        
+        //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
     }
     
     //carry out following when keyboard is about to hide
@@ -119,8 +137,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
         self.view.frame.origin.y = 0
         
-        //keyboard no longer showing
-        self.keyboardAdjusted = false
     }
     
     //gets size of keyboard to be used in resizing the view
