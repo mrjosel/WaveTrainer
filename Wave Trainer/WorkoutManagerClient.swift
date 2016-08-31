@@ -9,7 +9,7 @@
 import Foundation
 
 //enum for error in plate calculation
-enum PlateError :ErrorType {
+enum PlateError : ErrorType {
     case WeightLessThanBar
     case IvalidWeight
     case EmptyBar
@@ -94,12 +94,6 @@ class WorkoutManagerClinet: AnyObject {
     func login(username: String, password: String) {
         print(username)
         print(password)
-    }
-    
-    //signs up user for Workout Manager
-    func signUp(username: String, password: String) {
-        print(username, "is attempting to signup")
-        print(username, "wishes to use", password, "for their password")
     }
     //----------
 }

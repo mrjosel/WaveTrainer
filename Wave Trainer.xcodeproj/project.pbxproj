@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
+				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,

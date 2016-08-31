@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//TODO: IMPLEMENT #IFDEF TO REMOVE INITIALVC AT BUILD
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //outlets
@@ -86,16 +86,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //login button pressed
     func signUpButtonPressed(sender: UIButton) {
         
-        //get username and password text, pass into Workout Manager client
-        guard let username = self.userNameTextField.text, password = self.passwordTextField.text else {
-            //one or more fields empty, do nothing
-            return
-        }
-        //ensure strings are not empty, if either is empty, do nothing
-        if username != "" && password != "" {
-            //pass fields into client
-            WorkoutManagerClinet.sharedInstance.signUp(username, password: password)
-        }
+        //transition to signupVC
+        //TODO: MODAL TRANSITION TO NEW VC
     }
     
     override func didReceiveMemoryWarning() {
