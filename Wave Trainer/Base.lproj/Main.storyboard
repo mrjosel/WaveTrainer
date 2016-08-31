@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -100,7 +100,7 @@
             </objects>
             <point key="canvasLocation" x="-384" y="773"/>
         </scene>
-        <!--Item-->
+        <!--Graph-->
         <scene sceneID="LeP-Yi-E1A">
             <objects>
                 <viewController id="bDc-et-Qyc" sceneMemberID="viewController">
@@ -113,13 +113,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Ltn-wz-wLd"/>
+                    <tabBarItem key="tabBarItem" title="Graph" id="Ltn-wz-wLd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huQ-Ea-jt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="646" y="855"/>
         </scene>
-        <!--Item 2-->
+        <!--History-->
         <scene sceneID="pZt-74-oMT">
             <objects>
                 <viewController id="fz3-j2-z0c" sceneMemberID="viewController">
@@ -132,16 +132,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Kh3-hQ-6bK"/>
+                    <tabBarItem key="tabBarItem" title="History" id="Kh3-hQ-6bK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLw-K5-ZTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1384" y="867"/>
         </scene>
-        <!--Item 1-->
+        <!--Workout-->
         <scene sceneID="0EG-am-V0h">
             <objects>
-                <viewController id="LKQ-Dr-1f0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutViewController" id="LKQ-Dr-1f0" customClass="WorkoutViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WCo-nV-UkQ"/>
                         <viewControllerLayoutGuide type="bottom" id="oek-JO-qYm"/>
@@ -151,13 +151,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="PVF-s9-YJM"/>
+                    <tabBarItem key="tabBarItem" title="Workout" id="PVF-s9-YJM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDT-Js-T8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1384" y="55"/>
         </scene>
-        <!--Item-->
+        <!--Calendar-->
         <scene sceneID="XGc-ES-sG3">
             <objects>
                 <viewController id="Neo-sh-blJ" sceneMemberID="viewController">
@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="z7e-Sg-FIe"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" id="z7e-Sg-FIe"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oen-Xh-XcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,7 +179,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="kWF-Xh-NUM">
             <objects>
-                <tabBarController id="C2s-10-Fnm" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="C2s-10-Fnm" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TuE-QC-157">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

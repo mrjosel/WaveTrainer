@@ -17,6 +17,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //----------Below methods determin initial VC based on environment variable
+        
+        //set bounds
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        //get storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //determine if environment variable is set
+        let env = NSProcessInfo.processInfo().environment
+        guard env["LOGIN"] != nil else {
+            abort() //REMOVE IN PRODUCTION
+        }
+        
+        //if var is 1, prsent loginVC, else present WorkoutVC
+        if env["LOGIN"]! == "1" {
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+        } else {
+            self.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("TabBarViewController")
+        }
+        
+        self.window?.makeKeyAndVisible()
         return true
     }
 

@@ -22,8 +22,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //TODO: FIX ICON COLOR (IS BLACK)
-        
         //set image and constraints
         self.barbellImageView.image = UIImage(named: "barbellImage")    //TODO: SHARPEN IMAGE
         self.titleLabel.text = "Wave Trainer"   //TODO: make stylized version

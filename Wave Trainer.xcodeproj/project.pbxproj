@@ -16,6 +16,8 @@
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
 		B7EC15A01D53AD6900C3D5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7EC159F1D53AD6900C3D5F1 /* Assets.xcassets */; };
 		B7EC15A31D53AD6900C3D5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7EC15A11D53AD6900C3D5F1 /* LaunchScreen.storyboard */; };
+		B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */; };
+		B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B7EC159F1D53AD6900C3D5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7EC15A21D53AD6900C3D5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7EC15A41D53AD6900C3D5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabParentViewController.swift; sourceTree = "<group>"; };
+		B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +52,8 @@
 			children = (
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
 				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
+				B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */,
+				B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -180,11 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
+				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +297,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
