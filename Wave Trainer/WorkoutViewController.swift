@@ -14,6 +14,16 @@ class WorkoutViewController: TabParentViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //create menu button and add to navigation bar
+        let menuButton = UIBarButtonItem(image: UIImage(named: "menuImage"), style: .Plain, target: self, action: #selector(self.showMenu(_:)))
+        self.navigationItem.setLeftBarButtonItem(menuButton, animated: false)
+        //set title
+        self.navigationItem.title = "Wave Trainer"
+    }
+    
+    func showMenu(sender: UIBarButtonItem) {
+        print("showing menu")
     }
 
     override func didReceiveMemoryWarning() {
