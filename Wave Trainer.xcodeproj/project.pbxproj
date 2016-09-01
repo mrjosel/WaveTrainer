@@ -18,6 +18,9 @@
 		B7EC15A31D53AD6900C3D5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7EC15A11D53AD6900C3D5F1 /* LaunchScreen.storyboard */; };
 		B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */; };
 		B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */; };
+		B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */; };
+		B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */; };
+		B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D81D789A8600DE41B7 /* GraphViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		B7EC15A41D53AD6900C3D5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabParentViewController.swift; sourceTree = "<group>"; };
 		B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		B7F338D81D789A8600DE41B7 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,10 +56,9 @@
 		B7540FDA1D5E31F40034D806 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B7F338DA1D789A8D00DE41B7 /* TabBarVCs */,
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
 				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
-				B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */,
-				B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -112,6 +117,18 @@
 				B7540FDD1D5E320D0034D806 /* Supporting Files */,
 			);
 			path = "Wave Trainer";
+			sourceTree = "<group>";
+		};
+		B7F338DA1D789A8D00DE41B7 /* TabBarVCs */ = {
+			isa = PBXGroup;
+			children = (
+				B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */,
+				B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */,
+				B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */,
+				B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */,
+				B7F338D81D789A8600DE41B7 /* GraphViewController.swift */,
+			);
+			name = TabBarVCs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +206,12 @@
 				B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
+				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
+				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
+				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
 			);

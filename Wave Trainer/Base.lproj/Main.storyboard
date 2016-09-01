@@ -100,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="-384" y="773"/>
         </scene>
-        <!--Graph-->
+        <!--Graph View Controller-->
         <scene sceneID="LeP-Yi-E1A">
             <objects>
-                <viewController id="bDc-et-Qyc" sceneMemberID="viewController">
+                <viewController id="bDc-et-Qyc" customClass="GraphViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F3D-nd-RgA"/>
                         <viewControllerLayoutGuide type="bottom" id="23a-J4-eNt"/>
@@ -113,16 +113,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Graph" id="Ltn-wz-wLd"/>
+                    <navigationItem key="navigationItem" id="RPf-r6-u4z"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="huQ-Ea-jt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="1731"/>
+            <point key="canvasLocation" x="2580" y="1731"/>
         </scene>
-        <!--History-->
+        <!--History View Controller-->
         <scene sceneID="pZt-74-oMT">
             <objects>
-                <viewController id="fz3-j2-z0c" sceneMemberID="viewController">
+                <viewController id="fz3-j2-z0c" customClass="HistoryViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SRD-fT-hED"/>
                         <viewControllerLayoutGuide type="bottom" id="fky-Fm-fhB"/>
@@ -132,11 +132,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="History" id="Kh3-hQ-6bK"/>
+                    <navigationItem key="navigationItem" id="QPA-A1-Ytx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLw-K5-ZTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="895"/>
+            <point key="canvasLocation" x="2580" y="895"/>
         </scene>
         <!--Title-->
         <scene sceneID="0EG-am-V0h">
@@ -157,10 +157,10 @@
             </objects>
             <point key="canvasLocation" x="2680" y="6"/>
         </scene>
-        <!--Calendar-->
+        <!--Calendar View Controller-->
         <scene sceneID="XGc-ES-sG3">
             <objects>
-                <viewController id="Neo-sh-blJ" sceneMemberID="viewController">
+                <viewController id="Neo-sh-blJ" customClass="CalendarViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LYu-yh-H42"/>
                         <viewControllerLayoutGuide type="bottom" id="Cnr-Tg-MQ9"/>
@@ -170,11 +170,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" id="z7e-Sg-FIe"/>
+                    <navigationItem key="navigationItem" id="ym4-BU-Acu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oen-Xh-XcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="-746"/>
+            <point key="canvasLocation" x="2580" y="-746"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kWF-Xh-NUM">
@@ -187,9 +187,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="eOL-dC-nQg" kind="relationship" relationship="viewControllers" id="M4R-XH-OUC"/>
-                        <segue destination="fz3-j2-z0c" kind="relationship" relationship="viewControllers" id="g95-xH-BqE"/>
-                        <segue destination="bDc-et-Qyc" kind="relationship" relationship="viewControllers" id="p0S-Ha-eGc"/>
-                        <segue destination="Neo-sh-blJ" kind="relationship" relationship="viewControllers" id="UYq-hz-6Kp"/>
+                        <segue destination="XCg-xP-tjG" kind="relationship" relationship="viewControllers" id="g95-xH-BqE"/>
+                        <segue destination="4FL-pJ-RLq" kind="relationship" relationship="viewControllers" id="p0S-Ha-eGc"/>
+                        <segue destination="8yY-wV-PYv" kind="relationship" relationship="viewControllers" id="UYq-hz-6Kp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6x-0q-Blz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,6 +214,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBR-eu-jiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1868" y="6"/>
+        </scene>
+        <!--Calendar-->
+        <scene sceneID="bEo-1d-vrq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8yY-wV-PYv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Calendar" id="z7e-Sg-FIe"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lWH-lo-RxC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Neo-sh-blJ" kind="relationship" relationship="rootViewController" id="k0c-nw-8Bn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4kx-qq-RRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="-746"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="ZZ6-j5-sbF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XCg-xP-tjG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="History" id="Kh3-hQ-6bK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sSz-z7-HMo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fz3-j2-z0c" kind="relationship" relationship="rootViewController" id="IrY-Iz-Vzy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j6z-GQ-gUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="895"/>
+        </scene>
+        <!--Graph-->
+        <scene sceneID="XZG-oY-jQ7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4FL-pJ-RLq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Graph" id="Ltn-wz-wLd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7fR-dU-9yT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bDc-et-Qyc" kind="relationship" relationship="rootViewController" id="bTw-cC-2KV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B3A-Fz-Ksu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="1731"/>
         </scene>
     </scenes>
 </document>

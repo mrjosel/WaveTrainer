@@ -1,14 +1,14 @@
 //
-//  WorkoutViewController.swift
+//  HistoryViewController.swift
 //  Wave Trainer
 //
-//  Created by Brian Josel on 8/31/16.
+//  Created by Brian Josel on 9/1/16.
 //  Copyright © 2016 Brian Josel. All rights reserved.
 //
 
 import UIKit
 
-class WorkoutViewController: TabParentViewController {
+class HistoryViewController: TabParentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
