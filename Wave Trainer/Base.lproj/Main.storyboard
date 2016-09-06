@@ -155,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDT-Js-T8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2680" y="6"/>
+            <point key="canvasLocation" x="2580" y="-37"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="XGc-ES-sG3">
