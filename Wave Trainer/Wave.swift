@@ -16,8 +16,8 @@ class Wave : NSManagedObject {
     
     //managed vars
     @NSManaged var startDatePersisted : NSDate
-    @NSManaged var endDatePersisted: NSDate?
-    @NSManaged var completedPersisted : NSNumber
+    @NSManaged private var endDatePersisted: NSDate?
+    @NSManaged private var completedPersisted : NSNumber
     //@NSManaged var cycles: [Cycle]    //TODO: IMPLEMENT CYCLES
     
     //initializers

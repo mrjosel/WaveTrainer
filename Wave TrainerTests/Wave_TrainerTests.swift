@@ -9,6 +9,7 @@
 import XCTest
 import CoreData
 
+
 class Wave_TrainerTests: XCTestCase {
     
     //MARK: Wave Trainer Tests
@@ -51,9 +52,9 @@ class Wave_TrainerTests: XCTestCase {
         
         //tests 1-4
         XCTAssertNotNil(potentialWave1)                     //test that Wave is not nil
-        XCTAssertNotNil(potentialWave1?.completedPersisted) //test that persisted var is set
+        XCTAssertNotNil(potentialWave1?.completed)          //test that persisted var is set
         XCTAssertNotNil(potentialWave1?.startDatePersisted) //test that persisted var is set
-        XCTAssertNil(potentialWave1?.endDatePersisted)      //test that persisted var is nil
+        XCTAssertNil(potentialWave1?.endDate)               //test that persisted var is nil
         
         let timeInterval : NSTimeInterval = 50000
         let futureDate = NSDate(timeInterval: timeInterval, sinceDate: NSDate())
@@ -64,9 +65,9 @@ class Wave_TrainerTests: XCTestCase {
         
         //tests 5-8
         XCTAssertNotNil(potentialWave2)                     //test that Wave is not nil
-        XCTAssertNotNil(potentialWave2?.completedPersisted) //test that persisted var is set
+        XCTAssertNotNil(potentialWave2?.completed)          //test that persisted var is set
         XCTAssertNotNil(potentialWave2?.startDatePersisted) //test that persisted var is set
-        XCTAssertNotNil(potentialWave2?.endDatePersisted)   //test that persisted var is set
+        XCTAssertNotNil(potentialWave2?.endDate)            //test that persisted var is set
         
         //fail cases
         //endate is equal to today

@@ -13,7 +13,7 @@
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
 		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
 		B79E1C8C1D80828800DED411 /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
-		B79E1C8E1D8082CB00DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
+		B79E1C8F1D80847A00DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */; };
 		B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */; };
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
@@ -272,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B79E1C8F1D80847A00DED411 /* Wave.swift in Sources */,
 				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +290,6 @@
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
-				B79E1C8E1D8082CB00DED411 /* Wave.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
 				B79E1C8C1D80828800DED411 /* Cycle.swift in Sources */,
