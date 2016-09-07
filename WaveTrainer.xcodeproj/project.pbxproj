@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7212F581D80217400E8C33F /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
+		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
+		B79E1C7E1D802E1B00DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */; };
 		B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */; };
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
@@ -24,13 +25,26 @@
 		B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D81D789A8600DE41B7 /* GraphViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B79E1C671D80224A00DED411 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7EC158A1D53AD6900C3D5F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7EC15911D53AD6900C3D5F1;
+			remoteInfo = "Wave Trainer";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B7212F571D80217400E8C33F /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
-		B7EC15921D53AD6900C3D5F1 /* Wave Trainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wave Trainer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B79E1C621D80224A00DED411 /* WaveTrainer.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaveTrainer.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave_TrainerTests.swift; sourceTree = "<group>"; };
+		B79E1C661D80224A00DED411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7EC15921D53AD6900C3D5F1 /* WaveTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7EC159D1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wave_Trainer.xcdatamodel; sourceTree = "<group>"; };
@@ -45,6 +59,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B79E1C5F1D80224A00DED411 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7EC158F1D53AD6900C3D5F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,10 +115,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B79E1C631D80224A00DED411 /* Wave TrainerTests */ = {
+			isa = PBXGroup;
+			children = (
+				B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */,
+				B79E1C661D80224A00DED411 /* Info.plist */,
+			);
+			path = "Wave TrainerTests";
+			sourceTree = "<group>";
+		};
 		B7EC15891D53AD6900C3D5F1 = {
 			isa = PBXGroup;
 			children = (
 				B7EC15941D53AD6900C3D5F1 /* Wave Trainer */,
+				B79E1C631D80224A00DED411 /* Wave TrainerTests */,
 				B7EC15931D53AD6900C3D5F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,7 +136,8 @@
 		B7EC15931D53AD6900C3D5F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7EC15921D53AD6900C3D5F1 /* Wave Trainer.app */,
+				B7EC15921D53AD6900C3D5F1 /* WaveTrainer.app */,
+				B79E1C621D80224A00DED411 /* WaveTrainer.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,9 +169,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B7EC15911D53AD6900C3D5F1 /* Wave Trainer */ = {
+		B79E1C611D80224A00DED411 /* WaveTrainerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B7EC15A71D53AD6900C3D5F1 /* Build configuration list for PBXNativeTarget "Wave Trainer" */;
+			buildConfigurationList = B79E1C6B1D80224A00DED411 /* Build configuration list for PBXNativeTarget "WaveTrainerTests" */;
+			buildPhases = (
+				B79E1C5E1D80224A00DED411 /* Sources */,
+				B79E1C5F1D80224A00DED411 /* Frameworks */,
+				B79E1C601D80224A00DED411 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B79E1C681D80224A00DED411 /* PBXTargetDependency */,
+			);
+			name = WaveTrainerTests;
+			productName = "Wave TrainerTests";
+			productReference = B79E1C621D80224A00DED411 /* WaveTrainer.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B7EC15911D53AD6900C3D5F1 /* WaveTrainer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7EC15A71D53AD6900C3D5F1 /* Build configuration list for PBXNativeTarget "WaveTrainer" */;
 			buildPhases = (
 				B7EC158E1D53AD6900C3D5F1 /* Sources */,
 				B7EC158F1D53AD6900C3D5F1 /* Frameworks */,
@@ -149,9 +199,9 @@
 			);
 			dependencies = (
 			);
-			name = "Wave Trainer";
+			name = WaveTrainer;
 			productName = "Wave Trainer";
-			productReference = B7EC15921D53AD6900C3D5F1 /* Wave Trainer.app */;
+			productReference = B7EC15921D53AD6900C3D5F1 /* WaveTrainer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -164,13 +214,18 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Brian Josel";
 				TargetAttributes = {
+					B79E1C611D80224A00DED411 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = J6UJF3YUKE;
+						TestTargetID = B7EC15911D53AD6900C3D5F1;
+					};
 					B7EC15911D53AD6900C3D5F1 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = J6UJF3YUKE;
 					};
 				};
 			};
-			buildConfigurationList = B7EC158D1D53AD6900C3D5F1 /* Build configuration list for PBXProject "Wave Trainer" */;
+			buildConfigurationList = B7EC158D1D53AD6900C3D5F1 /* Build configuration list for PBXProject "WaveTrainer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -183,12 +238,20 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B7EC15911D53AD6900C3D5F1 /* Wave Trainer */,
+				B7EC15911D53AD6900C3D5F1 /* WaveTrainer */,
+				B79E1C611D80224A00DED411 /* WaveTrainerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B79E1C601D80224A00DED411 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7EC15901D53AD6900C3D5F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,15 +265,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B79E1C5E1D80224A00DED411 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7EC158E1D53AD6900C3D5F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B79E1C7E1D802E1B00DED411 /* Wave.swift in Sources */,
 				B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
-				B7212F581D80217400E8C33F /* Wave.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
@@ -222,6 +293,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B79E1C681D80224A00DED411 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7EC15911D53AD6900C3D5F1 /* WaveTrainer */;
+			targetProxy = B79E1C671D80224A00DED411 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B7540FD01D53AEB90034D806 /* Main.storyboard */ = {
@@ -243,6 +322,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B79E1C691D80224A00DED411 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Wave TrainerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josel.Wave-TrainerTests";
+				PRODUCT_NAME = WaveTrainer;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WaveTrainer.app/WaveTrainer";
+			};
+			name = Debug;
+		};
+		B79E1C6A1D80224A00DED411 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Wave TrainerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josel.Wave-TrainerTests";
+				PRODUCT_NAME = WaveTrainer;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WaveTrainer.app/WaveTrainer";
+			};
+			name = Release;
+		};
 		B7EC15A51D53AD6900C3D5F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -333,8 +436,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Wave Trainer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.josel.Wave-Trainer";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.josel.WaveTrainer;
+				PRODUCT_NAME = WaveTrainer;
 			};
 			name = Debug;
 		};
@@ -344,15 +447,23 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Wave Trainer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.josel.Wave-Trainer";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.josel.WaveTrainer;
+				PRODUCT_NAME = WaveTrainer;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B7EC158D1D53AD6900C3D5F1 /* Build configuration list for PBXProject "Wave Trainer" */ = {
+		B79E1C6B1D80224A00DED411 /* Build configuration list for PBXNativeTarget "WaveTrainerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B79E1C691D80224A00DED411 /* Debug */,
+				B79E1C6A1D80224A00DED411 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B7EC158D1D53AD6900C3D5F1 /* Build configuration list for PBXProject "WaveTrainer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7EC15A51D53AD6900C3D5F1 /* Debug */,
@@ -361,7 +472,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B7EC15A71D53AD6900C3D5F1 /* Build configuration list for PBXNativeTarget "Wave Trainer" */ = {
+		B7EC15A71D53AD6900C3D5F1 /* Build configuration list for PBXNativeTarget "WaveTrainer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B7EC15A81D53AD6900C3D5F1 /* Debug */,

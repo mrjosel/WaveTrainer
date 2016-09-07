@@ -75,17 +75,17 @@ class Wave : NSManagedObject {
             self.endDatePersisted = newValue
         }
     }
-    
+
     
     //intermediate var for completion of wave
     var completed : Bool {
         get {
-            return Bool(self.completedPersisted)
+            return self.completedPersisted == 1 ? true : false
         }
         set {
-            self.completedPersisted = newValue.boolValue
-            self.endDate = newValue == true ? NSDate() : nil //when wave is complete, set endDate, if not complete remove endDate
+            self.completedPersisted = newValue ? 1 : 0
+            self.endDate = newValue ? NSDate() : nil //when wave is complete, set endDate, if not complete remove endDate
         }
     }
-    
+
 }
