@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7212F581D80217400E8C33F /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
@@ -21,12 +22,10 @@
 		B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */; };
 		B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */; };
 		B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338D81D789A8600DE41B7 /* GraphViewController.swift */; };
-		B7F338DE1D7ECC5900DE41B7 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338DD1D7ECC5900DE41B7 /* Workout.swift */; };
-		B7F338E01D7ECF0F00DE41B7 /* WorkoutEnumsAndProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338DF1D7ECF0F00DE41B7 /* WorkoutEnumsAndProtocols.swift */; };
-		B7F338E21D7ED2A200DE41B7 /* CoreExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F338E11D7ED2A200DE41B7 /* CoreExercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7212F571D80217400E8C33F /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
@@ -43,9 +42,6 @@
 		B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B7F338D81D789A8600DE41B7 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		B7F338DD1D7ECC5900DE41B7 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
-		B7F338DF1D7ECF0F00DE41B7 /* WorkoutEnumsAndProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutEnumsAndProtocols.swift; sourceTree = "<group>"; };
-		B7F338E11D7ED2A200DE41B7 /* CoreExercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +77,7 @@
 			children = (
 				B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */,
 				B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */,
-				B7F338DD1D7ECC5900DE41B7 /* Workout.swift */,
-				B7F338DF1D7ECF0F00DE41B7 /* WorkoutEnumsAndProtocols.swift */,
-				B7F338E11D7ED2A200DE41B7 /* CoreExercise.swift */,
+				B7212F571D80217400E8C33F /* Wave.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -215,9 +209,8 @@
 				B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
-				B7F338E01D7ECF0F00DE41B7 /* WorkoutEnumsAndProtocols.swift in Sources */,
 				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
-				B7F338E21D7ED2A200DE41B7 /* CoreExercise.swift in Sources */,
+				B7212F581D80217400E8C33F /* Wave.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
@@ -225,7 +218,6 @@
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
-				B7F338DE1D7ECC5900DE41B7 /* Workout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
