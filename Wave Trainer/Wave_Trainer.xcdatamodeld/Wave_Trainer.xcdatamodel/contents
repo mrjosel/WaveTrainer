@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G1004" minimumToolsVersion="Automatic">
+    <entity name="Cycle" representedClassName="Cycle" syncable="YES">
+        <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Wave" representedClassName="Wave" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="endDatePersisted" optional="YES" attributeType="Date" syncable="YES"/>
@@ -7,5 +11,6 @@
     </entity>
     <elements>
         <element name="Wave" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Cycle" positionX="-54" positionY="18" width="128" height="75"/>
     </elements>
 </model>
