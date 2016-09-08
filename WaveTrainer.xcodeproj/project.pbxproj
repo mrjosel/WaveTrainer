@@ -12,9 +12,10 @@
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
 		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
-		B79E1C9A1D81747900DED411 /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
-		B79E1C9B1D81747D00DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
-		B79E1C9D1D81751300DED411 /* CoreDataModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9C1D81751300DED411 /* CoreDataModelViewController.swift */; };
+		B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */; };
+		B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */; };
+		B79E1CA51D817B3200DED411 /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
+		B79E1CA61D817B3500DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */; };
 		B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */; };
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
@@ -47,7 +48,8 @@
 		B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave_TrainerTests.swift; sourceTree = "<group>"; };
 		B79E1C661D80224A00DED411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B79E1C8B1D80828800DED411 /* Cycle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cycle.swift; sourceTree = "<group>"; };
-		B79E1C9C1D81751300DED411 /* CoreDataModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataModelViewController.swift; sourceTree = "<group>"; };
+		B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveModelViewController.swift; sourceTree = "<group>"; };
+		B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		B7EC15921D53AD6900C3D5F1 /* WaveTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */,
 				B7212F571D80217400E8C33F /* Wave.swift */,
 				B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */,
+				B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -127,6 +130,14 @@
 				B79E1C661D80224A00DED411 /* Info.plist */,
 			);
 			path = "Wave TrainerTests";
+			sourceTree = "<group>";
+		};
+		B79E1C9E1D81781D00DED411 /* CoreDataViewers */ = {
+			isa = PBXGroup;
+			children = (
+				B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */,
+			);
+			name = CoreDataViewers;
 			sourceTree = "<group>";
 		};
 		B7EC15891D53AD6900C3D5F1 = {
@@ -162,8 +173,8 @@
 		B7F338DA1D789A8D00DE41B7 /* TabBarVCs */ = {
 			isa = PBXGroup;
 			children = (
+				B79E1C9E1D81781D00DED411 /* CoreDataViewers */,
 				B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */,
-				B79E1C9C1D81751300DED411 /* CoreDataModelViewController.swift */,
 				B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */,
 				B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */,
 				B7F338D51D789A7500DE41B7 /* HistoryViewController.swift */,
@@ -275,8 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B79E1C9B1D81747D00DED411 /* Wave.swift in Sources */,
-				B79E1C9A1D81747900DED411 /* Cycle.swift in Sources */,
 				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,11 +298,14 @@
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
+				B79E1CA51D817B3200DED411 /* Cycle.swift in Sources */,
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
-				B79E1C9D1D81751300DED411 /* CoreDataModelViewController.swift in Sources */,
+				B79E1CA61D817B3500DED411 /* Wave.swift in Sources */,
+				B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
+				B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */,
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,

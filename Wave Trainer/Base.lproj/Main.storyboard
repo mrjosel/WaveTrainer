@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -157,10 +158,10 @@
             </objects>
             <point key="canvasLocation" x="2644" y="-1"/>
         </scene>
-        <!--Core Data Model View Controller-->
+        <!--Wave Model View Controller-->
         <scene sceneID="3gr-YA-msw">
             <objects>
-                <viewController storyboardIdentifier="CoreDataModelViewController" id="9h9-Bg-rgk" customClass="CoreDataModelViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CoreDataModelViewController" id="9h9-Bg-rgk" customClass="WaveModelViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eNC-wc-6ED"/>
                         <viewControllerLayoutGuide type="bottom" id="BTB-6k-dPA"/>
@@ -168,9 +169,34 @@
                     <view key="view" contentMode="scaleToFill" id="Efr-ib-D15">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oc0-vR-P6y">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hJw-7x-ksM">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hJw-7x-ksM" id="l6V-hK-llk">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="oc0-vR-P6y" secondAttribute="trailing" constant="-20" id="EzJ-qZ-r59"/>
+                            <constraint firstItem="oc0-vR-P6y" firstAttribute="leading" secondItem="Efr-ib-D15" secondAttribute="leadingMargin" constant="-20" id="YPu-xB-pTU"/>
+                            <constraint firstItem="oc0-vR-P6y" firstAttribute="top" secondItem="eNC-wc-6ED" secondAttribute="bottom" id="c2d-YY-m79"/>
+                            <constraint firstItem="BTB-6k-dPA" firstAttribute="top" secondItem="oc0-vR-P6y" secondAttribute="bottom" id="nUT-cH-FJY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gef-aI-aIh"/>
+                    <connections>
+                        <outlet property="coreDataTableView" destination="oc0-vR-P6y" id="c1d-Kc-hkq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5V-xN-3IR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -55,6 +55,7 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNotNil(potentialWave1?.completed)          //test that persisted var is set
         XCTAssertNotNil(potentialWave1?.startDatePersisted) //test that persisted var is set
         XCTAssertNil(potentialWave1?.endDate)               //test that persisted var is nil
+        XCTAssertNil(potentialWave1?.name)                  //test that persisted var is not set
         
         let timeInterval : NSTimeInterval = 50000
         let futureDate = NSDate(timeInterval: timeInterval, sinceDate: NSDate())
@@ -68,6 +69,7 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNotNil(potentialWave2?.completed)          //test that persisted var is set
         XCTAssertNotNil(potentialWave2?.startDatePersisted) //test that persisted var is set
         XCTAssertNotNil(potentialWave2?.endDate)            //test that persisted var is set
+        XCTAssertNil(potentialWave2?.name)                  //test that persisted var is not set
         
         //fail cases
         //endate is equal to today
