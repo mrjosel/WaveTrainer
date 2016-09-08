@@ -74,11 +74,11 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     //adds wave to CoreData
     func addWave(sender: UIBarButtonItem) {
         print("creating Wave", self.index)
-//        //create wave, wave has date set to now, no endDate, and is incomplete, save context
-//        let newWave = Wave(startDate: NSDate(), endDate: nil, completed: false, context: self.sharedContext)
-//        newWave?.name = "Wave " + String(self.index)
+        //create wave, wave has date set to now, no endDate, and is incomplete, save context
+        let newWave = Wave(startDate: NSDate(), endDate: nil, completed: false, context: self.sharedContext)
+        newWave?.name = "Wave " + String(self.index)
         self.index += 1
-//        CoreDataStackManager.sharedInstance.saveContext()
+        CoreDataStackManager.sharedInstance.saveContext()
         print("fetch count is", self.waveFetchedResultsController.fetchedObjects!.count)
     }
 
