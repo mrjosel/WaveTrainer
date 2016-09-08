@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 
-@objc(Cycle)
-
 //RepsCycle enum - A Cycle can either be of 5 reps, 3 reps, or 5-3-1 reps
 enum RepsCycle : Int, CustomStringConvertible {
     case FiveReps = 5, ThreeReps = 3, FiveThreeOneReps = 1, Deload = 0
@@ -36,27 +34,32 @@ enum RepsCycleError : ErrorType {
     case RawValIsGreaterThan5
 }
 
+@objc(Cycle)
+
 //Cycle class - a Cycle denotes the workout and reps schedule within a Wave
 class Cycle : NSManagedObject {
     
     //managed vars
     @NSManaged var repsCyclePersisted : NSNumber
     @NSManaged var completedPersisted : NSNumber
+    @NSManaged var wave : Wave
 //    @NSManaged var workouts : [Workout]   //TODO: CREATE WORKOUT CLASS
     
     //initializers
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
-    
+    //attempt creation of managed object
     init?(repsCycle : RepsCycle, completed: Bool, context: NSManagedObjectContext) {
+        //
         guard let entity = NSEntityDescription.entityForName("Cycle", inManagedObjectContext: context) else {
             return nil
         }
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
         //set intermediate vars, intermediate vars will set managed vars
-        //TODO: CREATE SETTERS
+        self.repsCycle = repsCycle
+        self.completed = completed
     }
     
     //intermediate vars

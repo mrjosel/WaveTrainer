@@ -96,6 +96,14 @@ class Wave_TrainerTests: XCTestCase {
         //test 12
         XCTAssertNil(potentialWave6, "wave must be marked complete if endDate is set")
         
+        //Cycle Tests
+        //test 13
+        let potentialCycle1 = Cycle(repsCycle: .FiveReps, completed: false, context: dummyContext!)
+        XCTAssertNotNil(potentialCycle1)
+        
+        let potentialCycle2 = Cycle(repsCycle: .ThreeReps, completed: true, context: dummyContext!)
+        XCTAssertNotNil(potentialCycle2)
+        
         
     }
     //
