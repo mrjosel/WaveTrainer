@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -85,7 +85,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="gw7-P3-W19">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" id="x2q-6C-3fH" customClass="SignUpViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="x2q-6C-3fH" customClass="SignUpViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QSQ-dZ-BWM"/>
                         <viewControllerLayoutGuide type="bottom" id="aAo-yZ-cOr"/>
@@ -103,7 +103,7 @@
         <!--Graph View Controller-->
         <scene sceneID="LeP-Yi-E1A">
             <objects>
-                <viewController id="bDc-et-Qyc" customClass="GraphViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bDc-et-Qyc" customClass="GraphViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F3D-nd-RgA"/>
                         <viewControllerLayoutGuide type="bottom" id="23a-J4-eNt"/>
@@ -122,7 +122,7 @@
         <!--History View Controller-->
         <scene sceneID="pZt-74-oMT">
             <objects>
-                <viewController id="fz3-j2-z0c" customClass="HistoryViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fz3-j2-z0c" customClass="HistoryViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SRD-fT-hED"/>
                         <viewControllerLayoutGuide type="bottom" id="fky-Fm-fhB"/>
@@ -141,7 +141,7 @@
         <!--Title-->
         <scene sceneID="0EG-am-V0h">
             <objects>
-                <viewController storyboardIdentifier="WorkoutViewController" id="LKQ-Dr-1f0" customClass="WorkoutViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutViewController" id="LKQ-Dr-1f0" customClass="WorkoutViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WCo-nV-UkQ"/>
                         <viewControllerLayoutGuide type="bottom" id="oek-JO-qYm"/>
@@ -155,12 +155,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDT-Js-T8P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="-37"/>
+            <point key="canvasLocation" x="2644" y="-1"/>
+        </scene>
+        <!--Core Data Model View Controller-->
+        <scene sceneID="3gr-YA-msw">
+            <objects>
+                <viewController storyboardIdentifier="CoreDataModelViewController" id="9h9-Bg-rgk" customClass="CoreDataModelViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eNC-wc-6ED"/>
+                        <viewControllerLayoutGuide type="bottom" id="BTB-6k-dPA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Efr-ib-D15">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gef-aI-aIh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O5V-xN-3IR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2580" y="-1580"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="XGc-ES-sG3">
             <objects>
-                <viewController id="Neo-sh-blJ" customClass="CalendarViewController" customModule="Wave_Trainer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Neo-sh-blJ" customClass="CalendarViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LYu-yh-H42"/>
                         <viewControllerLayoutGuide type="bottom" id="Cnr-Tg-MQ9"/>
@@ -190,11 +209,12 @@
                         <segue destination="XCg-xP-tjG" kind="relationship" relationship="viewControllers" id="g95-xH-BqE"/>
                         <segue destination="4FL-pJ-RLq" kind="relationship" relationship="viewControllers" id="p0S-Ha-eGc"/>
                         <segue destination="8yY-wV-PYv" kind="relationship" relationship="viewControllers" id="UYq-hz-6Kp"/>
+                        <segue destination="bti-Sd-T6C" kind="relationship" relationship="viewControllers" id="xNR-J2-x33"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6x-0q-Blz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="55"/>
+            <point key="canvasLocation" x="700" y="-993"/>
         </scene>
         <!--Workout-->
         <scene sceneID="2ig-Oh-eSN">
@@ -271,6 +291,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B3A-Fz-Ksu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1768" y="1731"/>
+        </scene>
+        <!--CoreData-->
+        <scene sceneID="5F1-gv-uKP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bti-Sd-T6C" userLabel="CoreData" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="CoreData" id="4ul-wk-s4T" userLabel="CoreData"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jJa-Er-lAf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9h9-Bg-rgk" kind="relationship" relationship="rootViewController" id="nwQ-YH-GbX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zEg-Y7-7wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1742" y="-1570"/>
         </scene>
     </scenes>
 </document>
