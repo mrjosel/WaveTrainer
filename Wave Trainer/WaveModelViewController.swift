@@ -21,7 +21,14 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
     
     //dummy index var for creating/naming waves
-    var index : Int = 0
+    var index : Int! {
+        didSet {
+            self.userDefaults.setValue(self.index!, forKey: "waveIndex")
+        }
+    }
+    
+    //NSUserefaults, used to manage index
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     //fetchedResultsController
     lazy var waveFetchedResultsController : NSFetchedResultsController = {
@@ -61,14 +68,13 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
             print(error)
         }
         
-        //set index based on results in fetch
-        if let fetchedResults = self.waveFetchedResultsController.fetchedObjects where !fetchedResults.isEmpty {
-            self.index = fetchedResults.count
-        } else {
-            self.index = 1
-        }
-        print("fetch count is", self.waveFetchedResultsController.fetchedObjects!.count)
-        
+        //set index based on user defaults
+        self.index = {
+            guard let index = self.userDefaults.valueForKey("waveIndex") as? Int else {
+                return 1
+            }
+            return index
+        }()
     }
     
     //adds wave to CoreData
@@ -77,7 +83,7 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
         //create wave, wave has date set to now, no endDate, and is incomplete, save context
         let newWave = Wave(startDate: NSDate(), endDate: nil, completed: false, context: self.sharedContext)
         newWave?.name = "Wave " + String(self.index)
-        self.index += 1
+        self.index! += 1
         CoreDataStackManager.sharedInstance.saveContext()
         print("fetch count is", self.waveFetchedResultsController.fetchedObjects!.count)
     }
@@ -128,6 +134,11 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
         case .Delete:
             //get wave at path
             let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
+            
+            //decrement index if wave thats deleted is last row in table (which implies being in the last section as well)
+            let lastSection = tableView.numberOfSections - 1
+            let lastRow = tableView.numberOfRowsInSection(indexPath.section) - 1
+            self.index! = indexPath.section == lastSection && indexPath.row == lastRow ? self.index - 1 : self.index
             
             //delete wave from context, save context
             self.sharedContext.deleteObject(wave)
