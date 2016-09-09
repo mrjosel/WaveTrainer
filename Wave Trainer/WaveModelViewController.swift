@@ -9,14 +9,11 @@
 import UIKit
 import CoreData
 
+
 //class to view CoreData model in a Table View Controller
 //NOT TO BE IMPLEMENTED IN RELEASE
-class WaveModelViewController: TabParentViewController, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class WaveModelViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    
-    //outlets
-    @IBOutlet weak var coreDataTableView: UITableView!
-    
     //var for local reference to CoreData singleton
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
     
@@ -47,7 +44,6 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         
         //create add button and add to navigation bar
@@ -57,8 +53,6 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
         self.navigationItem.title = "Waves Viewer"
         
         //set delegates and data sources (where applicable)
-        self.coreDataTableView.delegate = self
-        self.coreDataTableView.dataSource = self
         self.waveFetchedResultsController.delegate = self
         
         //perform fetch
@@ -79,13 +73,11 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     
     //adds wave to CoreData
     func addWave(sender: UIBarButtonItem) {
-        print("creating Wave", self.index)
         //create wave, wave has date set to now, no endDate, and is incomplete, save context
         let newWave = Wave(startDate: NSDate(), endDate: nil, completed: false, context: self.sharedContext)
         newWave?.name = "Wave " + String(self.index)
         self.index! += 1
         CoreDataStackManager.sharedInstance.saveContext()
-        print("fetch count is", self.waveFetchedResultsController.fetchedObjects!.count)
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,14 +86,14 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     }
     
     //sets number of rows
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //get section info from fetch, return number of objects for section
         let sectionInfo = self.waveFetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     //creates cells for tableView
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         //set reuseID
         let reuseID = "WaveCell"
@@ -118,7 +110,7 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     }
     
     //manages behavior when cell is selected
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //get wave at path
         let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
@@ -129,7 +121,7 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     }
     
     //manages delete behavior of cells
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
             //get wave at path
@@ -152,7 +144,7 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
     
     //begin tableView updates when fetch changes
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.coreDataTableView.beginUpdates()
+        self.tableView.beginUpdates()
     }
     
     //manages adding sections in the event of different sections in fetch
@@ -162,10 +154,10 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
         switch type {
         //insert new section
         case .Insert:
-            self.coreDataTableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         //delete section
         case .Delete:
-            self.coreDataTableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         default:
             print("error: reached default of didChangeSection in fetchController")
             return
@@ -179,31 +171,31 @@ class WaveModelViewController: TabParentViewController, NSFetchedResultsControll
         switch type {
         //insert new object
         case .Insert:
-            self.coreDataTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         //delete object
         case .Delete:
-            self.coreDataTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         //update object
         case .Update:
             //get wave from fetch
             let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath!) as! Wave
             
             //get cell
-            let cell = self.coreDataTableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
             
             //set label of cell as wave name, return cell
             cell.textLabel?.text = wave.name
         //move object
         case .Move:
-            self.coreDataTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            self.coreDataTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
             
         }
     }
     
     //end tableView updates when fetch changes
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.coreDataTableView.endUpdates()
+        self.tableView.endUpdates()
     }
     
 
