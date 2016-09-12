@@ -45,6 +45,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
         //set FRC delegate
         self.cycleFetchedResultsController.delegate = self
         
+        //ensure wave was passed in
         guard let wave = wave else {
             //no wave passed in, dismiss VC and return
             //TODO: THROW ERROR?
@@ -137,7 +138,11 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
         //get cycle at row
         let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
         print(cycle.wave.name, cycle.repsCycle.description)
-        //TODO:  MAKE SEGUE TO NEXT VC
+        
+        //create controller, pass wave in, present
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("WorkoutModelViewController") as! WorkoutModelViewController
+        controller.cycle = cycle
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     //fetch results controller delegate methods

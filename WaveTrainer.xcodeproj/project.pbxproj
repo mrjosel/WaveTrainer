@@ -17,6 +17,7 @@
 		B79E1CA51D817B3200DED411 /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
 		B79E1CA61D817B3500DED411 /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B79E1CB01D8715A800DED411 /* CycleModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1CAF1D8715A800DED411 /* CycleModelViewController.swift */; };
+		B79E1CB21D8758C700DED411 /* WorkoutModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1CB11D8758C700DED411 /* WorkoutModelViewController.swift */; };
 		B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */; };
 		B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */; };
 		B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */; };
@@ -52,6 +53,7 @@
 		B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveModelViewController.swift; sourceTree = "<group>"; };
 		B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		B79E1CAF1D8715A800DED411 /* CycleModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleModelViewController.swift; sourceTree = "<group>"; };
+		B79E1CB11D8758C700DED411 /* WorkoutModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutModelViewController.swift; sourceTree = "<group>"; };
 		B7EC15921D53AD6900C3D5F1 /* WaveTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaveTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EC15951D53AD6900C3D5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */,
 				B79E1CAF1D8715A800DED411 /* CycleModelViewController.swift */,
+				B79E1CB11D8758C700DED411 /* WorkoutModelViewController.swift */,
 			);
 			name = CoreDataViewers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B79E1CB01D8715A800DED411 /* CycleModelViewController.swift in Sources */,
+				B79E1CB21D8758C700DED411 /* WorkoutModelViewController.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
 				B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */,
