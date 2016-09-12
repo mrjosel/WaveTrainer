@@ -3,15 +3,17 @@
     <entity name="Cycle" representedClassName="Cycle" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="wave" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wave" inverseName="cycles" inverseEntity="Wave" syncable="YES"/>
     </entity>
     <entity name="Wave" representedClassName="Wave" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="endDatePersisted" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDatePersisted" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="cycles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cycle" inverseName="wave" inverseEntity="Cycle" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Wave" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Cycle" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="Wave" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Cycle" positionX="-54" positionY="18" width="128" height="90"/>
     </elements>
 </model>

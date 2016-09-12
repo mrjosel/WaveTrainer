@@ -7,14 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
-class CycleModelViewController: UITableViewController {
+class CycleModelViewController: UITableViewController,NSFetchedResultsControllerDelegate {
     
     //var for local reference to CoreData singleton
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
 
     //wave, sent from previous controller
     var wave : Wave?
+    
+    //fetched results controller for cycle objects
+    lazy var cycleFetchedResultsController : NSFetchedResultsController = {
+        
+        //create fetch request
+        let fetchRequest = NSFetchRequest(entityName: "Cycle")
+
+        //create search predicate to get cycles for specific wave
+        fetchRequest.predicate = NSPredicate(format: "wave == %@", self.wave!)  //safely using implicitly unwrapping since wave is not nil if VC ever gets to this point
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "repsCyclePersisted", ascending: false)]
+        
+        //create and return fetch controller
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +50,16 @@ class CycleModelViewController: UITableViewController {
             return
         }
         
+        //perform fetch
+        do {
+            try self.cycleFetchedResultsController.performFetch()
+        } catch {
+            //failed to fetch, print error
+            print(error)
+        }
+        
         //check for cycles, if no cycles exist, create them
-        guard wave.cycles != [] else {
+        guard let cycles = self.cycleFetchedResultsController.fetchedObjects as? [Cycle] where cycles != [] else {
             
             //create cycles for five, three, and one
             let cycleFive = Cycle(repsCycle: RepsCycle.FiveReps, completed: false, context: self.sharedContext)
