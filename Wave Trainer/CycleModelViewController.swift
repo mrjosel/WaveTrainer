@@ -74,6 +74,9 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
             cycleThree?.wave = wave
             cycleFiveThreeOne?.wave = wave
             cycleDeload?.wave = wave
+            
+            //save context
+            CoreDataStackManager.sharedInstance.saveContext()
             return
         }
     }
@@ -85,60 +88,54 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
 
     // MARK: - Table view data source
 
+    //gets number of sections to be displayed in table
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        //get sections info from fetch
+        let sections = self.cycleFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+        return sections.count
     }
 
+    //gets number of rows for each table section
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        //get rows in each section
+        let sections = self.cycleFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
 
-    /*
+    //configure cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        
+        //get cyclefor row
+        let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
+        
+        //set reuseID
+        let reuseID = "CycleCell"
+        
+        //create cell
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath) 
 
-        // Configure the cell...
-
+        // Configure the cell ad return
+        cell.textLabel?.text = cycle.repsCycle.description
         return cell
     }
-    */
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    //selecting cycle shows list of exercises
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //get cycle at row
+        let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
+        print(cycle.repsCycle.description)
+        //TODO:  MAKE SEGUE TO NEXT VC
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
