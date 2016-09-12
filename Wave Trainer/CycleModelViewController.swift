@@ -42,6 +42,9 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        //set FRC delegate
+        self.cycleFetchedResultsController.delegate = self
+        
         guard let wave = wave else {
             //no wave passed in, dismiss VC and return
             //TODO: THROW ERROR?
@@ -133,8 +136,65 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //get cycle at row
         let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
-        print(cycle.repsCycle.description)
+        print(cycle.wave.name, cycle.repsCycle.description)
         //TODO:  MAKE SEGUE TO NEXT VC
+    }
+    
+    //fetch results controller delegate methods
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        //begin the tableView updates
+        self.tableView.beginUpdates()
+    }
+    
+    //manages adding sections in the event of different sections in fetch
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        //check change type
+        switch type {
+        //insert new section
+        case .Insert:
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        //delete section
+        case .Delete:
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            print("error: reached default of didChangeSection in fetchController")
+            return
+        }
+    }
+    
+    //manages the changing of an object in the fetch
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        //check change type
+        switch type {
+        //insert new object
+        case .Insert:
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        //delete object
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        //update object
+        case .Update:
+            //get wave from fetch
+            let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath!) as! Cycle
+            
+            //get cell
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+            
+            //set label of cell as wave name, return cell
+            cell.textLabel?.text = cycle.repsCycle.description
+        //move object
+        case .Move:
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            
+        }
+    }
+    
+    //end updates when finished
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
     }
 
     /*
