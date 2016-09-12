@@ -115,9 +115,12 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
         //get wave at path
         let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
         
-        //print wave name (for now)
-        //TODO: CREATE SEGUE TO NEXT VC TO VIEW CYCLES
-        print(wave.name)
+        //create controller, pass wave in, present
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("CycleModelViewController") as! CycleModelViewController
+        controller.wave = wave
+        self.navigationController?.pushViewController(controller, animated: true)
+        
+        
     }
     
     //manages delete behavior of cells

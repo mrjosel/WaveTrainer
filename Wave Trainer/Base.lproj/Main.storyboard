@@ -302,10 +302,10 @@
             </objects>
             <point key="canvasLocation" x="2382" y="-1983"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Cycle Model View Controller-->
         <scene sceneID="a7K-Zb-mFU">
             <objects>
-                <tableViewController id="6X3-mu-ql0" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CycleModelViewController" id="6X3-mu-ql0" customClass="CycleModelViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xTz-6L-mOG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +328,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfC-uh-JfB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3138" y="-1993"/>
+            <point key="canvasLocation" x="3120" y="-1983"/>
         </scene>
         <!--CoreData-->
         <scene sceneID="WCx-qa-Hax">
