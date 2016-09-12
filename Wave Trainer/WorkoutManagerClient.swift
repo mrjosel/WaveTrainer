@@ -37,6 +37,9 @@ class WorkoutManagerClinet: AnyObject {
         //TODO:  GET MORE RELEVANT ENDPOINTS
     }
     
+    //variable set by user to denote whether a deload cycle is to be used or not, default is false
+    var deload : Bool = false
+    
     //available plate options for calculating plates on bars, empty until user creates
     var plates : [Double] = [] {
         didSet {

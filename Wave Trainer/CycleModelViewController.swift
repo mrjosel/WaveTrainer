@@ -9,6 +9,9 @@
 import UIKit
 
 class CycleModelViewController: UITableViewController {
+    
+    //var for local reference to CoreData singleton
+    var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
 
     //wave, sent from previous controller
     var wave : Wave?
@@ -21,6 +24,33 @@ class CycleModelViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        guard let wave = wave else {
+            //no wave passed in, dismiss VC and return
+            //TODO: THROW ERROR?
+            print("no wave present, dismissing")
+            self.dismissViewControllerAnimated(false, completion: nil)
+            return
+        }
+        
+        //check for cycles, if no cycles exist, create them
+        guard wave.cycles != [] else {
+            
+            //create cycles for five, three, and one
+            let cycleFive = Cycle(repsCycle: RepsCycle.FiveReps, completed: false, context: self.sharedContext)
+            let cycleThree = Cycle(repsCycle: RepsCycle.ThreeReps, completed: false, context: self.sharedContext)
+            let cycleFiveThreeOne = Cycle(repsCycle: RepsCycle.FiveThreeOneReps, completed: false, context: self.sharedContext)
+            
+            //create deload cycle if user is using one
+            let cycleDeload = WorkoutManagerClinet.sharedInstance.deload ? Cycle(repsCycle: RepsCycle.Deload, completed: false, context: self.sharedContext) : nil
+            
+            //set cycles wave to wave
+            cycleFive?.wave = wave
+            cycleThree?.wave = wave
+            cycleFiveThreeOne?.wave = wave
+            cycleDeload?.wave = wave
+            return
+        }
     }
 
     override func didReceiveMemoryWarning() {
