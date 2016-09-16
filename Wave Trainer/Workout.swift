@@ -17,6 +17,7 @@ class Workout: NSManagedObject {
     @NSManaged var exercises: [Exercise]
     @NSManaged var completedPersisted : NSNumber
     @NSManaged private var dateCompleted : NSDate
+    @NSManaged var order : NSNumber
     
     //initializers
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
@@ -40,5 +41,8 @@ class Workout: NSManagedObject {
             return self.namePersisted
         }
         //TODO:  CALCULATE NAME BASED ON CORE EXERCISES
+        set {
+            self.namePersisted = newValue
+        }
     }
 }

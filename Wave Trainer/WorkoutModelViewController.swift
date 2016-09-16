@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-class WorkoutModelViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+    
+    //outlets
+    @IBOutlet weak var workoutTableView: UITableView!
 
     //MOC
     let sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
@@ -17,9 +20,41 @@ class WorkoutModelViewController: UITableViewController, NSFetchedResultsControl
     //cycle passed in from previous VC
     var cycle : Cycle?
     
+    //add and edit buttons
+    var addWorkoutButton : UIBarButtonItem!
+    var editWorkoutButton : UIBarButtonItem!
+    
+    //fetched results controller for cycle objects
+    lazy var workoutFetchedResultsController : NSFetchedResultsController<Workout> = { () -> NSFetchedResultsController<Workout> in
+        
+        //create fetch request
+        let fetchRequest = NSFetchRequest<Workout>(entityName: "Workout")
+        
+        //create search predicate to get cycles for specific wave
+        fetchRequest.predicate = NSPredicate(format: "cycle == %@", self.cycle!)  //safely using implicitly unwrapping since wave is not nil if VC ever gets to this point
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
+        
+        //create and return fetch controller
+        let frc = NSFetchedResultsController<Workout>(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //set delegate and dataSource
+        self.workoutTableView.delegate = self
+        self.workoutTableView.dataSource = self
+        
+        //create and add buttons to controller
+        self.addWorkoutButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWorkout(_:)))
+        self.editWorkoutButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editWorkout(_:)))
+        self.navigationItem.setRightBarButton(self.addWorkoutButton, animated: false)
+        self.navigationItem.rightBarButtonItems = [self.addWorkoutButton, self.editWorkoutButton]
+        
+        //set title
+        self.navigationItem.title = "Workout"
+        
         //ensure cycle was passed in from prevoious VC
         guard cycle != nil else {
             //no wave passed in, dismiss VC and return
@@ -28,12 +63,44 @@ class WorkoutModelViewController: UITableViewController, NSFetchedResultsControl
             self.dismiss(animated: false, completion: nil)
             return
         }
-                
+        
+        //fetch workouts
+        do {
+            try self.workoutFetchedResultsController.performFetch()
+        } catch {
+            //failed to complete fetch, dismiss VC
+            print(error)
+            //TODO: ALERT USER
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        //hide table and show button to add workout if no workouts exist in fetch
+        guard !(self.workoutFetchedResultsController.fetchedObjects?.isEmpty)! else {
+            self.workoutTableView.isHidden = true
+            self.addWorkoutButton.isEnabled = true
+            self.editWorkoutButton.isEnabled = false
+            return
+        }
+        
+        //hide add workout button and show editWorkoutButton
+        self.addWorkoutButton.isEnabled = false
+        self.editWorkoutButton.isEnabled = true
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    //add workout to cycle
+    func addWorkout(_ sender : UIButton) {
+        print("adding workout")
+    }
+    
+    //edit workout, allows deletion and reordering
+    func editWorkout(_ sender : UIButton) {
+        print("editing workout")
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,70 +109,124 @@ class WorkoutModelViewController: UITableViewController, NSFetchedResultsControl
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    //gets number of sections to be displayed in table
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        //get sections info from fetch
+        let sections = self.workoutFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+        return sections.count
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    //gets number of rows for each table section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        //get rows in each section
+        let sections = self.workoutFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+    
+    //configure cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //get cyclefor row
+        let workout = self.workoutFetchedResultsController.object(at: indexPath)
+        
+        //set reuseID
+        let reuseID = "WorkoutCell"
+        
+        //create cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
+        
+        // Configure the cell ad return
+        cell.textLabel?.text = workout.name
         return cell
     }
-    */
-
-    /*
+    
+    
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
-    */
-
+    
+    //selecting cycle shows list of exercises
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //get cycle at row
+      /*  let workout = self.workoutFetchedResultsController.object(at: indexPath)
+        
+        //create controller, pass wave in, present
+        let controller = storyboard?.instantiateViewController(withIdentifier: "ExerciseModelViewController") as! ExerciseModelViewController
+        controller.cycle = cycle
+        self.navigationController?.pushViewController(controller, animated: true)*/
+    }
+    
+    //fetch results controller delegate methods
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        //begin the tableView updates
+        self.workoutTableView.beginUpdates()
+    }
+    
+    //manages adding sections in the event of different sections in fetch
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        
+        //check change type
+        switch type {
+        //insert new section
+        case .insert:
+            self.workoutTableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        //delete section
+        case .delete:
+            self.workoutTableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default:
+            print("error: reached default of didChangeSection in fetchController")
+            return
+        }
+    }
+    
+    //manages the changing of an object in the fetch
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        //check change type
+        switch type {
+        //insert new object
+        case .insert:
+            self.workoutTableView.insertRows(at: [newIndexPath!], with: .fade)
+        //delete object
+        case .delete:
+            self.workoutTableView.deleteRows(at: [indexPath!], with: .fade)
+        //update object
+        case .update:
+            //get wave from fetch
+            let workout = self.workoutFetchedResultsController.object(at: indexPath!)
+            
+            //get cell
+            let cell = self.workoutTableView.cellForRow(at: indexPath!)! as UITableViewCell
+            
+            //set label of cell as wave name, return cell
+            cell.textLabel?.text = workout.name
+        //move object
+        case .move:
+            self.workoutTableView.deleteRows(at: [indexPath!], with: .fade)
+            self.workoutTableView.insertRows(at: [newIndexPath!], with: .fade)
+            
+        }
+    }
+    
+    //end updates when finished
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.workoutTableView.endUpdates()
+    }
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
