@@ -43,7 +43,8 @@ class Cycle : NSManagedObject {
     @NSManaged var repsCyclePersisted : NSNumber
     @NSManaged var completedPersisted : NSNumber
     @NSManaged var wave : Wave
-//    @NSManaged var workouts : [Workout]   //TODO: CREATE WORKOUT CLASS
+    @NSManaged var workouts : [Workout]
+    //TODO: MAKE START AND END DATES
     
     //initializers
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {

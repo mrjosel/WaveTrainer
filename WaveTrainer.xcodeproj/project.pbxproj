@@ -11,6 +11,7 @@
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
+		B78516331D8B813200B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
 		B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */; };
 		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
 		B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */; };
@@ -47,6 +48,7 @@
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
+		B78516321D8B813200B130AA /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		B79E1C621D80224A00DED411 /* WaveTrainer.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaveTrainer.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave_TrainerTests.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				B7EC159C1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld */,
 				B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */,
 				B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */,
+				B78516321D8B813200B130AA /* Workout.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
+				B78516331D8B813200B130AA /* Workout.swift in Sources */,
 				B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

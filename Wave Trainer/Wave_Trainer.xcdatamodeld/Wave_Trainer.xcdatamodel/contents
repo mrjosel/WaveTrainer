@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G1004" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Cycle" representedClassName="Cycle" syncable="YES">
-        <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="wave" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wave" inverseName="cycles" inverseEntity="Wave" syncable="YES"/>
     </entity>
     <entity name="Wave" representedClassName="Wave" syncable="YES">
-        <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="endDatePersisted" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="endDatePersisted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startDatePersisted" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startDatePersisted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="cycles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cycle" inverseName="wave" inverseEntity="Cycle" syncable="YES"/>
     </entity>
+    <entity name="Workout" representedClassName="Workout" syncable="YES"/>
     <elements>
-        <element name="Wave" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Cycle" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Wave" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Workout" positionX="-54" positionY="27" width="128" height="45"/>
     </elements>
 </model>
