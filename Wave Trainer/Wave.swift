@@ -15,18 +15,18 @@ import CoreData
 class Wave : NSManagedObject {
     
     //managed vars
-    @NSManaged private var endDatePersisted: NSDate?
-    @NSManaged private var completedPersisted : NSNumber
-    @NSManaged var startDatePersisted : NSDate
+    @NSManaged fileprivate var endDatePersisted: Date?
+    @NSManaged fileprivate var completedPersisted : NSNumber
+    @NSManaged var startDatePersisted : Date
     @NSManaged var name : String?   //TODO: DEVELOP METHOD OF INDEXING UNNAMED WAVES
     @NSManaged var cycles: [Cycle]
     
     //initializers
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
-    init?(startDate: NSDate, endDate: NSDate?, completed: Bool, context: NSManagedObjectContext) {
+    init?(startDate: Date, endDate: Date?, completed: Bool, context: NSManagedObjectContext) {
         
         
         //if completed is set without an endDate or vice versa, initializer should fail and return nil
@@ -42,19 +42,19 @@ class Wave : NSManagedObject {
         
         //if endDate set, should be after than startDate
         if let endDate = endDate {
-            if startDate.isEqualToDate(endDate) {
+            if startDate == endDate {
                 return nil
             }
-            if endDate.timeIntervalSinceDate(startDate).isSignMinus {
+            if (endDate as NSDate).timeIntervalSince(startDate).sign == .minus {
                 return nil
             }
         }
         
         //completed and start/enddates compliant, attempt creation of managed object
-        guard let entity = NSEntityDescription.entityForName("Wave", inManagedObjectContext: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Wave", in: context) else {
             return nil
         }
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        super.init(entity: entity, insertInto: context)
         
         //create object, setting intermediate vars will set managed vars
         self.startDatePersisted = startDate //no need for intermediate var
@@ -65,7 +65,7 @@ class Wave : NSManagedObject {
     
     //intermediate variables, allows for computing/obersving other variables in Core Data
     //intermediate var for end date of wave
-    var endDate : NSDate? {
+    var endDate : Date? {
         get {
             guard let date = self.endDatePersisted else {
                 return nil
@@ -85,7 +85,7 @@ class Wave : NSManagedObject {
         }
         set {
             self.completedPersisted = newValue ? 1 : 0
-            self.endDate = newValue ? NSDate() : nil //when wave is complete, set endDate, if not complete remove endDate
+            self.endDate = newValue ? Date() : nil //when wave is complete, set endDate, if not complete remove endDate
         }
     }
 

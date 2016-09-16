@@ -11,13 +11,13 @@ import CoreData
 
 //RepsCycle enum - A Cycle can either be of 5 reps, 3 reps, or 5-3-1 reps
 enum RepsCycle : Int, CustomStringConvertible {
-    case FiveReps = 5, ThreeReps = 3, FiveThreeOneReps = 1, Deload = 0
+    case fiveReps = 5, threeReps = 3, fiveThreeOneReps = 1, deload = 0
     
     static let RepsCycleNames = [
-        FiveReps : "5 Reps Cycle",
-        ThreeReps : "3 Reps Cycle",
-        FiveThreeOneReps : "5-3-1 Reps Cycle",
-        Deload : "Deload Cycle"
+        fiveReps : "5 Reps Cycle",
+        threeReps : "3 Reps Cycle",
+        fiveThreeOneReps : "5-3-1 Reps Cycle",
+        deload : "Deload Cycle"
     ]
     
     //description var for CustomStringConvertible conformance
@@ -28,10 +28,10 @@ enum RepsCycle : Int, CustomStringConvertible {
     }
 }
 
-enum RepsCycleError : ErrorType {
-    case RawValIs2
-    case RawValIs4
-    case RawValIsGreaterThan5
+enum RepsCycleError : Error {
+    case rawValIs2
+    case rawValIs4
+    case rawValIsGreaterThan5
 }
 
 @objc(Cycle)
@@ -46,16 +46,16 @@ class Cycle : NSManagedObject {
 //    @NSManaged var workouts : [Workout]   //TODO: CREATE WORKOUT CLASS
     
     //initializers
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     //attempt creation of managed object
     init?(repsCycle : RepsCycle, completed: Bool, context: NSManagedObjectContext) {
         //
-        guard let entity = NSEntityDescription.entityForName("Cycle", inManagedObjectContext: context) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Cycle", in: context) else {
             return nil
         }
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        super.init(entity: entity, insertInto: context)
         
         //set intermediate vars, intermediate vars will set managed vars
         self.repsCycle = repsCycle
@@ -83,7 +83,7 @@ class Cycle : NSManagedObject {
         }
         set {
             //persist the value
-            self.repsCyclePersisted = newValue.rawValue
+            self.repsCyclePersisted = NSNumber(value : newValue.rawValue)
         }
     }
     

@@ -18,10 +18,10 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     var wave : Wave?
     
     //fetched results controller for cycle objects
-    lazy var cycleFetchedResultsController : NSFetchedResultsController = {
+    lazy var cycleFetchedResultsController : NSFetchedResultsController<Cycle> = { () -> NSFetchedResultsController<Cycle> in
         
         //create fetch request
-        let fetchRequest = NSFetchRequest(entityName: "Cycle")
+        let fetchRequest = NSFetchRequest<Cycle>(entityName: "Cycle")
 
         //create search predicate to get cycles for specific wave
         fetchRequest.predicate = NSPredicate(format: "wave == %@", self.wave!)  //safely using implicitly unwrapping since wave is not nil if VC ever gets to this point
@@ -50,7 +50,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
             //no wave passed in, dismiss VC and return
             //TODO: THROW ERROR?
             print("no wave present, dismissing")
-            self.dismissViewControllerAnimated(false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
             return
         }
         
@@ -63,15 +63,15 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
         }
         
         //check for cycles, if no cycles exist, create them
-        guard let cycles = self.cycleFetchedResultsController.fetchedObjects as? [Cycle] where cycles != [] else {
+        guard  !self.cycleFetchedResultsController.fetchedObjects!.isEmpty else {
             
             //create cycles for five, three, and one
-            let cycleFive = Cycle(repsCycle: RepsCycle.FiveReps, completed: false, context: self.sharedContext)
-            let cycleThree = Cycle(repsCycle: RepsCycle.ThreeReps, completed: false, context: self.sharedContext)
-            let cycleFiveThreeOne = Cycle(repsCycle: RepsCycle.FiveThreeOneReps, completed: false, context: self.sharedContext)
+            let cycleFive = Cycle(repsCycle: RepsCycle.fiveReps, completed: false, context: self.sharedContext)
+            let cycleThree = Cycle(repsCycle: RepsCycle.threeReps, completed: false, context: self.sharedContext)
+            let cycleFiveThreeOne = Cycle(repsCycle: RepsCycle.fiveThreeOneReps, completed: false, context: self.sharedContext)
             
             //create deload cycle if user is using one
-            let cycleDeload = WorkoutManagerClinet.sharedInstance.deload ? Cycle(repsCycle: RepsCycle.Deload, completed: false, context: self.sharedContext) : nil
+            let cycleDeload = WorkoutManagerClinet.sharedInstance.deload ? Cycle(repsCycle: RepsCycle.deload, completed: false, context: self.sharedContext) : nil
             
             //set cycles wave to wave
             cycleFive?.wave = wave
@@ -93,7 +93,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     // MARK: - Table view data source
 
     //gets number of sections to be displayed in table
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         //get sections info from fetch
         let sections = self.cycleFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
@@ -101,7 +101,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     }
 
     //gets number of rows for each table section
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //get rows in each section
         let sections = self.cycleFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
@@ -110,16 +110,16 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     }
 
     //configure cell
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //get cyclefor row
-        let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
+        let cycle = self.cycleFetchedResultsController.object(at: indexPath) 
         
         //set reuseID
         let reuseID = "CycleCell"
         
         //create cell
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID, forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) 
 
         // Configure the cell ad return
         cell.textLabel?.text = cycle.repsCycle.description
@@ -128,40 +128,39 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
 
     
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
     }
     
     //selecting cycle shows list of exercises
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //get cycle at row
-        let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath) as! Cycle
-        print(cycle.wave.name, cycle.repsCycle.description)
+        let cycle = self.cycleFetchedResultsController.object(at: indexPath) 
         
         //create controller, pass wave in, present
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("WorkoutModelViewController") as! WorkoutModelViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "WorkoutModelViewController") as! WorkoutModelViewController
         controller.cycle = cycle
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
     //fetch results controller delegate methods
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //begin the tableView updates
         self.tableView.beginUpdates()
     }
     
     //manages adding sections in the event of different sections in fetch
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         //check change type
         switch type {
         //insert new section
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
         //delete section
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             print("error: reached default of didChangeSection in fetchController")
             return
@@ -169,36 +168,36 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
     }
     
     //manages the changing of an object in the fetch
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         //check change type
         switch type {
         //insert new object
-        case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
         //delete object
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
         //update object
-        case .Update:
+        case .update:
             //get wave from fetch
-            let cycle = self.cycleFetchedResultsController.objectAtIndexPath(indexPath!) as! Cycle
+            let cycle = self.cycleFetchedResultsController.object(at: indexPath!) 
             
             //get cell
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath!)! as UITableViewCell
             
             //set label of cell as wave name, return cell
             cell.textLabel?.text = cycle.repsCycle.description
         //move object
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
             
         }
     }
     
     //end updates when finished
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
 

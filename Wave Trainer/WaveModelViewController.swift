@@ -25,13 +25,13 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //NSUserefaults, used to manage index
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let userDefaults = UserDefaults.standard
     
     //fetchedResultsController
-    lazy var waveFetchedResultsController : NSFetchedResultsController = {
+    lazy var waveFetchedResultsController : NSFetchedResultsController<Wave> = { () -> NSFetchedResultsController<Wave> in
         
         //create fetch request
-        let fetchRequest = NSFetchRequest(entityName: "Wave")
+        let fetchRequest = NSFetchRequest<Wave>(entityName: "Wave")
         
         //set sort descriptors
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDatePersisted", ascending: true)]
@@ -47,8 +47,8 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
         // Do any additional setup after loading the view.
         
         //create add button and add to navigation bar
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.addWave(_:)))
-        self.navigationItem.setRightBarButtonItem(addButton, animated: false)
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWave(_:)))
+        self.navigationItem.setRightBarButton(addButton, animated: false)
         //set title
         self.navigationItem.title = "Waves Viewer"
         
@@ -64,7 +64,7 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
         
         //set index based on user defaults
         self.index = {
-            guard let index = self.userDefaults.valueForKey("waveIndex") as? Int else {
+            guard let index = self.userDefaults.value(forKey: "waveIndex") as? Int else {
                 return 1
             }
             return index
@@ -72,9 +72,9 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //adds wave to CoreData
-    func addWave(sender: UIBarButtonItem) {
+    func addWave(_ sender: UIBarButtonItem) {
         //create wave, wave has date set to now, no endDate, and is incomplete, save context
-        let newWave = Wave(startDate: NSDate(), endDate: nil, completed: false, context: self.sharedContext)
+        let newWave = Wave(startDate: Date(), endDate: nil, completed: false, context: self.sharedContext)
         newWave?.name = "Wave " + String(self.index)
         self.index! += 1
         CoreDataStackManager.sharedInstance.saveContext()
@@ -86,23 +86,23 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //sets number of rows
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //get section info from fetch, return number of objects for section
         let sectionInfo = self.waveFetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     //creates cells for tableView
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //set reuseID
         let reuseID = "WaveCell"
         
         //get wave from fetch
-        let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
+        let wave = self.waveFetchedResultsController.object(at: indexPath)
         
         //create cell
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseID)! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID)! as UITableViewCell
         
         //set label of cell as wave name, return cell
         cell.textLabel?.text = wave.name
@@ -110,13 +110,13 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //manages behavior when cell is selected
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //get wave at path
-        let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
+        let wave = self.waveFetchedResultsController.object(at: indexPath)
         
         //create controller, pass wave in, present
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("CycleModelViewController") as! CycleModelViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "CycleModelViewController") as! CycleModelViewController
         controller.wave = wave
         self.navigationController?.pushViewController(controller, animated: true)
         
@@ -124,19 +124,19 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //manages delete behavior of cells
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-        case .Delete:
+        case .delete:
             //get wave at path
-            let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath) as! Wave
+            let wave = self.waveFetchedResultsController.object(at: indexPath)
             
             //decrement index if wave thats deleted is last row in table (which implies being in the last section as well)
             let lastSection = tableView.numberOfSections - 1
-            let lastRow = tableView.numberOfRowsInSection(indexPath.section) - 1
-            self.index! = indexPath.section == lastSection && indexPath.row == lastRow ? self.index - 1 : self.index
+            let lastRow = tableView.numberOfRows(inSection: (indexPath as NSIndexPath).section) - 1
+            self.index! = (indexPath as NSIndexPath).section == lastSection && (indexPath as NSIndexPath).row == lastRow ? self.index - 1 : self.index
             
             //delete wave from context, save context
-            self.sharedContext.deleteObject(wave)
+            self.sharedContext.delete(wave)
             CoreDataStackManager.sharedInstance.saveContext()
         default:
             //should never get to this point
@@ -146,21 +146,21 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //begin tableView updates when fetch changes
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
     //manages adding sections in the event of different sections in fetch
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         //check change type
         switch type {
         //insert new section
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
         //delete section
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             print("error: reached default of didChangeSection in fetchController")
             return
@@ -168,36 +168,36 @@ class WaveModelViewController: UITableViewController, NSFetchedResultsController
     }
     
     //manages the changing of an object in the fetch
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         //check change type
         switch type {
         //insert new object
-        case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
         //delete object
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
         //update object
-        case .Update:
+        case .update:
             //get wave from fetch
-            let wave = self.waveFetchedResultsController.objectAtIndexPath(indexPath!) as! Wave
+            let wave = self.waveFetchedResultsController.object(at: indexPath!)
             
             //get cell
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath!)! as UITableViewCell
             
             //set label of cell as wave name, return cell
             cell.textLabel?.text = wave.name
         //move object
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
             
         }
     }
     
     //end tableView updates when fetch changes
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
     

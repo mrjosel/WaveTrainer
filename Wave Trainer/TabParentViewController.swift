@@ -15,15 +15,15 @@ class TabParentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         //create menu button and add to navigation bar
-        let menuButton = UIBarButtonItem(image: UIImage(named: "menuImage"), style: .Plain, target: self, action: #selector(self.showMenu(_:)))
-        self.navigationItem.setLeftBarButtonItem(menuButton, animated: false)
+        let menuButton = UIBarButtonItem(image: UIImage(named: "menuImage"), style: .plain, target: self, action: #selector(self.showMenu(_:)))
+        self.navigationItem.setLeftBarButton(menuButton, animated: false)
         //set title
         self.navigationItem.title = "Wave Trainer"
         
     }
     
     //shows menu panel
-    func showMenu(sender: UIBarButtonItem) {
+    func showMenu(_ sender: UIBarButtonItem) {
         //TODO: IMPLEMENT MENU
         print("showing menu")
     }

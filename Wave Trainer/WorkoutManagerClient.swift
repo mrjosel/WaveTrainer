@@ -9,10 +9,10 @@
 import Foundation
 
 //enum for error in plate calculation
-enum PlateError : ErrorType {
-    case WeightLessThanBar
-    case IvalidWeight
-    case EmptyBar
+enum PlateError : Error {
+    case weightLessThanBar
+    case ivalidWeight
+    case emptyBar
 }
 
 //class that handles Workout Manager Client
@@ -20,7 +20,7 @@ class WorkoutManagerClinet: AnyObject {
     
     //singleton
     static let sharedInstance = WorkoutManagerClinet()
-    private init(){}    //prevents developers from initializing Workout Manager in app
+    fileprivate init(){}    //prevents developers from initializing Workout Manager in app
     
     //static constants for client
     struct Constants {
@@ -44,7 +44,7 @@ class WorkoutManagerClinet: AnyObject {
     var plates : [Double] = [] {
         didSet {
             //if plates change, perform assending sort
-            plates = plates.sort(>)
+            plates = plates.sorted(by: >)
         }
     }
     
@@ -53,18 +53,18 @@ class WorkoutManagerClinet: AnyObject {
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
     //output is always assuming unlimited number of plates for each available weight, therefore output is always comprised of largest available plates
-    func plateCalc(targetWeight: Double) throws -> [Double] {
+    func plateCalc(_ targetWeight: Double) throws -> [Double] {
         
         //check if targetWeight is greater than barWeight
         guard targetWeight >= self.barWeight else {
             //throw error
-            throw PlateError.WeightLessThanBar
+            throw PlateError.weightLessThanBar
         }
         
         //check if targetWeight can be calculatd from barWeight and available plates
-        guard (targetWeight - self.barWeight) % plates.last! == 0 else {
+        guard (targetWeight - self.barWeight).truncatingRemainder(dividingBy: plates.last!) == 0 else {
             //throw error
-            throw PlateError.IvalidWeight
+            throw PlateError.ivalidWeight
         }
         
         //remainder variable - get the weight that needs to be placed on one side of barbell, remove largest possible plate from remainder, continue iteration
@@ -75,7 +75,7 @@ class WorkoutManagerClinet: AnyObject {
         
         //if remainder is already zero, throw EmptyBar
         guard remainder != 0 else {
-            throw PlateError.EmptyBar
+            throw PlateError.emptyBar
         }
         
         //calculate plates
@@ -94,7 +94,7 @@ class WorkoutManagerClinet: AnyObject {
     //----------
     //FUTURE: CLOUD BASED SHARING POSSIBLE, MAY INVOLVE MIGRATION TO BaaS TYPE FRAMEWORK
     //logs in user
-    func login(username: String, password: String) {
+    func login(_ username: String, password: String) {
         print(username)
         print(password)
     }

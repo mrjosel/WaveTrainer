@@ -21,17 +21,17 @@ class Wave_TrainerTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        let managedObjectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])!
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
         
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         
         do {
-            try persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
         } catch {
             print("Adding in-memory persistent store failed")
         }
         
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         self.dummyContext = managedObjectContext
         
@@ -48,7 +48,7 @@ class Wave_TrainerTests: XCTestCase {
         
         //success cases
         //wave has a start date, incomplete, without an end date
-        let potentialWave1 = Wave(startDate: NSDate(), endDate: nil, completed: false, context: dummyContext!)
+        let potentialWave1 = Wave(startDate: Date(), endDate: nil, completed: false, context: dummyContext!)
         
         //tests 1-4
         XCTAssertNotNil(potentialWave1)                     //test that Wave is not nil
@@ -57,12 +57,12 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNil(potentialWave1?.endDate)               //test that persisted var is nil
         XCTAssertNil(potentialWave1?.name)                  //test that persisted var is not set
         
-        let timeInterval : NSTimeInterval = 50000
-        let futureDate = NSDate(timeInterval: timeInterval, sinceDate: NSDate())
-        let pastDate = NSDate(timeInterval: -timeInterval, sinceDate: NSDate())
+        let timeInterval : TimeInterval = 50000
+        let futureDate = Date(timeInterval: timeInterval, since: Date())
+        let pastDate = Date(timeInterval: -timeInterval, since: Date())
         
         //wave has a start date, and endDate later in time, and is complete
-        let potentialWave2 = Wave(startDate: NSDate(), endDate: futureDate, completed: true, context: dummyContext!)
+        let potentialWave2 = Wave(startDate: Date(), endDate: futureDate, completed: true, context: dummyContext!)
         
         //tests 5-8
         XCTAssertNotNil(potentialWave2)                     //test that Wave is not nil
@@ -73,7 +73,7 @@ class Wave_TrainerTests: XCTestCase {
         
         //fail cases
         //endate is equal to today
-        let startDate = NSDate()
+        let startDate = Date()
         let endDate = startDate
         let potentialWave3 = Wave(startDate: startDate, endDate: endDate, completed: true, context: dummyContext!)
         
@@ -81,19 +81,19 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNil(potentialWave3, "endDate can't be same as startDate")
         
         //endate is before today
-        let potentialWave4 = Wave(startDate: NSDate(), endDate: pastDate, completed: true, context: dummyContext!)
+        let potentialWave4 = Wave(startDate: Date(), endDate: pastDate, completed: true, context: dummyContext!)
         
         //test 10
         XCTAssertNil(potentialWave4, "endate can't be sooner than startDate")
         
         //wave is complete but no endate
-        let potentialWave5 = Wave(startDate: NSDate(), endDate: nil, completed: true, context: dummyContext!)
+        let potentialWave5 = Wave(startDate: Date(), endDate: nil, completed: true, context: dummyContext!)
         
         //test 11
         XCTAssertNil(potentialWave5, "wave must have endDate if completed == true")
         
         //wave has an endDate bus is marked incomplete
-        let potentialWave6 = Wave(startDate: NSDate(), endDate: futureDate, completed: false, context: dummyContext!)
+        let potentialWave6 = Wave(startDate: Date(), endDate: futureDate, completed: false, context: dummyContext!)
         
         //test 12
         XCTAssertNil(potentialWave6, "wave must be marked complete if endDate is set")

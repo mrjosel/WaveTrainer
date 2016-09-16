@@ -25,26 +25,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //set image and constraints
         self.barbellImageView.image = UIImage(named: "barbellImage")    //TODO: SHARPEN IMAGE
         self.titleLabel.text = "Wave Trainer"   //TODO: make stylized version
-        self.titleLabel.textColor = UIColor.whiteColor()
-        self.view.backgroundColor = UIColor.blackColor()
+        self.titleLabel.textColor = UIColor.white
+        self.view.backgroundColor = UIColor.black
         self.userNameTextField.placeholder = "Username"
         self.passwordTextField.placeholder = "Password"
         //TODO:  JAZZ UP BUTTONS
-        self.signUpButton.setTitle("Sign Up", forState: UIControlState.Normal)
-        self.signUpButton.backgroundColor = UIColor.whiteColor()
-        self.signUpButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.signUpButton.addTarget(self, action: #selector(self.signUpButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        self.loginButton.addTarget(self, action: #selector(self.loginButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        self.loginButton.setTitle("Login", forState: UIControlState.Normal)
-        self.loginButton.backgroundColor = UIColor.whiteColor()
-        self.loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.signUpButton.setTitle("Sign Up", for: UIControlState())
+        self.signUpButton.backgroundColor = UIColor.white
+        self.signUpButton.setTitleColor(UIColor.black, for: UIControlState())
+        self.signUpButton.addTarget(self, action: #selector(self.signUpButtonPressed(_:)), for: .touchUpInside)
+        self.loginButton.addTarget(self, action: #selector(self.loginButtonPressed(_:)), for: .touchUpInside)
+        self.loginButton.setTitle("Login", for: UIControlState())
+        self.loginButton.backgroundColor = UIColor.white
+        self.loginButton.setTitleColor(UIColor.black, for: UIControlState())
         
         //textField behavior
         self.userNameTextField.clearsOnBeginEditing = true
-        self.userNameTextField.clearButtonMode = .WhileEditing
+        self.userNameTextField.clearButtonMode = .whileEditing
         self.passwordTextField.clearsOnBeginEditing = true
-        self.passwordTextField.clearButtonMode = .WhileEditing
-        self.passwordTextField.secureTextEntry = true
+        self.passwordTextField.clearButtonMode = .whileEditing
+        self.passwordTextField.isSecureTextEntry = true
         
         //set delegates
         self.userNameTextField.delegate = self
@@ -53,24 +53,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //perform the following before view appears
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         //subscribe to keyboard notifications to allow for view resizing
         self.subscribeToKeyboardNotifications()
     }
     
     //perform the following before the view disappears
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         //unsubscribe to keyboard notifications to prevent any race conditions
         self.unsubscribeFromKeyboardNotifications()
     }
     //TODO:  INVESTIGATE HOW TO LOGIN AND HOW TO SIGNUP USING CLIENT
     //login button pressed
-    func loginButtonPressed(sender: UIButton) {
+    func loginButtonPressed(_ sender: UIButton) {
         
         //get username and password text, pass into Workout Manager client
-        guard let username = self.userNameTextField.text, password = self.passwordTextField.text else {
+        guard let username = self.userNameTextField.text, let password = self.passwordTextField.text else {
             //one or more fields empty, do nothing
             return
         }
@@ -82,7 +82,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //login button pressed
-    func signUpButtonPressed(sender: UIButton) {
+    func signUpButtonPressed(_ sender: UIButton) {
         
         //transition to signupVC
         //TODO: MODAL TRANSITION TO NEW VC
@@ -95,12 +95,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //----------delegate methods----------
     //when return key is hit
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //hide keyboard when enter key is hit
         textField.resignFirstResponder()
         
         //resume listening for keyboardWillShow
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         return true
     }
     
@@ -108,29 +108,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //subscribes to notifications from keyboard, usually called in a VCs viewWillAppear method
     func subscribeToKeyboardNotifications() {
         //adds notifications to notification center
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     //unsubscribes to notifications from keyboard, usually called in a VCs viewWillDisappear method
     func unsubscribeFromKeyboardNotifications() {
         //removes keyboard notifications from notification center
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     //carry out following when keyboard is about to show
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         
         //only adjust if keyboard is not showing, else do nothing
         self.view.frame.origin.y -= self.getKeyboardHeight(notification)
         
         //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     //carry out following when keyboard is about to hide
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
         self.view.frame.origin.y = 0
@@ -138,10 +138,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     //gets size of keyboard to be used in resizing the view
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = (notification as NSNotification).userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.CGRectValue().height
+        return keyboardSize.cgRectValue.height
     }
     //------------------------------End of view resizing methods-------------------------------------------------
     
