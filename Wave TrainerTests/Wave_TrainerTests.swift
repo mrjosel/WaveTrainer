@@ -44,7 +44,7 @@ class Wave_TrainerTests: XCTestCase {
     }
     
     //tests to confirm the Wave initializer returns when no input params are given
-    func testWaveInitializer() {
+    func waveTests() {
         
         //success cases
         //wave has a start date, incomplete, without an end date
@@ -97,9 +97,10 @@ class Wave_TrainerTests: XCTestCase {
         
         //test 12
         XCTAssertNil(potentialWave6, "wave must be marked complete if endDate is set")
+
     }
         //Cycle Tests
-    func testCycleInitializer() {
+    func cycleTests() {
     
         //tests
         let potentialCycle1 = Cycle(repsCycle: .fiveReps, completed: false, context: dummyContext!)
@@ -117,12 +118,13 @@ class Wave_TrainerTests: XCTestCase {
     }
     
     //Workout tests
-    func testWorkoutInitializer() {
+    func workoutTests() {
         
         //tests
         let potentialWorkout1 = Workout(name: "myWorkout", order: 0, context: dummyContext!)
         XCTAssertNotNil(potentialWorkout1)
     }
+    
     
     
     //

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B705633E1D8DF88800224337 /* ExerciseModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */; };
+		B705633F1D8DFB4000224337 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
@@ -306,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B705633F1D8DFB4000224337 /* Exercise.swift in Sources */,
 				B78516351D8DED4D00B130AA /* Wave.swift in Sources */,
 				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
 				B78516361D8DED5100B130AA /* Cycle.swift in Sources */,

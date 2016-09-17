@@ -189,7 +189,7 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
             let cell = self.tableView.cellForRow(at: indexPath!)! as UITableViewCell
             
             //set label of cell as wave name, return cell
-            cell.textLabel?.text = "exercise"//TODO: FIX
+            cell.textLabel?.text = exercise.name
         //move object
         case .move:
             self.tableView.deleteRows(at: [indexPath!], with: .fade)
