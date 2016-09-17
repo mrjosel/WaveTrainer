@@ -15,6 +15,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     //outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var exerciseTableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     //delegate
     var delegate : ExercisePickerViewControllerDelegate?
@@ -26,8 +27,11 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         self.searchBar.delegate = self
         self.exerciseTableView.delegate = self
         
-        //config search bar
-        self.searchBar.showsCancelButton = true
+        //config navBar
+        //TODO: SET TITLE
+        
+        //set background color to same as navBar
+        self.view.backgroundColor = UIColor(white: 0.97, alpha: 1.0)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,10 +41,6 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     //cancel button was clicked, exit controller
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        self.dismiss(animated: true, completion: nil)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
