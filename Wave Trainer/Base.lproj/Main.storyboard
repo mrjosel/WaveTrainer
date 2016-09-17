@@ -376,7 +376,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tnz-Lg-Ndt" id="yxW-2C-iob">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -390,6 +390,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ia9-lt-XGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4423" y="-1994"/>
+        </scene>
+        <!--Exercise Picker View Controller-->
+        <scene sceneID="GQ9-Wh-Pub">
+            <objects>
+                <viewController storyboardIdentifier="ExercisePickerViewController" id="9Uk-Uu-9J8" customClass="ExercisePickerViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BkT-X8-eIO"/>
+                        <viewControllerLayoutGuide type="bottom" id="cIK-CT-KAq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nAt-AO-5Iw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MlJ-Pg-Ln8">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="jxs-XL-tss">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jxs-XL-tss" id="2nz-H7-oLW">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="M5L-7z-gb0">
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M5L-7z-gb0" firstAttribute="top" secondItem="BkT-X8-eIO" secondAttribute="bottom" constant="8" id="0Ix-Un-Otz"/>
+                            <constraint firstAttribute="trailing" secondItem="M5L-7z-gb0" secondAttribute="trailing" id="3QJ-Di-MDF"/>
+                            <constraint firstItem="MlJ-Pg-Ln8" firstAttribute="top" secondItem="M5L-7z-gb0" secondAttribute="bottom" id="7Nf-kR-W9A"/>
+                            <constraint firstItem="M5L-7z-gb0" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="OIq-yU-rtW"/>
+                            <constraint firstItem="cIK-CT-KAq" firstAttribute="top" secondItem="MlJ-Pg-Ln8" secondAttribute="bottom" id="PNM-7q-iFX"/>
+                            <constraint firstAttribute="trailing" secondItem="MlJ-Pg-Ln8" secondAttribute="trailing" id="RYf-hU-tl2"/>
+                            <constraint firstItem="MlJ-Pg-Ln8" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="iUS-Ce-OWY"/>
+                            <constraint firstItem="MlJ-Pg-Ln8" firstAttribute="top" secondItem="M5L-7z-gb0" secondAttribute="bottom" id="ufE-xG-cEH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="exerciseTableView" destination="MlJ-Pg-Ln8" id="P03-WT-Eb1"/>
+                        <outlet property="searchBar" destination="M5L-7z-gb0" id="Q68-yo-6BR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T9z-34-pO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4421.6000000000004" y="-1297.6011994002999"/>
         </scene>
         <!--CoreData-->
         <scene sceneID="WCx-qa-Hax">

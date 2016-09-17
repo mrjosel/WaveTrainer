@@ -71,11 +71,11 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     
     //adds exercise to CoreData
     func addExercise(_ sender: UIBarButtonItem) {
-        print("adding exercise")
+        
         //create controller, set delegate,  present modally
-        /*let controller = storyboard?.instantiateViewController(withIdentifier: "ExercisePickerViewController") as! ExercisePickerViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "ExercisePickerViewController") as! ExercisePickerViewController
         controller.delegate = self
-        self.present(controller, animated: true, completion: nil)*/
+        self.present(controller, animated: true, completion: nil)
         
     }
     
