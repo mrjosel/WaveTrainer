@@ -21,8 +21,8 @@ class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITable
     var cycle : Cycle?
     
     //add and edit buttons
-    var addWorkoutButton : UIBarButtonItem!
-    var editWorkoutButton : UIBarButtonItem!
+    //var addWorkoutButton : UIBarButtonItem!
+    //var editWorkoutButton : UIBarButtonItem!
     
     //fetched results controller for cycle objects
     lazy var workoutFetchedResultsController : NSFetchedResultsController<Workout> = { () -> NSFetchedResultsController<Workout> in
@@ -45,18 +45,19 @@ class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITable
         //set delegate and dataSource
         self.workoutTableView.delegate = self
         self.workoutTableView.dataSource = self
+        self.workoutFetchedResultsController.delegate = self
         
         //create and add buttons to controller
-        self.addWorkoutButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWorkout(_:)))
-        self.editWorkoutButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editWorkout(_:)))
-        self.navigationItem.setRightBarButton(self.addWorkoutButton, animated: false)
-        self.navigationItem.rightBarButtonItems = [self.addWorkoutButton, self.editWorkoutButton]
+        //self.addWorkoutButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWorkout(_:)))
+        //self.editWorkoutButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editWorkout(_:)))
+        //self.navigationItem.setRightBarButton(self.addWorkoutButton, animated: false)
+        //self.navigationItem.rightBarButtonItems = [self.addWorkoutButton, self.editWorkoutButton]
         
         //set title
         self.navigationItem.title = "Workout"
         
         //ensure cycle was passed in from prevoious VC
-        guard cycle != nil else {
+        guard let cycle = self.cycle else {
             //no wave passed in, dismiss VC and return
             //TODO: THROW ERROR?
             print("no cycle present, dismissing")
@@ -74,17 +75,31 @@ class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITable
             self.dismiss(animated: true, completion: nil)
         }
         
-        //hide table and show button to add workout if no workouts exist in fetch
-        guard !(self.workoutFetchedResultsController.fetchedObjects?.isEmpty)! else {
-            self.workoutTableView.isHidden = true
-            self.addWorkoutButton.isEnabled = true
-            self.editWorkoutButton.isEnabled = false
+        //if no workouts exist, create four base workouts based on core lifts
+        guard let workouts = self.workoutFetchedResultsController.fetchedObjects, !workouts.isEmpty else {
+            //self.workoutTableView.isHidden = true
+            //self.addWorkoutButton.isEnabled = true
+            //self.editWorkoutButton.isEnabled = false
+            
+            let ohp = Workout(name: "OHP", order: 0, context: self.sharedContext)
+            let deadlift = Workout(name: "Deadlift", order: 1, context: self.sharedContext)
+            let bench = Workout(name: "Bench Press", order: 2, context: self.sharedContext)
+            let squat = Workout(name: "Squat", order: 3, context: self.sharedContext)
+            
+            //set workout cycles to self.cycle
+            ohp?.cycle = cycle
+            deadlift?.cycle = cycle
+            bench?.cycle = cycle
+            squat?.cycle = cycle
+            
+            //save context
+            CoreDataStackManager.sharedInstance.saveContext()
             return
-        }
+        }   
         
         //hide add workout button and show editWorkoutButton
-        self.addWorkoutButton.isEnabled = false
-        self.editWorkoutButton.isEnabled = true
+        //self.addWorkoutButton.isEnabled = false
+        //self.editWorkoutButton.isEnabled = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -154,8 +169,9 @@ class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITable
     //selecting cycle shows list of exercises
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //get cycle at row
-      /*  let workout = self.workoutFetchedResultsController.object(at: indexPath)
-        
+        let workout = self.workoutFetchedResultsController.object(at: indexPath)
+        print(workout.name)
+        /*
         //create controller, pass wave in, present
         let controller = storyboard?.instantiateViewController(withIdentifier: "ExerciseModelViewController") as! ExerciseModelViewController
         controller.cycle = cycle

@@ -12,6 +12,9 @@
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
 		B78516331D8B813200B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
+		B78516341D8DED2E00B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
+		B78516351D8DED4D00B130AA /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
+		B78516361D8DED5100B130AA /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
 		B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */; };
 		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
 		B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */; };
@@ -300,7 +303,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B78516351D8DED4D00B130AA /* Wave.swift in Sources */,
 				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
+				B78516361D8DED5100B130AA /* Cycle.swift in Sources */,
+				B78516341D8DED2E00B130AA /* Workout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

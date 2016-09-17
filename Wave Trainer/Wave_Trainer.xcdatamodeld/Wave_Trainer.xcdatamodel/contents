@@ -4,14 +4,14 @@
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="wave" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wave" inverseName="cycles" inverseEntity="Wave" syncable="YES"/>
-        <relationship name="workouts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="cycle" inverseEntity="Workout" syncable="YES"/>
+        <relationship name="workouts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Workout" inverseName="cycle" inverseEntity="Workout" syncable="YES"/>
     </entity>
     <entity name="Wave" representedClassName="Wave" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="endDatePersisted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDatePersisted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="cycles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cycle" inverseName="wave" inverseEntity="Cycle" syncable="YES"/>
+        <relationship name="cycles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Cycle" inverseName="wave" inverseEntity="Cycle" syncable="YES"/>
     </entity>
     <entity name="Workout" representedClassName="Workout" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>

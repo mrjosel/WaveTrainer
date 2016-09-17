@@ -63,7 +63,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
         }
         
         //check for cycles, if no cycles exist, create them
-        guard  !self.cycleFetchedResultsController.fetchedObjects!.isEmpty else {
+        guard let cycles = self.cycleFetchedResultsController.fetchedObjects, !cycles.isEmpty else {
             
             //create cycles for five, three, and one
             let cycleFive = Cycle(repsCycle: RepsCycle.fiveReps, completed: false, context: self.sharedContext)
