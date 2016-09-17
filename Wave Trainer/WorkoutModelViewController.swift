@@ -170,12 +170,11 @@ class WorkoutModelViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //get cycle at row
         let workout = self.workoutFetchedResultsController.object(at: indexPath)
-        print(workout.name)
-        /*
-        //create controller, pass wave in, present
+        
+        //create controller, pass workout in, present
         let controller = storyboard?.instantiateViewController(withIdentifier: "ExerciseModelViewController") as! ExerciseModelViewController
-        controller.cycle = cycle
-        self.navigationController?.pushViewController(controller, animated: true)*/
+        controller.workout = workout
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     //fetch results controller delegate methods

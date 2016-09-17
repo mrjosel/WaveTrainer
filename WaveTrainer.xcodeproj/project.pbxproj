@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B705633E1D8DF88800224337 /* ExerciseModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseModelViewController.swift; sourceTree = "<group>"; };
 		B7212F571D80217400E8C33F /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		B79E1C9E1D81781D00DED411 /* CoreDataViewers */ = {
 			isa = PBXGroup;
 			children = (
+				B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */,
 				B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */,
 				B79E1CAF1D8715A800DED411 /* CycleModelViewController.swift */,
 				B79E1CB11D8758C700DED411 /* WorkoutModelViewController.swift */,
@@ -322,6 +325,7 @@
 				B7EC15961D53AD6900C3D5F1 /* AppDelegate.swift in Sources */,
 				B79E1CA61D817B3500DED411 /* Wave.swift in Sources */,
 				B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */,
+				B705633E1D8DF88800224337 /* ExerciseModelViewController.swift in Sources */,
 				B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */,
 				B79E1CB01D8715A800DED411 /* CycleModelViewController.swift in Sources */,
 				B79E1CB21D8758C700DED411 /* WorkoutModelViewController.swift in Sources */,

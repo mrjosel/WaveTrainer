@@ -20,7 +20,7 @@ class Workout: NSManagedObject {
     @NSManaged private var dateCompleted : NSDate?
     @NSManaged var order : NSNumber
     @NSManaged var cycle : Cycle
-    //@NSManaged var exercises: [Exercise]
+    @NSManaged var exercises: [Exercise]
     
     //initializers
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {

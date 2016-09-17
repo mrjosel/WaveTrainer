@@ -16,10 +16,10 @@ class Exercise : NSManagedObject {
     
     //managed vars
     @NSManaged var sets : NSNumber
-    @NSManaged fileprivate var repsPersisted : NSNumber?
+    @NSManaged private var repsPersisted : NSNumber?
     @NSManaged var name : String
-    @NSManaged fileprivate var orderPersisted : NSNumber
-    @NSManaged fileprivate var isCorePersisted : NSNumber
+    @NSManaged private var orderPersisted : NSNumber
+    @NSManaged private var isCorePersisted : NSNumber
     @NSManaged var workout : Workout
     
     //initializers
