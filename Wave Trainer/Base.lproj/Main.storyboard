@@ -416,11 +416,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-Hc-LW4">
-                                <items>
-                                    <navigationItem title="Title" id="IhX-88-jPp"/>
-                                </items>
-                            </navigationBar>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fWa-ER-Cxf">
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -428,29 +423,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fWa-ER-Cxf" secondAttribute="trailing" id="7Te-Vg-gKp"/>
-                            <constraint firstItem="OOM-Hc-LW4" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="CXO-CH-C3B"/>
-                            <constraint firstItem="fWa-ER-Cxf" firstAttribute="top" secondItem="OOM-Hc-LW4" secondAttribute="bottom" id="Ceg-Uv-7AR"/>
                             <constraint firstItem="fWa-ER-Cxf" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="Clt-UC-zYq"/>
+                            <constraint firstItem="TWg-j1-AMa" firstAttribute="top" secondItem="fWa-ER-Cxf" secondAttribute="bottom" id="GQn-hM-sGY"/>
                             <constraint firstAttribute="trailing" secondItem="TWg-j1-AMa" secondAttribute="trailing" id="Hvq-Pw-xZr"/>
-                            <constraint firstItem="TWg-j1-AMa" firstAttribute="top" secondItem="fWa-ER-Cxf" secondAttribute="bottom" id="Ng7-ko-l29"/>
-                            <constraint firstItem="TWg-j1-AMa" firstAttribute="top" secondItem="fWa-ER-Cxf" secondAttribute="bottom" id="PR4-Hf-Kpn"/>
-                            <constraint firstItem="fWa-ER-Cxf" firstAttribute="top" secondItem="OOM-Hc-LW4" secondAttribute="bottom" id="R1i-4a-Kv7"/>
                             <constraint firstItem="cIK-CT-KAq" firstAttribute="top" secondItem="TWg-j1-AMa" secondAttribute="bottom" id="YkN-3C-Lvk"/>
                             <constraint firstItem="cIK-CT-KAq" firstAttribute="top" secondItem="TWg-j1-AMa" secondAttribute="bottom" id="aJF-1c-AxA"/>
                             <constraint firstAttribute="trailing" secondItem="fWa-ER-Cxf" secondAttribute="trailing" id="aJs-vS-T9n"/>
                             <constraint firstItem="TWg-j1-AMa" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="dUf-NE-UJP"/>
-                            <constraint firstAttribute="trailing" secondItem="OOM-Hc-LW4" secondAttribute="trailing" id="irh-0T-Nb5"/>
-                            <constraint firstItem="OOM-Hc-LW4" firstAttribute="top" secondItem="BkT-X8-eIO" secondAttribute="bottom" constant="8" id="j7b-ID-2Rf"/>
                             <constraint firstAttribute="trailing" secondItem="TWg-j1-AMa" secondAttribute="trailing" id="sVc-X8-rW3"/>
-                            <constraint firstItem="OOM-Hc-LW4" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="tC8-zT-vBV"/>
-                            <constraint firstAttribute="trailing" secondItem="OOM-Hc-LW4" secondAttribute="trailing" id="tpO-BZ-Zr7"/>
                             <constraint firstItem="fWa-ER-Cxf" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="vRc-Bj-FQ3"/>
                             <constraint firstItem="TWg-j1-AMa" firstAttribute="leading" secondItem="nAt-AO-5Iw" secondAttribute="leading" id="wpK-5f-h14"/>
+                            <constraint firstItem="fWa-ER-Cxf" firstAttribute="top" secondItem="BkT-X8-eIO" secondAttribute="bottom" constant="8" id="zdx-q3-MkY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="exerciseTableView" destination="TWg-j1-AMa" id="zco-8O-4Wh"/>
-                        <outlet property="navBar" destination="OOM-Hc-LW4" id="QhA-xd-bhl"/>
                         <outlet property="searchBar" destination="fWa-ER-Cxf" id="OiU-yr-pxB"/>
                     </connections>
                 </viewController>

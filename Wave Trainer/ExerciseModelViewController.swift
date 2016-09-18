@@ -11,7 +11,7 @@ import CoreData
 
 //protocol for picking exercises in pickerVC
 protocol ExercisePickerViewControllerDelegate {
-    func didAddExercise(_ exercise: Exercise) -> Void
+    func exercisePicker(didAddExercise exercise: Exercise?) -> Void
 }
 
 //view controller for viewing exercises
@@ -80,9 +80,8 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     }
     
     //method called by picker controller, handles when user selects exercise in pickerVC
-    func didAddExercise(_ exercise: Exercise) {
-        
-        print("didAddExercise called")
+    func exercisePicker(didAddExercise exercise: Exercise?) {
+        print("didAddExercise called, \(exercise?.name)")
     }
 
     override func didReceiveMemoryWarning() {

@@ -15,10 +15,19 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     //outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var exerciseTableView: UITableView!
-    @IBOutlet weak var navBar: UINavigationBar!
+    
+    //exercises, used to populate tableView
+    var exercises = [Exercise]()
     
     //delegate
     var delegate : ExercisePickerViewControllerDelegate?
+    
+    //MOCs, dummy context for returned search terms, shared for actual selected result
+    var dummyContext : NSManagedObjectContext!
+    var sharedContext : NSManagedObjectContext!
+    
+    //search task - URLSessionTask containing search term in search bar
+    var searchTask : URLSessionTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +36,17 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         self.searchBar.delegate = self
         self.exerciseTableView.delegate = self
         
-        //config navBar
-        //TODO: SET TITLE
+        //show cancel button and begin first responder
+        self.searchBar.showsCancelButton = true
+        self.searchBar.becomeFirstResponder()
         
-        //set background color to same as navBar
+        //set background
         self.view.backgroundColor = UIColor(white: 0.97, alpha: 1.0)
+        
+        //create dummy context
+        self.dummyContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        self.dummyContext.persistentStoreCoordinator = CoreDataStackManager.sharedInstance.persistentStoreCoordinator
+        self.sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -40,7 +55,30 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    //called whenever text is entered
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("editing")
+    }
+    
     //cancel button was clicked, exit controller
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        //call delegate with no exercise object
+        self.delegate?.exercisePicker(didAddExercise: nil)
+        
+        //dismiss
+        self.exitPickerVC()
+    }
+    
+    //dimiss VC and resign first responder
+    func exitPickerVC() {
+    
+        //remove search bar
+        searchBar.resignFirstResponder()
+        
+        //dismiss VC
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,14 +87,9 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
 
     // MARK: - Table view data source
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
+    //return tableRows for array of exercises
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.exercises.count
     }
 
     //configures cells at each row
@@ -68,41 +101,18 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    //call delegate with selected exercise
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //get exercise
+        let exercise = self.exercises[indexPath.row]
+        
+        //call delegate with exercise
+        self.delegate?.exercisePicker(didAddExercise: exercise)
+        
+        //dismiss
+        self.exitPickerVC()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
