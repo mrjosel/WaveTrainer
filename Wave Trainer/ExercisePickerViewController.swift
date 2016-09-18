@@ -57,7 +57,21 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     
     //called whenever text is entered
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("editing")
+        
+        //if a task is running, cancel it so as not to slow down process (if user keeps typing, then returned search items or active task is irrelevant to user)
+        if let task = self.searchTask {
+            task.cancel()
+        }
+        
+        //if user hits clear text button, clear out exercises array and reload data
+        guard searchText != "" else {
+            self.exercises = [Exercise]()
+            self.exerciseTableView.reloadData()
+            return
+        }
+        
+        //create search task based on search text
+        //TODO:  CREATE URL SESSION TASK
     }
     
     //cancel button was clicked, exit controller
@@ -98,6 +112,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         //create and return cell
         let reuseID = "pickerCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
+        cell.textLabel?.text = self.exercises[indexPath.row].name
         return cell
     }
     
