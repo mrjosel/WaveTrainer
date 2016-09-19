@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 //enum for error in plate calculation
 enum PlateError : Error {
@@ -37,6 +38,11 @@ class WorkoutManagerClient: AnyObject {
         static let EXERCISE_CATEGORY = "exercisecategory"
         static let EXERCISE_IMAGE = "exerciseimage"
         //TODO:  GET MORE RELEVANT ENDPOINTS
+    }
+    
+    //keys to search through JSON data
+    struct Keys {
+        static let RESULTS = "results"
     }
     
     //variable set by user to denote whether a deload cycle is to be used or not, default is false
@@ -94,37 +100,49 @@ class WorkoutManagerClient: AnyObject {
     }
     
     //gets exercises from Workout Manager
-    func getExercises(completionHandler : @escaping (_ success : Bool, _ exercises : [Exercise]?, _ error : NSError?) -> Void) -> Void {
-        
-        
-        //return array of exercises
-        var exercises : [Exercise]?
+    func taskToFetchExercises(completionHandler : @escaping CompletionHandler) -> URLSessionTask {
         
         //TODO:  BETTER UNDERSTAND URL STRING CREATION
-        let urlString = "https://wger.de/api/v2/?format=json"
+        let urlString = "https://wger.de/api/v2/exercise/?format=json"
         //create search task based on search text
         let searchTask = WorkoutManagerClient.sharedInstance.taskForGETRequest(urlString, completionHandler:  {data, error in
             if let error = error {
-                completionHandler(false, nil, error)
+                completionHandler(nil, error)
             } else {
                 //no error, pass data into JSON parser
-                WorkoutManagerClient.parseJSONWithCompletionHandler(data as! Data, completionHandler: {data, error in
+                WorkoutManagerClient.parseJSONWithCompletionHandler(data as! Data, completionHandler: {parsedJSON, error in
                     
                     //check for error, if so return
                     if let error = error {
                         //complete with error
-                        completionHandler(false, nil, error)
+                        completionHandler(nil, error)
                     } else {
-                        //no error, create exercises from JSON
-                        //TODO:  CREATE FUNCTION TO CREATE EXERCISES FROM JSON
-                        print(data)
-                        completionHandler(true, nil, nil)
+                        //no error, complete and return parsedJSON 
+                        completionHandler(parsedJSON, nil)
                     }
                 })
                 
             }
         })
+        //resume task to actually kick it off, return running task
         searchTask.resume()
+        return searchTask
+    }
+    
+    //takes in Swift dictionary from JSON and returns sorted exercise objects array
+    class func makeExercisesFromJSON(jsonData : [String: AnyObject], context: NSManagedObjectContext) -> [Exercise] {
+        
+        //exercises stored under "results"
+        guard let exerciseDict = jsonData[WorkoutManagerClient.Keys.RESULTS] as? [[String: AnyObject]] else {
+            //nothing in dict or failed to cast, return nil
+            return []
+        }
+        
+        //map array of dicts into exercise objects
+        let excercises : [Exercise] = exerciseDict.map() {
+            Exercise(dict: $0, isCore: false, reps: nil, order: nil, context: context)!
+        }
+        return excercises
     }
     
     //----------

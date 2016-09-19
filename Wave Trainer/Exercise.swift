@@ -15,7 +15,7 @@ import CoreData
 class Exercise : NSManagedObject {
     
     //managed vars
-    @NSManaged var sets : NSNumber
+    @NSManaged var sets : NSNumber?
     @NSManaged private var repsPersisted : NSNumber?
     @NSManaged var name : String
     @NSManaged private var orderPersisted : NSNumber
@@ -27,7 +27,7 @@ class Exercise : NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
-    init?(dict: [String: String], isCore: Bool, reps: Int, order: Int, context: NSManagedObjectContext) {
+    init?(dict: [String: AnyObject], isCore: Bool, reps: Int?, order: Int?, context: NSManagedObjectContext) {
         
         //create entity and call superclass initializer
         guard let entity = NSEntityDescription.entity(forEntityName: "Exercise", in: context) else {

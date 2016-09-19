@@ -49,7 +49,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         self.sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
         
         //get exercises from Workout Manager API, if exercises is already populated, do nothing
-        guard self.exercises != [] else {
+        /*guard self.exercises != [] else {
             
             //no exercises in array, get exercises from Workout Manager, then sort by name
             WorkoutManagerClient.sharedInstance.getExercises(completionHandler: {success, exercises, error in
@@ -60,7 +60,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
                 print("error = \(error)")
             })
             return
-        }
+        }*/
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -76,26 +76,49 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         if let task = self.searchTask {
             task.cancel()
         }
-        /*
-        //if user hits clear text button, clear out exercises array and reload data
+        
+        //if search string is nil, then user clicked clear button
         guard searchText != "" else {
+            //clear out array
             self.exercises = [Exercise]()
+            
+            //reload table data
             self.exerciseTableView.reloadData()
             return
         }
         
-        //TODO:  BETTER UNDERSTAND URL STRING CREATION
-        let urlString = "https://wger.de/api/v2/?format=json"
-        //create search task based on search text
-        self.searchTask = WorkoutManagerClinet.sharedInstance.taskForGETRequest(urlString, completionHandler:  {data, error in
-            if let error = error {
-                print(error)        //TODO: WORK WITH ERROR
-            } else {
-                print(data)         //TODO: CREATE EXERCISE OBJECT
+        //create search task for retreiving exercises
+        self.searchTask = WorkoutManagerClient.sharedInstance.taskToFetchExercises(completionHandler: {parsedJSON, error in
+            
+            //check for error
+            guard error == nil else {
+                //TODO: CREATE ALERT THAT THERE WAS A FAILURE TO GET EXERCISES
+                print(error)
+                print("failed to get exercises")
+                return
             }
+            
+            //no error, clear out searchTask, continue to get exercise objects from JSON data
+            self.searchTask = nil
+            
+            //ensure parsed JSON is a dict before proceeding
+            guard let parsedJSON = parsedJSON as? [String: AnyObject] else {
+                //TODO: CREATE ALERT THAT THERE WAS A FAILURE TO CAST
+                print(error)
+                print("failed to cast into dict")
+                return
+            }
+            
+            //use parsed JSON and dummy context to create exercise objects
+            self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
+            
+            // Reload the table on the main thread
+            DispatchQueue.main.async {
+                self.exerciseTableView.reloadData()
+            }
+            
         })
-        self.searchTask?.resume()
- */
+        
     }
     
     //cancel button was clicked, exit controller
