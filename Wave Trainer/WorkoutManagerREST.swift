@@ -12,8 +12,11 @@ import Foundation
 //all REST related functions in extension
 extension WorkoutManagerClinet {
     
+    //alias for completionHandler
+    typealias CompletionHander = (_ result: AnyObject?, _ error: NSError?) -> Void
+    
     //HTTP GET REQUEST
-    func taskForGETRequest(_ urlString: String, completionHandler: @escaping (_ success: Bool, _ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionTask {
+    func taskForGETRequest(_ urlString: String, completionHandler : @escaping CompletionHander) -> URLSessionTask {
         
         //construct URL
         let url = URL(string: urlString)
@@ -24,21 +27,37 @@ extension WorkoutManagerClinet {
         //create request
         let request = URLRequest(url: url!)
         
-        //create handler for task
-        let handler = {(data: Data?, urlResponse: URLResponse?, error: NSError?) -> Void in
+        //start task and return
+        let task = session.dataTask(with: request, completionHandler: {data, urlResponse, error in
             
             //check for error
             if let error = error {
-                completionHandler(false, nil, error)
+                completionHandler(nil, error as NSError?)
             } else {
                 //no error, successful request, get data
-                //TODO:  PARSE JSON FUNCTION
+                WorkoutManagerClinet.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
             }
-        }
-        
-        //start task and return
-        let task = session.dataTask(with: request, completionHandler: handler as! (Data?, URLResponse?, Error?) -> Void)
+        })
         task.resume()
         return task
+    }
+    
+    //take in NSData and create JSON object
+    class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: @escaping CompletionHander) {
+
+        //parsed JSON data to return
+        var parsedResult : AnyObject?
+        
+        //attempt parsing of JSON data to creare JSON object
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
+        } catch {
+            //failed to parse data, complete with error
+            completionHandler(nil, error as NSError?)
+            return
+        }
+        
+        //success, complete with parsedResult
+        completionHandler(parsedResult, nil)
     }
 }

@@ -70,8 +70,17 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             return
         }
         
+        //TODO:  BETTER UNDERSTAND URL STRING CREATION
+        let urlString = "https://wger.de/api/v2/?format=json"
         //create search task based on search text
-        //TODO:  CREATE URL SESSION TASK
+        self.searchTask = WorkoutManagerClinet.sharedInstance.taskForGETRequest(urlString, completionHandler:  {data, error in
+            if let error = error {
+                print(error)        //TODO: WORK WITH ERROR
+            } else {
+                print(data)         //TODO: CREATE EXERCISE OBJECT
+            }
+        })
+        self.searchTask?.resume()
     }
     
     //cancel button was clicked, exit controller

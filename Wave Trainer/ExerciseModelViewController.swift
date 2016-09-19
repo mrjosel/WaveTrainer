@@ -76,7 +76,6 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
         let controller = storyboard?.instantiateViewController(withIdentifier: "ExercisePickerViewController") as! ExercisePickerViewController
         controller.delegate = self
         self.present(controller, animated: true, completion: nil)
-        
     }
     
     //method called by picker controller, handles when user selects exercise in pickerVC

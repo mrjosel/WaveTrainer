@@ -27,6 +27,8 @@ class WorkoutManagerClinet: AnyObject {
         static let API_KEY = "4b15f2ad2aa8285971ec064bcde0aca67b08d3ae"
         static let ROOT_URL = "https://wger.de"
         static let API_WIDE = "api/v2"
+        static let FORMAT = "format"
+        static let JSON = "json"
     }
     
     //enpoints for client, not all endpoints from API are listed here, only those pertinent to app
