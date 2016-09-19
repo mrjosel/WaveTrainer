@@ -16,10 +16,10 @@ enum PlateError : Error {
 }
 
 //class that handles Workout Manager Client
-class WorkoutManagerClinet: AnyObject {
+class WorkoutManagerClient: AnyObject {
     
     //singleton
-    static let sharedInstance = WorkoutManagerClinet()
+    static let sharedInstance = WorkoutManagerClient()
     fileprivate init(){}    //prevents developers from initializing Workout Manager in app
     
     //static constants for client
@@ -40,18 +40,18 @@ class WorkoutManagerClinet: AnyObject {
     }
     
     //variable set by user to denote whether a deload cycle is to be used or not, default is false
-    var deload : Bool = false
+    var deload : Bool = false               //MUST BE ADDED TO NSUSERDEFULATS
     
     //available plate options for calculating plates on bars, empty until user creates
     var plates : [Double] = [] {
         didSet {
             //if plates change, perform assending sort
-            plates = plates.sorted(by: >)
+            plates = plates.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
         }
     }
     
     //bar weight, set by user
-    var barWeight : Double = 0
+    var barWeight : Double = 0              //MUST BE ADDED TO NSUSERDEFULATS
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
     //output is always assuming unlimited number of plates for each available weight, therefore output is always comprised of largest available plates
@@ -91,6 +91,40 @@ class WorkoutManagerClinet: AnyObject {
         
         //return array of plates
         return result
+    }
+    
+    //gets exercises from Workout Manager
+    func getExercises(completionHandler : @escaping (_ success : Bool, _ exercises : [Exercise]?, _ error : NSError?) -> Void) -> Void {
+        
+        
+        //return array of exercises
+        var exercises : [Exercise]?
+        
+        //TODO:  BETTER UNDERSTAND URL STRING CREATION
+        let urlString = "https://wger.de/api/v2/?format=json"
+        //create search task based on search text
+        let searchTask = WorkoutManagerClient.sharedInstance.taskForGETRequest(urlString, completionHandler:  {data, error in
+            if let error = error {
+                completionHandler(false, nil, error)
+            } else {
+                //no error, pass data into JSON parser
+                WorkoutManagerClient.parseJSONWithCompletionHandler(data as! Data, completionHandler: {data, error in
+                    
+                    //check for error, if so return
+                    if let error = error {
+                        //complete with error
+                        completionHandler(false, nil, error)
+                    } else {
+                        //no error, create exercises from JSON
+                        //TODO:  CREATE FUNCTION TO CREATE EXERCISES FROM JSON
+                        print(data)
+                        completionHandler(true, nil, nil)
+                    }
+                })
+                
+            }
+        })
+        searchTask.resume()
     }
     
     //----------

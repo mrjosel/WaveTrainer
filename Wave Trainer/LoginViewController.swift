@@ -77,7 +77,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //ensure strings are not empty, if either is empty, do nothing
         if username != "" && password != "" {
             //pass fields into client
-            WorkoutManagerClinet.sharedInstance.login(username, password: password)
+            WorkoutManagerClient.sharedInstance.login(username, password: password)
         }
     }
     

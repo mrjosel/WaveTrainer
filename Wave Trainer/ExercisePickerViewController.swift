@@ -47,6 +47,20 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         self.dummyContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         self.dummyContext.persistentStoreCoordinator = CoreDataStackManager.sharedInstance.persistentStoreCoordinator
         self.sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
+        
+        //get exercises from Workout Manager API, if exercises is already populated, do nothing
+        guard self.exercises != [] else {
+            
+            //no exercises in array, get exercises from Workout Manager, then sort by name
+            WorkoutManagerClient.sharedInstance.getExercises(completionHandler: {success, exercises, error in
+                
+                //TODO: MAKE SURE EXERCISES ARE ALL GOOD
+                print("success = \(success)")
+                print("exercises = \(exercises)")
+                print("error = \(error)")
+            })
+            return
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -62,7 +76,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         if let task = self.searchTask {
             task.cancel()
         }
-        
+        /*
         //if user hits clear text button, clear out exercises array and reload data
         guard searchText != "" else {
             self.exercises = [Exercise]()
@@ -81,6 +95,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             }
         })
         self.searchTask?.resume()
+ */
     }
     
     //cancel button was clicked, exit controller

@@ -71,7 +71,7 @@ class CycleModelViewController: UITableViewController,NSFetchedResultsController
             let cycleFiveThreeOne = Cycle(repsCycle: RepsCycle.fiveThreeOneReps, completed: false, context: self.sharedContext)
             
             //create deload cycle if user is using one
-            let cycleDeload = WorkoutManagerClinet.sharedInstance.deload ? Cycle(repsCycle: RepsCycle.deload, completed: false, context: self.sharedContext) : nil
+            let cycleDeload = WorkoutManagerClient.sharedInstance.deload ? Cycle(repsCycle: RepsCycle.deload, completed: false, context: self.sharedContext) : nil
             
             //set cycles wave to wave
             cycleFive?.wave = wave

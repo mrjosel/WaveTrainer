@@ -10,13 +10,13 @@ import Foundation
 
 
 //all REST related functions in extension
-extension WorkoutManagerClinet {
+extension WorkoutManagerClient {
     
     //alias for completionHandler
-    typealias CompletionHander = (_ result: AnyObject?, _ error: NSError?) -> Void
+    typealias CompletionHandler = (_ result: AnyObject?, _ error: NSError?) -> Void
     
     //HTTP GET REQUEST
-    func taskForGETRequest(_ urlString: String, completionHandler : @escaping CompletionHander) -> URLSessionTask {
+    func taskForGETRequest(_ urlString: String, completionHandler : @escaping CompletionHandler) -> URLSessionTask {
         
         //construct URL
         let url = URL(string: urlString)
@@ -35,7 +35,7 @@ extension WorkoutManagerClinet {
                 completionHandler(nil, error as NSError?)
             } else {
                 //no error, successful request, get data
-                WorkoutManagerClinet.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
+                completionHandler(data as AnyObject?, nil)
             }
         })
         task.resume()
@@ -43,7 +43,7 @@ extension WorkoutManagerClinet {
     }
     
     //take in NSData and create JSON object
-    class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: @escaping CompletionHander) {
+    class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: @escaping CompletionHandler) {
 
         //parsed JSON data to return
         var parsedResult : AnyObject?
