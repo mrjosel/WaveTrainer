@@ -36,6 +36,7 @@ class Exercise : NSManagedObject {
         super.init(entity: entity, insertInto: context)
         
         //TODO: CREATE BETTER DEFINED MODEL BASED ON RESTFUL IMPLEMENTATION
+        self.name = dict[WorkoutManagerClient.Keys.NAME] as! String
     }
     
     //intermediate vars

@@ -35,6 +35,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         //set delegates
         self.searchBar.delegate = self
         self.exerciseTableView.delegate = self
+        self.exerciseTableView.dataSource = self
         
         //show cancel button and begin first responder
         self.searchBar.showsCancelButton = true
@@ -121,6 +122,15 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    //invoked when the search button is clicked
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //clear first responder, end current task
+        searchBar.resignFirstResponder()
+        self.searchTask?.cancel()
+        self.searchTask = nil
+        print(self.exercises)
+    }
+    
     //cancel button was clicked, exit controller
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
@@ -157,7 +167,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //create and return cell
-        let reuseID = "pickerCell"
+        let reuseID = "SearchCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
         cell.textLabel?.text = self.exercises[indexPath.row].name
         return cell

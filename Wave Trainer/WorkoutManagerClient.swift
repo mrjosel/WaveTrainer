@@ -43,6 +43,8 @@ class WorkoutManagerClient: AnyObject {
     //keys to search through JSON data
     struct Keys {
         static let RESULTS = "results"
+        static let NAME = "name"
+        static let DESCRIPTION = "description"
     }
     
     //variable set by user to denote whether a deload cycle is to be used or not, default is false
