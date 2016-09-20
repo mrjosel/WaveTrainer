@@ -17,7 +17,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var exerciseTableView: UITableView!
     
     //exercises, used to populate tableView
-    var exercises = [Exercise]()
+    var exercises = [[String: AnyObject]]()//[Exercise]()
     
     //delegate
     var delegate : ExercisePickerViewControllerDelegate?
@@ -81,7 +81,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         //if search string is nil, then user clicked clear button
         guard searchText != "" else {
             //clear out array
-            self.exercises = [Exercise]()
+            self.exercises = [[String: AnyObject]]()//[Exercise]()
             
             //reload table data
             self.exerciseTableView.reloadData()
@@ -89,7 +89,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         //create search task for retreiving exercises
-        self.searchTask = WorkoutManagerClient.sharedInstance.taskToFetchExercises(completionHandler: {parsedJSON, error in
+        self.searchTask = WorkoutManagerClient.sharedInstance.taskToFetchExercises(searchString : searchText, completionHandler: {parsedJSON, error in
             
             //check for error
             guard error == nil else {
@@ -103,7 +103,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             self.searchTask = nil
             
             //ensure parsed JSON is a dict before proceeding
-            guard let parsedJSON = parsedJSON as? [String: AnyObject] else {
+            guard let parsedJSON = parsedJSON as? [[String: AnyObject]] else {
                 //TODO: CREATE ALERT THAT THERE WAS A FAILURE TO CAST
                 print(error)
                 print("failed to cast into dict")
@@ -111,7 +111,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             //use parsed JSON and dummy context to create exercise objects
-            self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
+            self.exercises = parsedJSON//WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
             
             // Reload the table on the main thread
             DispatchQueue.main.async {
@@ -169,7 +169,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         //create and return cell
         let reuseID = "SearchCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
-        cell.textLabel?.text = self.exercises[indexPath.row].name
+        cell.textLabel?.text = self.exercises[indexPath.row]["name"] as! String?//.name
         return cell
     }
     
@@ -178,12 +178,15 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
         //get exercise
         let exercise = self.exercises[indexPath.row]
+        print(exercise)
         
-        //call delegate with exercise
-        self.delegate?.exercisePicker(didAddExercise: exercise)
+        //TODO:  FIX OFFICIAL STATUS EXERCISES?  ADD CATEGORY SUBTITLE
         
-        //dismiss
-        self.exitPickerVC()
+//        //call delegate with exercise
+//        self.delegate?.exercisePicker(didAddExercise: exercise)
+//        
+//        //dismiss
+//        self.exitPickerVC()
     }
 
     /*

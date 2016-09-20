@@ -27,9 +27,12 @@ class WorkoutManagerClient: AnyObject {
     struct Constants {
         static let API_KEY = "4b15f2ad2aa8285971ec064bcde0aca67b08d3ae"
         static let ROOT_URL = "https://wger.de"
-        static let API_WIDE = "api/v2"
-        static let FORMAT = "format"
-        static let JSON = "json"
+        static let API_WIDE = "/api/v2"
+    }
+    
+    //parameters used in url
+    struct Params {
+        static let SEARCH = "search"
     }
     
     //enpoints for client, not all endpoints from API are listed here, only those pertinent to app
@@ -42,9 +45,24 @@ class WorkoutManagerClient: AnyObject {
     
     //keys to search through JSON data
     struct Keys {
+        static let LANGUAGE = "language"
+        static let STATUS = "status"
+        static let ORDERING = "ordering"
+        static let TERM = "term"
+        static let FORMAT = "format"
         static let RESULTS = "results"
         static let NAME = "name"
         static let DESCRIPTION = "description"
+        static let FULL_NAME = "full_name"
+        
+    }
+    
+    //values of interest
+    struct Values {
+        static let ENGLISH_TEXT = "English"
+        static let ENGLISH_NUM = "2"
+        static let OFFICIAL_STATUS = "2"
+        static let JSON = "json"
     }
     
     //variable set by user to denote whether a deload cycle is to be used or not, default is false
@@ -102,10 +120,32 @@ class WorkoutManagerClient: AnyObject {
     }
     
     //gets exercises from Workout Manager
-    func taskToFetchExercises(completionHandler : @escaping CompletionHandler) -> URLSessionTask {
+    func taskToFetchExercises(searchString: String, completionHandler : @escaping CompletionHandler) -> URLSessionTask {
         
-        //TODO:  BETTER UNDERSTAND URL STRING CREATION
-        let urlString = "https://wger.de/api/v2/exercise/?format=json"
+        //format searchString for proper use in HTTPS
+        let httpsSearchString = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        //need to build URL to use in GET request
+        let baseURL = WorkoutManagerClient.Constants.ROOT_URL + WorkoutManagerClient.Constants.API_WIDE
+        
+        //this task is a search, so the search param is appended after the endpoint by /
+        let searchURL = baseURL + "/" + WorkoutManagerClient.Endpoints.EXERCISE + "/" + WorkoutManagerClient.Params.SEARCH
+        
+        //use searchURL, only english language (for now), and only officially documented exercises
+        var mutableParams : [String: String] = [
+            WorkoutManagerClient.Keys.FORMAT : WorkoutManagerClient.Values.JSON,
+            WorkoutManagerClient.Keys.LANGUAGE : WorkoutManagerClient.Values.ENGLISH_NUM,
+            WorkoutManagerClient.Keys.STATUS : WorkoutManagerClient.Values.OFFICIAL_STATUS,
+            ]
+        
+        //if https formatting of search string completes without returning nil, create dict for search term and add to mutableParms
+        if let httpsSearchString = httpsSearchString {
+            mutableParams[WorkoutManagerClient.Keys.TERM] = httpsSearchString
+        }
+        
+        //create url from searchURL and mutable params
+        let urlString = self.createURL(searchURL, params: mutableParams)
+        
         //create search task based on search text
         let searchTask = WorkoutManagerClient.sharedInstance.taskForGETRequest(urlString, completionHandler:  {data, error in
             if let error = error {
@@ -131,17 +171,31 @@ class WorkoutManagerClient: AnyObject {
         return searchTask
     }
     
+    //function takes in base URL string and parameters to create whole URL string
+    func createURL(_ baseURLstring : String, params: [String: String]) -> String {
+        
+        //first append ? to end of baseURLstring
+        var outputString = baseURLstring + "?"
+        
+        //all remainging parameters are appened to the string in the format of &key=value
+        for (key, val) in params {
+            outputString += "&" + key + "=" + val
+        }
+        return outputString
+        
+    }
+    
     //takes in Swift dictionary from JSON and returns sorted exercise objects array
-    class func makeExercisesFromJSON(jsonData : [String: AnyObject], context: NSManagedObjectContext) -> [Exercise] {
+    class func makeExercisesFromJSON(jsonData : [[String: AnyObject]], context: NSManagedObjectContext) -> [Exercise] {
         
         //exercises stored under "results"
-        guard let exerciseDict = jsonData[WorkoutManagerClient.Keys.RESULTS] as? [[String: AnyObject]] else {
-            //nothing in dict or failed to cast, return nil
+        guard !jsonData.isEmpty else {
+            //nothing in dict, return empty array
             return []
         }
         
         //map array of dicts into exercise objects
-        let excercises : [Exercise] = exerciseDict.map() {
+        let excercises : [Exercise] = jsonData.map() {
             Exercise(dict: $0, isCore: false, reps: nil, order: nil, context: context)!
         }
         return excercises
