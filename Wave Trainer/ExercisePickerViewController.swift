@@ -173,7 +173,10 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         let reuseID = "SearchCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
         cell.textLabel?.text = exercise.name
-        cell.detailTextLabel?.text = exercise.category
+        guard let category = exercise.category else {
+            return cell
+        }
+        cell.detailTextLabel?.text = "Category: " + category
         return cell
     }
     
