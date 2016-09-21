@@ -15,7 +15,7 @@ protocol ExercisePickerViewControllerDelegate {
 }
 
 //view controller for viewing exercises
-class ExerciseModelViewController: UITableViewController, ExercisePickerViewControllerDelegate {
+class ExerciseModelViewController: UITableViewController, NSFetchedResultsControllerDelegate, ExercisePickerViewControllerDelegate {
 
     //var for local reference to CoreData singleton
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
@@ -51,6 +51,9 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
             return
         }
         
+        //set delegate
+        self.exerciseFetchedResultsController.delegate = self
+        
         //add button to add exercises
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addExercise(_:)))
         self.navigationItem.setRightBarButton(addButton, animated: false)
@@ -80,7 +83,27 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     
     //method called by picker controller, handles when user selects exercise in pickerVC
     func exercisePicker(didAddExercise exercise: Exercise?) {
-        print("didAddExercise called, \(exercise?.name)")
+        
+        //incoming exercise has dummyContext, recreate new object using sharedContext
+        guard let exercise = exercise else {
+            return
+        }
+        
+        //create dictionary for new exercise
+        let dict : [String: Any] = [
+            WorkoutManagerClient.Keys.NAME : exercise.name,
+            WorkoutManagerClient.Keys.IMAGE : exercise.imagePath,
+            WorkoutManagerClient.Keys.CATEGORY : exercise.category
+        ]
+        
+        //create new exercise and save context
+        guard let newExercise = Exercise(dict: dict as [String : AnyObject], isCore: false, reps: nil, order: nil, context: self.sharedContext) else {
+            print("failed to create exercise")
+            //TODO: MAKE ALERT
+            return
+        }
+        newExercise.workout = self.workout
+        CoreDataStackManager.sharedInstance.saveContext()
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,7 +135,6 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
         
         //get workout for row
         let exercise = self.exerciseFetchedResultsController.object(at: indexPath)
-        print(exercise.name)
         
         //set reuseID
         let reuseID = "ExerciseCell"
@@ -121,7 +143,11 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
         
         // Configure the cell and return
-        cell.textLabel?.text = "exercise" //TODO: EXERCISE STRING
+        cell.textLabel?.text = exercise.name
+        guard let category = exercise.category else {
+            return cell
+        }
+        cell.detailTextLabel?.text = "Category: " + category
         return cell
     }
     
@@ -145,13 +171,13 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     }
     
     //fetch results controller delegate methods
-    func controllerWillChangeContent(controller: NSFetchedResultsController<Exercise>) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //begin the tableView updates
         self.tableView.beginUpdates()
     }
     
     //manages adding sections in the event of different sections in fetch
-    func controller(controller: NSFetchedResultsController<Exercise>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         //check change type
         switch type {
@@ -168,7 +194,7 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     }
     
     //manages the changing of an object in the fetch
-    func controller(controller: NSFetchedResultsController<Exercise>, didChangeObject anObject: AnyObject, atIndexPath indexPath: IndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         //check change type
         switch type {
@@ -197,7 +223,7 @@ class ExerciseModelViewController: UITableViewController, ExercisePickerViewCont
     }
     
     //end updates when finished
-    func controllerDidChangeContent(controller: NSFetchedResultsController<Exercise>) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
     

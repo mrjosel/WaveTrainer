@@ -23,7 +23,7 @@ class Exercise : NSManagedObject {
     @NSManaged private var isCorePersisted : NSNumber
     @NSManaged var category : String?
     @NSManaged var imagePath : String?
-    @NSManaged var workout : Workout
+    @NSManaged var workout : Workout?
     
     //initializers
     override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
