@@ -17,7 +17,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var exerciseTableView: UITableView!
     
     //exercises, used to populate tableView
-    var exercises = [[String: AnyObject]]()//[Exercise]()
+    var exercises = [Exercise]()
     
     //delegate
     var delegate : ExercisePickerViewControllerDelegate?
@@ -81,7 +81,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         //if search string is nil, then user clicked clear button
         guard searchText != "" else {
             //clear out array
-            self.exercises = [[String: AnyObject]]()//[Exercise]()
+            self.exercises = [Exercise]()
             
             //reload table data
             self.exerciseTableView.reloadData()
@@ -111,7 +111,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             //use parsed JSON and dummy context to create exercise objects
-            self.exercises = parsedJSON//WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
+            self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
             
             // Reload the table on the main thread
             DispatchQueue.main.async {
@@ -166,10 +166,14 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     //configures cells at each row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //get exercise at indexPath
+        let exercise = self.exercises[indexPath.row]
+        
         //create and return cell
         let reuseID = "SearchCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
-        cell.textLabel?.text = self.exercises[indexPath.row]["name"] as! String?//.name
+        cell.textLabel?.text = exercise.name
+        cell.detailTextLabel?.text = exercise.category
         return cell
     }
     
@@ -178,15 +182,12 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
         //get exercise
         let exercise = self.exercises[indexPath.row]
-        print(exercise)
         
-        //TODO:  FIX OFFICIAL STATUS EXERCISES?  ADD CATEGORY SUBTITLE
+        //call delegate with exercise
+        self.delegate?.exercisePicker(didAddExercise: exercise)
         
-//        //call delegate with exercise
-//        self.delegate?.exercisePicker(didAddExercise: exercise)
-//        
-//        //dismiss
-//        self.exitPickerVC()
+        //dismiss
+        self.exitPickerVC()
     }
 
     /*

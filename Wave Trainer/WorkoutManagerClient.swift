@@ -54,6 +54,8 @@ class WorkoutManagerClient: AnyObject {
         static let NAME = "name"
         static let DESCRIPTION = "description"
         static let FULL_NAME = "full_name"
+        static let CATEGORY = "category"
+        static let IMAGE = "image"
         
     }
     

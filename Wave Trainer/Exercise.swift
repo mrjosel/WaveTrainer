@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 @objc(Exercise)
 
@@ -18,8 +19,10 @@ class Exercise : NSManagedObject {
     @NSManaged var sets : NSNumber?
     @NSManaged private var repsPersisted : NSNumber?
     @NSManaged var name : String
-    @NSManaged private var orderPersisted : NSNumber
+    @NSManaged private var orderPersisted : NSNumber?
     @NSManaged private var isCorePersisted : NSNumber
+    @NSManaged var category : String?
+    @NSManaged var imagePath : String?
     @NSManaged var workout : Workout
     
     //initializers
@@ -35,20 +38,31 @@ class Exercise : NSManagedObject {
         }
         super.init(entity: entity, insertInto: context)
         
-        //TODO: CREATE BETTER DEFINED MODEL BASED ON RESTFUL IMPLEMENTATION
+        //set params
         self.name = dict[WorkoutManagerClient.Keys.NAME] as! String
+        self.imagePath = dict[WorkoutManagerClient.Keys.IMAGE] as? String
+        self.category = dict[WorkoutManagerClient.Keys.CATEGORY] as? String
+        
     }
     
     //intermediate vars
     //order of exercise for workout
-    var order : Int {
+    var order : Int? {
         get {
-            return Int(self.orderPersisted)
+            guard let val = self.orderPersisted else {
+                return nil
+            }
+            return Int(val)
         }
         
         set {
+            guard let val = newValue else {
+                self.orderPersisted = nil
+                return
+            }
+            
             if !self.isCore {
-                self.orderPersisted = NSNumber(value: newValue)
+                self.orderPersisted = NSNumber(value: val)
             }
         }
     }
@@ -72,9 +86,12 @@ class Exercise : NSManagedObject {
         }
     }
     
+    //image from imagePath
+    var image : UIImage? //TODO: GETTER AND SETTER USING IMAGE CACHING
+    
     //set all intermediate vars from persisted vars during awake from fetch
     override func awakeFromFetch() {
-        self.order = Int(self.orderPersisted)
+        self.order = self.orderPersisted as Int?
         self.isCore = self.isCorePersisted == 1
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Cycle" representedClassName="Cycle" syncable="YES">
         <attribute name="completedPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="repsCyclePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -7,6 +7,8 @@
         <relationship name="workouts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Workout" inverseName="cycle" inverseEntity="Workout" syncable="YES"/>
     </entity>
     <entity name="Exercise" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isCorePersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderPersisted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -31,8 +33,8 @@
     </entity>
     <elements>
         <element name="Cycle" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="Exercise" positionX="-54" positionY="54" width="128" height="165"/>
         <element name="Wave" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Workout" positionX="-54" positionY="27" width="128" height="135"/>
-        <element name="Exercise" positionX="-54" positionY="54" width="128" height="135"/>
     </elements>
 </model>
