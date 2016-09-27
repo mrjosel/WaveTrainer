@@ -148,6 +148,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //called whenever text is added to field
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        //limit the number of characters to two
+        guard range.location <= 1 else {
+            return false
+        }
         
         //if textField.text is not nil, append replacement string to text
         guard let text = textField.text, text != "" else {
