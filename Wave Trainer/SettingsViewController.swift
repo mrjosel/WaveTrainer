@@ -31,6 +31,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.textField.isHidden = true
         self.setBarWeightButton.isHidden = true
         
+        //setup button
+        self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
+        self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
+        
         //set delegates
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
@@ -45,6 +49,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
+    //sets weight of bar in WorkoutManager singleton
+    func setBarWeightButtonPressed(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Cancel" {
+            print("Cancelling Request")
+        } else {
+            print("setting weight to", self.textField.text!, "lbs")
+        }
     }
     
     //perform the following before view appears
@@ -130,6 +143,43 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         //hide keyboard when enter key is hit
         textField.resignFirstResponder()
         
+        return true
+    }
+    
+    //called whenever text is added to field
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        //if textField.text is not nil, append replacement string to text
+        guard let text = textField.text, text != "" else {
+            
+            //if string is "0", return false
+            if string == "0" {
+                return false
+            }
+            self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + string + " lbs")
+            return true
+        }
+        
+        //if incoming string is a delete character, remove last char
+        guard string != "" else {
+            
+            //pop last char off string, update button
+            let updatedString = text.substring(to: text.index(before: text.endIndex))
+            
+            //check if updated string is empty
+            if updatedString != "" {
+                self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
+            } else {
+                self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
+                self.textField.placeholder = "Enter a weight between 1-99 lbs"
+            }
+            return true
+        }
+        
+        
+        //create updated string from text and replacement string, update text of button
+        let updatedString = text + string
+        self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
         return true
     }
     
