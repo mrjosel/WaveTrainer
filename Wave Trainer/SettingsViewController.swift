@@ -9,7 +9,7 @@
 import UIKit
 
 //views settings for the app
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate {
     
     //outlets
     @IBOutlet weak var settingsTableView: UITableView!
@@ -31,6 +31,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.textField.isHidden = true
         self.setBarWeightButton.isHidden = true
         
+        //set clear button for textField
+        self.textField.clearButtonMode = .whileEditing
+        
         //setup button
         self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
         self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
@@ -39,13 +42,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
         self.textField.delegate = self
+        self.navigationController?.delegate = self
         
         //set height of tableView based on content
         self.settingsTableView.addObserver(self, forKeyPath: "contentSize", options: .initial, context: nil)
         self.settingsTableView.frame.size = self.settingsTableView.contentSize
         
         //numberPad keyBoard
-        self.textField.keyboardType = .numberPad
+        self.textField.keyboardType = .decimalPad
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
@@ -53,10 +57,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //sets weight of bar in WorkoutManager singleton
     func setBarWeightButtonPressed(_ sender: UIButton) {
+        //if button text is cancel, resign first responder and ignore
         if sender.titleLabel?.text == "Cancel" {
-            print("Cancelling Request")
+            self.textField.resignFirstResponder()
         } else {
-            print("setting weight to", self.textField.text!, "lbs")
+            
+            //ensure text in textField
+            guard let weightString = self.textField.text else {
+                //no text in field, should never get to this point
+                print("error, no text in textField")
+                self.textField.resignFirstResponder()
+                return
+            }
+            
+            //create int from weightText and set in client singleton
+            let weightDouble = Double(weightString)!
+            WorkoutManagerClient.sharedInstance.barWeight = weightDouble
+            self.textField.resignFirstResponder()
         }
     }
     
@@ -111,6 +128,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         //show textField for Bar Weight cell only
         if setting == Settings.barWeight {
             self.textField.isHidden = false
+            self.setBarWeightButton.isHidden = false
             self.textField.becomeFirstResponder()
         } else {
             self.textField.resignFirstResponder()
@@ -137,12 +155,44 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     
+    
     //----------delegate methods----------
-    //when return key is hit
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //hide keyboard when enter key is hit
-        textField.resignFirstResponder()
+    //beginning editing
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
+//        //get string of barWeight
+//        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
+//            //no barWeight, just return and carry on
+//            return
+//        }
+//        
+//        //create string from barWeight, set in textField
+//        let barWeightString = String(barWeight)
+//        textField.text = barWeightString
+    }
+    
+    
+    //text field editing is over
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        //check value of textField
+        guard let text = textField.text, let weightDouble = Double(text) else {
+            textField.resignFirstResponder()
+            return
+        }
+        
+        //set weight
+        WorkoutManagerClient.sharedInstance.barWeight = weightDouble
+        textField.resignFirstResponder()
+    }
+    
+    
+    //when clear button is hit, clear text or not
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        //set button text to cancel
+        self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
+
         return true
     }
     
@@ -219,7 +269,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //carry out following when keyboard is about to hide
-    @objc func keyboardWillHide(_ notification: Notification) {
+    func keyboardWillHide(_ notification: Notification) {
         
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
         //self.view.frame.origin.y = 0

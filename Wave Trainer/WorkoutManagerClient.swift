@@ -14,6 +14,7 @@ enum PlateError : Error {
     case weightLessThanBar
     case ivalidWeight
     case emptyBar
+    case noBarWeightSet
 }
 
 //class that handles Workout Manager Client
@@ -21,7 +22,9 @@ class WorkoutManagerClient: AnyObject {
     
     //singleton
     static let sharedInstance = WorkoutManagerClient()
-    fileprivate init(){}    //prevents developers from initializing Workout Manager in app
+    
+    //prevents developers from initializing Workout Manager in app
+    fileprivate init() {}
     
     //static constants for client
     struct Constants {
@@ -67,11 +70,11 @@ class WorkoutManagerClient: AnyObject {
         static let JSON = "json"
     }
     
-    //variable set by user to denote whether a deload cycle is to be used or not, default is false
-    var deload : Bool = false               //MUST BE ADDED TO NSUSERDEFULATS
+    //variable set by user to denote whether a deload cycle is to be used or not
+    var deload : Bool?               //MUST BE ADDED TO NSUSERDEFULATS
     
     //available plate options for calculating plates on bars, empty until user creates
-    var plates : [Double] = [] {
+    var plates = [Double]() {
         didSet {
             //if plates change, perform assending sort
             plates = plates.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
@@ -79,26 +82,38 @@ class WorkoutManagerClient: AnyObject {
     }
     
     //bar weight, set by user
-    var barWeight : Double = 0              //MUST BE ADDED TO NSUSERDEFULATS
+    var barWeight : Double? {
+    
+        //if set, update NSUserDefaults
+        didSet {
+            UserDefaults.standard.setValue(barWeight, forKey: "barWeight")
+        }
+    }
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
     //output is always assuming unlimited number of plates for each available weight, therefore output is always comprised of largest available plates
     func plateCalc(_ targetWeight: Double) throws -> [Double] {
         
+        //ensure a barWeight is set
+        guard let barWeight = self.barWeight else {
+            //no bar weight, return
+            throw PlateError.noBarWeightSet
+        }
+        
         //check if targetWeight is greater than barWeight
-        guard targetWeight >= self.barWeight else {
+        guard targetWeight >= barWeight else {
             //throw error
             throw PlateError.weightLessThanBar
         }
         
         //check if targetWeight can be calculatd from barWeight and available plates
-        guard (targetWeight - self.barWeight).truncatingRemainder(dividingBy: plates.last!) == 0 else {
+        guard (targetWeight - barWeight).truncatingRemainder(dividingBy: plates.last!) == 0 else {
             //throw error
             throw PlateError.ivalidWeight
         }
         
         //remainder variable - get the weight that needs to be placed on one side of barbell, remove largest possible plate from remainder, continue iteration
-        var remainder = (targetWeight - self.barWeight) / 2
+        var remainder = (targetWeight - barWeight) / 2
         
         //returned result
         var result : [Double] = []
@@ -201,6 +216,23 @@ class WorkoutManagerClient: AnyObject {
             Exercise(dict: $0, isCore: false, reps: nil, order: nil, context: context)!
         }
         return excercises
+    }
+    
+    //update UserDefaults
+    func getDefaults() {
+        //get defaults for values that are stored in defaults
+        let barWeight = UserDefaults.standard.value(forKey: "barWeight") as? Double
+        let deload = UserDefaults.standard.value(forKey: "deload") as? Bool
+        let plates = UserDefaults.standard.value(forKey: "plates") as? [Double]
+        
+        print(barWeight)
+        print(deload)
+        print(plates)
+        
+        //set values
+        WorkoutManagerClient.sharedInstance.barWeight = barWeight
+        WorkoutManagerClient.sharedInstance.deload = deload
+        WorkoutManagerClient.sharedInstance.plates = plates ?? [Double]()
     }
     
     //----------
