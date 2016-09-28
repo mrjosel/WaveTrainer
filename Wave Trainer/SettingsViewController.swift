@@ -34,6 +34,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         //set clear button for textField
         self.textField.clearButtonMode = .whileEditing
         
+        //placeholderfor textField
+        self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
+        
         //setup button
         self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
         self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
@@ -199,18 +202,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //called whenever text is added to field
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-        //limit the number of characters to two
-        guard range.location <= 1 else {
+        //the limit is 1-99 with a one significant figure
+        //user cannot begin with a 0, nor a decimal point
+        //determine when a decimal point is added, then allow only a single non-decimal, character, and disallow the rest
+        //also, do not allow any digits to be entered if two are already entered
+        
+        
+        //limit the number of characters to four (1-99, a decimal, and one significant figure)
+        guard range.location <= 3 else {
             return false
         }
         
-        //if textField.text is not nil, append replacement string to text
+        //if text is nil or an empty string, ensure user is not attempting to start with 0 or a decimal
         guard let text = textField.text, text != "" else {
             
             //if string is "0", return false
-            if string == "0" {
+            if string == "0" || string == "."{
                 return false
             }
+            
+            //create button text using only replacementString since no previous text exists
             self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + string + " lbs")
             return true
         }
@@ -226,13 +237,30 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
             } else {
                 self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
-                self.textField.placeholder = "Enter a weight between 1-99 lbs"
+                self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
             }
             return true
         }
         
+        //decimal only allowed if one doesn't exist, if one does, then only one digit allowed
+        guard text.range(of: ".") == nil else {
+            if string == "." {
+                return false
+            }
+            //decimal exists, and user attempting to input digit, only allow single digit
+            //if decimal is not last character, then disallow
+            if text.characters.last == "." {
+                //allow entry
+                let updatedString = text + string
+                self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
+                return true
+            }
+            
+            //decimal exists, not last char, disallow
+            return false
+        }
         
-        //create updated string from text and replacement string, update text of button
+        //at this point, text exists and text can be added within range
         let updatedString = text + string
         self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
         return true
