@@ -47,9 +47,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.textField.delegate = self
         self.navigationController?.delegate = self
         
-        //set height of tableView based on content
+        //set height of tableView based on content, disallow scrolling
         self.settingsTableView.addObserver(self, forKeyPath: "contentSize", options: .initial, context: nil)
         self.settingsTableView.frame.size = self.settingsTableView.contentSize
+        self.settingsTableView.isScrollEnabled = false
         
         //numberPad keyBoard
         self.textField.keyboardType = .decimalPad
@@ -159,36 +160,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     
-    //----------delegate methods----------
+    // MARK: - textField Delegate Methods
     //beginning editing
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-//        //get string of barWeight
-//        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
-//            //no barWeight, just return and carry on
-//            return
-//        }
-//        
-//        //create string from barWeight, set in textField
-//        let barWeightString = String(barWeight)
-//        textField.text = barWeightString
-    }
-    
-    
-    //text field editing is over
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        //check value of textField
-        guard let text = textField.text, let weightDouble = Double(text) else {
-            textField.resignFirstResponder()
+        //get string of barWeight
+        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
+            //no barWeight, just return and carry on
             return
         }
         
-        //set weight
-        WorkoutManagerClient.sharedInstance.barWeight = weightDouble
-        textField.resignFirstResponder()
+        //create string from barWeight, set in textField, set button text
+        let barWeightString = String(barWeight)
+        textField.text = barWeightString
+        self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + barWeightString + " lbs")
     }
-    
     
     //when clear button is hit, clear text or not
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -230,7 +216,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         guard string != "" else {
             
             //pop last char off string, update button
-            let updatedString = text.substring(to: text.index(before: text.endIndex))
+            var updatedString = text.substring(to: text.index(before: text.endIndex))
+            
+            //if last char is a decimal, pop it as well so button text does not end in a decimal
+            updatedString = updatedString.characters.last == "." ? updatedString.substring(to: updatedString.index(before: updatedString.endIndex)) : updatedString
             
             //check if updated string is empty
             if updatedString != "" {
@@ -261,12 +250,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         //at this point, text exists and text can be added within range
-        let updatedString = text + string
+        //create updatedString based on text and input string from user, use updatedString in button text
+        //if last char is a decimal, pop it from updatedString when adding to button text
+        let updatedString = string == "." ? text : text + string
         self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
         return true
     }
     
-    //-----Following methods all related to resizing view when keyboard appears/dissappers-------------------------
+    // MARK: - Keyboard resizing methods
     //subscribes to notifications from keyboard, usually called in a VCs viewWillAppear method
     func subscribeToKeyboardNotifications() {
         //adds notifications to notification center
@@ -314,6 +305,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
-    //------------------------------End of view resizing methods-------------------------------------------------
+    // MARK: - End of Keyboard resizing methods
     
 }
