@@ -50,6 +50,25 @@ enum Settings : Int, CustomStringConvertible, CaseCountable {
         oneRMTest : nil
     ]
     
+    //generic value, depending on setting returns different value type, only barWeight has value for now
+    var valueString : String? {
+        get {
+            switch self {
+            case .barWeight :
+                guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
+                    return nil
+                }
+                return String(barWeight)
+            case .plates :
+                return nil//WorkoutManagerClient.sharedInstance.plates as AnyObject
+            case .routine :
+                return nil
+            case .oneRMTest :
+                return nil
+            }
+        }
+    }
+    
     //count of number of settings
     static let caseCount: Int = Settings.countCases()
     

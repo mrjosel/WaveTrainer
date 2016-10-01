@@ -74,10 +74,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 return
             }
             
-            //create int from weightText and set in client singleton
+            //create double from weightText and set in client singleton
             let weightDouble = Double(weightString)!
             WorkoutManagerClient.sharedInstance.barWeight = weightDouble
             self.textField.resignFirstResponder()
+            self.settingsTableView.reloadData()
         }
     }
     
@@ -146,8 +147,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         //create cell
         let reuseID = "SettingsCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as! SettingsTableViewCell
+        
         //get setting for particular row
         let setting = Settings(rawValue: indexPath.row)
         
@@ -155,6 +156,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.text = setting?.description
         cell.imageView?.image = setting?.image
         
+        //set value if it exists
+        guard let value = setting?.valueString else {
+            cell.valueLabel.isHidden = true
+            return cell
+        }
+        
+        //if cell is barWeight, add "lbs" to string
+        cell.valueLabel.text = setting == .barWeight ? value + " lbs" : value
+        
+        //layout cell
+        cell.valueLabel.sizeToFit()
+        cell.valueLabel.isHidden = false
+        cell.contentView.bringSubview(toFront: cell.valueLabel)
+        cell.layoutSubviews()
         return cell
     }
 

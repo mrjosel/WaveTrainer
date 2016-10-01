@@ -12,7 +12,7 @@ import UIKit
 class SettingsTableViewCell: UITableViewCell {
 
     //editable textField
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var valueLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

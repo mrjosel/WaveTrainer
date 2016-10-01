@@ -136,9 +136,24 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zOX-dd-wga" id="Uan-dm-3A0">
-                                            <frame key="frameInset" width="375" height="35.5"/>
+                                            <frame key="frameInset" width="375" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZn-vJ-DcO">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="jZn-vJ-DcO" secondAttribute="bottom" constant="7" id="0Ng-ke-cYV"/>
+                                                <constraint firstAttribute="trailing" secondItem="jZn-vJ-DcO" secondAttribute="trailing" constant="8" id="Nph-o9-0Y0"/>
+                                                <constraint firstItem="jZn-vJ-DcO" firstAttribute="top" secondItem="Uan-dm-3A0" secondAttribute="top" constant="7" id="buV-lO-EG3"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="valueLabel" destination="jZn-vJ-DcO" id="NeP-A6-sZe"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
