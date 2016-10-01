@@ -179,16 +179,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //beginning editing
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        //get string of barWeight
-        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
-            //no barWeight, just return and carry on
-            return
-        }
+        //set cancel button for barWeight cell
+        self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
+    }
+    
+    //ending editing
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
-        //create string from barWeight, set in textField, set button text
-        let barWeightString = String(barWeight)
-        textField.text = barWeightString
-        self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + barWeightString + " lbs")
+        //clear text
+        textField.text = nil
     }
     
     //when clear button is hit, clear text or not
