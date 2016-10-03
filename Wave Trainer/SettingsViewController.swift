@@ -206,7 +206,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //collapsing cells delegate
     func toggleSection(header: CollapsibleTableViewHeader) {
-        
+        //TODO:  FIX TOGGLING SECTION TO END EDITING OF TEXTFIELD
+        //TOOD:  FIX TOGGLING BUG WHERE SOMETIMES IT TOGGLES, OTHER TIMES NOT
         //get setting at section
         guard let setting = Setting(rawValue: header.section) else {
             return
@@ -294,16 +295,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     // MARK: - textField Delegate Methods
-    //beginning editing
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-
-//        //set text to barWeight if it exists
-//        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
-//            return
-//        }
-//        let barWeightString = String(barWeight)
-//        textField.text = barWeightString
-    }
     
     //ending editing
     func textFieldDidEndEditing(_ textField: UITextField) {
