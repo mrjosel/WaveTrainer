@@ -207,14 +207,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //collapsing cells delegate
     func toggleSection(header: CollapsibleTableViewHeader) {
         //TODO:  FIX TOGGLING SECTION TO END EDITING OF TEXTFIELD
-        //TOOD:  FIX TOGGLING BUG WHERE SOMETIMES IT TOGGLES, OTHER TIMES NOT
         //get setting at section
         guard let setting = Setting(rawValue: header.section) else {
             return
         }
         
         //collapse open header, if header is open
-        if let expandedHeader = self.expandedHeader {
+        if let expandedHeader = self.expandedHeader, expandedHeader != header {
             
             //if expandedHeader is barWeight, call delegate method to end textField editing
             if expandedHeader.section == Setting.barWeight.rawValue {
