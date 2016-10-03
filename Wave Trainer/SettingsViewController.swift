@@ -354,17 +354,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         //if incoming string is a delete character, remove last char
         guard string != "" else {
-            
-            //pop last char off string, update button
-            var updatedString = text.substring(to: text.index(before: text.endIndex))
-            
-            //if last char is a decimal, pop it as well so button text does not end in a decimal
-            updatedString = updatedString.characters.last == "." ? updatedString.substring(to: updatedString.index(before: updatedString.endIndex)) : updatedString
-            
-            //check if updated string is empty
-            if updatedString == "" {
-                textField.placeholder = "Enter a weight between 1-99.9 lbs"
-            }
             return true
         }
         
@@ -384,9 +373,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         //at this point, text exists and text can be added within range
-        //create updatedString based on text and input string from user, use updatedString in button text
-        //if last char is a decimal, pop it from updatedString when adding to button text
-        return true
+        //if only one character, allow anything
+        if text.characters.count == 1 {
+            return true
+        }
+        
+        //two characters input, only allow decimal
+        return string == "."
     }
     
     // MARK: - Keyboard resizing methods
