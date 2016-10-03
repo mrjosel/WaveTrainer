@@ -1,4 +1,4 @@
-//
+    //
 //  SettingsViewController.swift
 //  WaveTrainer
 //
@@ -9,14 +9,13 @@
 import UIKit
 
 //views settings for the app
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, CollapsibleTableViewHeaderDelegate {
     
     //outlets
     @IBOutlet weak var settingsTableView: UITableView!
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var buttonLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var setBarWeightButton: UIButton!
+    
+    //keeper variable for which collapsible header is currently expanded
+    var expandedHeader : CollapsibleTableViewHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,84 +27,83 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         //hide textField and button by default
-        self.textField.isHidden = true
-        self.setBarWeightButton.isHidden = true
-        
-        //set clear button for textField
-        self.textField.clearButtonMode = .whileEditing
-        
-        //placeholderfor textField
-        self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
-        
-        //setup button
-        self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
-        self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
-        
+//        self.textField.isHidden = true
+//        self.setBarWeightButton.isHidden = true
+//        
+//        //set clear button for textField
+//        self.textField.clearButtonMode = .whileEditing
+//        
+//        //placeholderfor textField
+//        self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
+//        
+//        //setup button
+//        self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
+//        self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
+//        
         //set delegates
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
-        self.textField.delegate = self
         self.navigationController?.delegate = self
         
         //set height of tableView based on content, disallow scrolling
-        self.settingsTableView.addObserver(self, forKeyPath: "contentSize", options: .initial, context: nil)
-        self.settingsTableView.frame.size = self.settingsTableView.contentSize
+//        self.settingsTableView.addObserver(self, forKeyPath: "contentSize", options: .initial, context: nil)
+//        self.settingsTableView.frame.size = self.settingsTableView.contentSize
         self.settingsTableView.isScrollEnabled = false
         
         //numberPad keyBoard
-        self.textField.keyboardType = .decimalPad
+//        self.textField.keyboardType = .decimalPad
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
-    //sets weight of bar in WorkoutManager singleton
-    func setBarWeightButtonPressed(_ sender: UIButton) {
-        //if button text is cancel, resign first responder and ignore
-        if sender.titleLabel?.text == "Cancel" {
-            self.textField.resignFirstResponder()
-        } else {
-            
-            //ensure text in textField
-            guard let weightString = self.textField.text else {
-                //no text in field, should never get to this point
-                print("error, no text in textField")
-                self.textField.resignFirstResponder()
-                return
-            }
-            
-            //create double from weightText and set in client singleton
-            let weightDouble = Double(weightString)!
-            WorkoutManagerClient.sharedInstance.barWeight = weightDouble
-            self.textField.resignFirstResponder()
-            self.settingsTableView.reloadData()
-        }
-    }
+//    //sets weight of bar in WorkoutManager singleton
+//    func setBarWeightButtonPressed(_ sender: UIButton) {
+//        //if button text is cancel, resign first responder and ignore
+//        if sender.titleLabel?.text == "Cancel" {
+//            self.textField.resignFirstResponder()
+//        } else {
+//            
+//            //ensure text in textField
+//            guard let weightString = self.textField.text else {
+//                //no text in field, should never get to this point
+//                print("error, no text in textField")
+//                self.textField.resignFirstResponder()
+//                return
+//            }
+//            
+//            //create double from weightText and set in client singleton
+//            let weightDouble = Double(weightString)!
+//            WorkoutManagerClient.sharedInstance.barWeight = weightDouble
+//            self.textField.resignFirstResponder()
+//            self.settingsTableView.reloadData()
+//        }
+//    }
     
     //perform the following before view appears
     override func viewWillAppear(_ animated: Bool) {
         
         //subscribe to keyboard notifications to allow for view resizing
-        self.subscribeToKeyboardNotifications()
+//        self.subscribeToKeyboardNotifications()
     }
     
     //perform the following before the view disappears
     override func viewWillDisappear(_ animated: Bool) {
         
         //unsubscribe to keyboard notifications to prevent any race conditions
-        self.unsubscribeFromKeyboardNotifications()
+//        self.unsubscribeFromKeyboardNotifications()
     }
     
-    //perform the following based on keyPath
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        //check keypath
-        if keyPath == "contentSize" {
-            
-            //adjust settings tableVoew height
-            self.tableViewHeight.constant = self.settingsTableView.contentSize.height
-        }
-    }
+//    //perform the following based on keyPath
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        
+//        //check keypath
+//        if keyPath == "contentSize" {
+//            
+//            //adjust settings tableVoew height
+//            self.tableViewHeight.constant = self.settingsTableView.contentSize.height
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -114,63 +112,183 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     // MARK: - Table view data source
     
-    //only a single section in table
+    //one section in table per setting
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Setting.caseCount
     }
 
     //one row for each Settings case
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Settings.caseCount
+
+        //get setting at section
+        guard let setting = Setting(rawValue: section) else {
+            return 0
+        }
+
+        //get valueString count for setting
+        guard let value = setting.valueString else {
+            //valueCount is nil, return 0
+            return 0
+        }
+        return value.count
+
     }
     
-    //handle behavior of cell when its selected
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //customize header
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        //get setting for particular row
-        let setting = Settings(rawValue: indexPath.row)
-        
-        //show textField for Bar Weight cell only
-        if setting == Settings.barWeight {
-            self.textField.isHidden = false
-            self.setBarWeightButton.isHidden = false
-            self.textField.becomeFirstResponder()
-        } else {
-            self.textField.resignFirstResponder()
-            self.textField.text = nil
-            self.textField.isHidden = true
+        //get setting at section
+        guard let setting = Setting(rawValue: section) else {
+            //if setting not found, return empty UIView, should never get to this point
+            //TODO: ERROR HANDLING
+            return UIView()
         }
+        
+        //get cell, set section
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        header.section = section
+        
+        //set delegate
+        header.delegate = self
+        
+        //configure header,  label and return
+        header.textLabel?.text = setting.description
+        header.contentView.backgroundColor = UIColor.white
+        return header
     }
-
+    
+    //height for header
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
+    
+    //height for footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
     //configure cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //create cell
-        let reuseID = "SettingsCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as! SettingsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "item") as? SettingItemCell else {
+            return UITableViewCell()
+        }
         
         //get setting for particular row
-        let setting = Settings(rawValue: indexPath.row)
-        
-        //set cell and return
-        cell.textLabel?.text = setting?.description
-        cell.imageView?.image = setting?.image
-        
-        //set value if it exists
-        guard let value = setting?.valueString else {
-            cell.valueLabel.isHidden = true
+        guard let setting = Setting(rawValue: indexPath.section) else {
+            //if setting not found, return cell, should never get to this point
+            //TODO: ERROR HANDLING
             return cell
         }
         
-        //if cell is barWeight, add "lbs" to string
-        cell.valueLabel.text = setting == .barWeight ? value + " lbs" : value
+        //configure cell and return
+        self.configureSettingItemCell(cell, withSetting: setting, atIndexPath: indexPath)
+        return cell
+    }
+    
+    //cponfigure height of cells
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        //get header
+        guard let header = tableView.headerView(forSection: indexPath.section) as? CollapsibleTableViewHeader else {
+            return 0
+        }
+        
+        //return 0 height if collapsed, 44.0 height if not collapsed
+        return header.isCollapsed ? 0 : 44.0
+    }
+    
+    //handle behavior of cell when its selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    }
+    
+    //collapsing cells delegate
+    func toggleSection(header: CollapsibleTableViewHeader) {
+        
+        //get setting at section
+        guard let setting = Setting(rawValue: header.section) else {
+            return
+        }
+        
+        //collapse open header, if header is open
+        if let expandedHeader = self.expandedHeader {
+            
+            //if expandedHeader is barWeight, call delegate method to end textField editing
+            if expandedHeader.section == Setting.barWeight.rawValue {
+                
+                //get open cell, call method
+                let cell = self.settingsTableView.cellForRow(at: IndexPath(row: 0, section: expandedHeader.section)) as! SettingItemCell
+                cell.textField.delegate?.textFieldDidEndEditing!(cell.textField)
+            }
+            
+            //collapse header and clear var
+            expandedHeader.isCollapsed = true
+        }
+        
+        //get values of setting
+        guard let values = setting.valueString else {
+            return
+        }
+        
+        //toggle collapse
+        header.isCollapsed = !header.isCollapsed
+        
+        //adjust rows height
+        self.settingsTableView.beginUpdates()
+        for i in 0 ..< values.count {
+            //create indexPath, update tableView
+            let indexPath = IndexPath(row: i, section: header.section)
+            self.settingsTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        self.settingsTableView.endUpdates()
+        
+        //if expandedHeader is the header itself, then clear variable, otherwise set it
+        self.expandedHeader = self.expandedHeader == header ? nil : header
+    }
+    
+    func configureSettingItemCell(_ cell: SettingItemCell, withSetting setting : Setting, atIndexPath indexPath: IndexPath) {
+        
+        //set cell image
+        cell.imageView?.image = setting.image
+        
+        //configure textField based on setting
+        switch setting {
+        case .barWeight:
+            //configure textField
+            cell.textField.placeholder = WorkoutManagerClient.barWeightPlaceHolder
+            if let barWeight = WorkoutManagerClient.sharedInstance.barWeight {
+                let string = String(barWeight)
+                cell.textField.text = string
+            }
+            cell.textField.sizeToFit()
+            cell.textField.isHidden = false
+            cell.textField.keyboardType = .decimalPad
+            cell.textField.delegate = self
+            cell.textLabel?.isHidden = true
+            cell.contentView.bringSubview(toFront: cell.textField)
+        case .plates:
+            cell.textField.isHidden = true
+            cell.textLabel?.isHidden = false
+        default:
+            //TODO: RESOLVE
+            cell.textField.isHidden = true
+            return
+        }
+        
+        //set value if it exists
+        guard let values = setting.valueString else {
+            
+            //no value, return
+            return
+        }
+        
+        //set text label
+        cell.textLabel?.text = values[indexPath.row]
         
         //layout cell
-        cell.valueLabel.sizeToFit()
-        cell.valueLabel.isHidden = false
-        cell.contentView.bringSubview(toFront: cell.valueLabel)
         cell.layoutSubviews()
-        return cell
     }
 
     
@@ -178,25 +296,36 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - textField Delegate Methods
     //beginning editing
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        //set cancel button for barWeight cell
-        self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
+
+//        //set text to barWeight if it exists
+//        guard let barWeight = WorkoutManagerClient.sharedInstance.barWeight else {
+//            return
+//        }
+//        let barWeightString = String(barWeight)
+//        textField.text = barWeightString
     }
     
     //ending editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        //clear text
-        textField.text = nil
-    }
-    
-    //when clear button is hit, clear text or not
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        //set barWeight to textField string
+        guard let text = textField.text, text != "" else {
+            
+            //clear text
+            textField.text = nil
+            return
+        }
         
-        //set button text to cancel
-        self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
-
-        return true
+        //create barWeight from text
+        guard let barWeight = Double(text), barWeight > 0 else {
+            //clear text
+            textField.text = nil
+            return
+        }
+        
+        //set barWeight, clear text
+        WorkoutManagerClient.sharedInstance.barWeight = barWeight
+        textField.text = nil
     }
     
     //called whenever text is added to field
@@ -220,9 +349,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             if string == "0" || string == "."{
                 return false
             }
-            
-            //create button text using only replacementString since no previous text exists
-            self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + string + " lbs")
             return true
         }
         
@@ -236,11 +362,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             updatedString = updatedString.characters.last == "." ? updatedString.substring(to: updatedString.index(before: updatedString.endIndex)) : updatedString
             
             //check if updated string is empty
-            if updatedString != "" {
-                self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
-            } else {
-                self.setBarWeightButton.setTitleWithOutAnimation(title: "Cancel")
-                self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
+            if updatedString == "" {
+                textField.placeholder = "Enter a weight between 1-99.9 lbs"
             }
             return true
         }
@@ -254,11 +377,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             //if decimal is not last character, then disallow
             if text.characters.last == "." {
                 //allow entry
-                let updatedString = text + string
-                self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
                 return true
             }
-            
             //decimal exists, not last char, disallow
             return false
         }
@@ -266,8 +386,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         //at this point, text exists and text can be added within range
         //create updatedString based on text and input string from user, use updatedString in button text
         //if last char is a decimal, pop it from updatedString when adding to button text
-        let updatedString = string == "." ? text : text + string
-        self.setBarWeightButton.setTitleWithOutAnimation(title: "Set Bar Weight to " + updatedString + " lbs")
         return true
     }
     
@@ -289,14 +407,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //carry out following when keyboard is about to show
     @objc func keyboardWillShow(_ notification: Notification) {
         
-        //only adjust if keyboard is not showing, else do nothing
-        //self.view.frame.origin.y -= self.getKeyboardHeight(notification)
-        
-        //show button and textField, adjust layout of button
-        self.setBarWeightButton.isHidden = false
-        self.textField.isHidden = false
-        self.buttonLayoutConstraint.constant = self.getKeyboardHeight(notification)
-        
         //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
@@ -304,12 +414,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //carry out following when keyboard is about to hide
     func keyboardWillHide(_ notification: Notification) {
         
-        //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
-        //self.view.frame.origin.y = 0
-        
-        //hide button and textField
-        self.setBarWeightButton.isHidden = true
-        self.textField.isHidden = true
+        //start listening to willShow notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
     }
     

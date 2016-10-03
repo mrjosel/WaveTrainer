@@ -1,18 +1,18 @@
 //
-//  SettingsTableViewCell.swift
+//  SettingItemCell.swift
 //  WaveTrainer
 //
-//  Created by Brian Josel on 9/26/16.
+//  Created by Brian Josel on 10/2/16.
 //  Copyright © 2016 Brian Josel. All rights reserved.
 //
 
 import UIKit
 
-//custom cell for settingsVC
-class SettingsTableViewCell: UITableViewCell {
+//custom cell that has textField
+class SettingItemCell: UITableViewCell {
 
-    //editable textField
-    @IBOutlet weak var valueLabel: UILabel!
+    //textField outlet
+    @IBOutlet weak var textField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()

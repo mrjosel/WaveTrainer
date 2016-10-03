@@ -10,9 +10,10 @@
 		B705633E1D8DF88800224337 /* ExerciseModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */; };
 		B70563411D8DFE4900224337 /* ExercisePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
-		B7533F041D99E65D00FC37C8 /* SettingsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* SettingsEnum.swift */; };
-		B7533F061D9A01DD00FC37C8 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F051D9A01DD00FC37C8 /* SettingsTableViewCell.swift */; };
+		B75061D41DA1F77500EE84F7 /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */; };
+		B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
 		B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */; };
+		B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
@@ -56,9 +57,10 @@
 		B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePickerViewController.swift; sourceTree = "<group>"; };
 		B7212F571D80217400E8C33F /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B7533F031D99E65D00FC37C8 /* SettingsEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsEnum.swift; sourceTree = "<group>"; };
-		B7533F051D9A01DD00FC37C8 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
+		B7533F031D99E65D00FC37C8 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
+		B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
@@ -119,8 +121,9 @@
 		B7540FDB1D5E32000034D806 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B7533F051D9A01DD00FC37C8 /* SettingsTableViewCell.swift */,
 				B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */,
+				B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */,
+				B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -136,7 +139,7 @@
 				B79E1C9F1D81791100DED411 /* CoreDataStackManager.swift */,
 				B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */,
 				B78516321D8B813200B130AA /* Workout.swift */,
-				B7533F031D99E65D00FC37C8 /* SettingsEnum.swift */,
+				B7533F031D99E65D00FC37C8 /* Setting.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -335,7 +338,6 @@
 				B7F338D11D77433B00DE41B7 /* WorkoutViewController.swift in Sources */,
 				B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
-				B7533F061D9A01DD00FC37C8 /* SettingsTableViewCell.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
 				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
 				B79E1CA51D817B3200DED411 /* Cycle.swift in Sources */,
@@ -348,13 +350,15 @@
 				B79E1CB01D8715A800DED411 /* CycleModelViewController.swift in Sources */,
 				B79E1CB21D8758C700DED411 /* WorkoutModelViewController.swift in Sources */,
 				B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */,
-				B7533F041D99E65D00FC37C8 /* SettingsEnum.swift in Sources */,
+				B75061D41DA1F77500EE84F7 /* SettingItemCell.swift in Sources */,
+				B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */,
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
 				B771D9AB1D99DED6005CE96C /* SettingsViewController.swift in Sources */,
 				B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */,
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
+				B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */,
 				B78516331D8B813200B130AA /* Workout.swift in Sources */,
 				B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */,
 			);

@@ -128,15 +128,12 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="36" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XAc-w8-w8K">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="340" id="eBD-R4-1Xe"/>
-                                </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="zOX-dd-wga" customClass="SettingsTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="zOX-dd-wga" customClass="SettingsHeaderTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zOX-dd-wga" id="Uan-dm-3A0">
-                                            <frame key="frameInset" width="375" height="35"/>
+                                            <frame key="frameInset" width="375" height="35.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZn-vJ-DcO">
@@ -155,37 +152,44 @@
                                             <outlet property="valueLabel" destination="jZn-vJ-DcO" id="NeP-A6-sZe"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="UQu-mV-TRa" customClass="SettingItemCell" customModule="WaveTrainer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="128" width="375" height="36"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UQu-mV-TRa" id="Zbk-xe-3ys">
+                                            <frame key="frameInset" width="375" height="35.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CPJ-4S-HK6">
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CPJ-4S-HK6" firstAttribute="leading" secondItem="Zbk-xe-3ys" secondAttribute="leading" id="0mW-YF-C3N"/>
+                                                <constraint firstAttribute="trailing" secondItem="CPJ-4S-HK6" secondAttribute="trailing" id="5ZU-0E-AvL"/>
+                                                <constraint firstItem="CPJ-4S-HK6" firstAttribute="top" secondItem="Zbk-xe-3ys" secondAttribute="top" constant="2" id="pJr-WG-7C3"/>
+                                                <constraint firstAttribute="bottom" secondItem="CPJ-4S-HK6" secondAttribute="bottom" constant="2" id="yba-or-Dff"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="CPJ-4S-HK6" id="dtz-dv-bZE"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xmx-Ga-LjF">
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mi0-yZ-noZ">
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XAc-w8-w8K" firstAttribute="leading" secondItem="R3D-ZA-y8x" secondAttribute="leading" id="9DR-mR-nd2"/>
-                            <constraint firstItem="hpz-sT-EBe" firstAttribute="top" secondItem="Mi0-yZ-noZ" secondAttribute="bottom" constant="91" id="D4F-qV-iRf"/>
                             <constraint firstItem="XAc-w8-w8K" firstAttribute="top" secondItem="1tD-nc-cUB" secondAttribute="bottom" id="JsX-KT-fMa"/>
-                            <constraint firstAttribute="trailing" secondItem="Mi0-yZ-noZ" secondAttribute="trailing" id="S30-RF-RVo"/>
                             <constraint firstAttribute="trailing" secondItem="XAc-w8-w8K" secondAttribute="trailing" id="ZDw-uW-s7m"/>
-                            <constraint firstItem="xmx-Ga-LjF" firstAttribute="top" secondItem="XAc-w8-w8K" secondAttribute="bottom" id="eZe-iK-Coz"/>
-                            <constraint firstAttribute="trailing" secondItem="xmx-Ga-LjF" secondAttribute="trailing" id="l6e-Z7-xCo"/>
-                            <constraint firstItem="xmx-Ga-LjF" firstAttribute="leading" secondItem="R3D-ZA-y8x" secondAttribute="leading" id="wLC-kC-Q4t"/>
-                            <constraint firstItem="Mi0-yZ-noZ" firstAttribute="leading" secondItem="R3D-ZA-y8x" secondAttribute="leading" id="x2u-Mn-fAO"/>
+                            <constraint firstItem="hpz-sT-EBe" firstAttribute="top" secondItem="XAc-w8-w8K" secondAttribute="bottom" id="urd-Uy-eeg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8X2-Yj-Rx3"/>
                     <connections>
-                        <outlet property="buttonLayoutConstraint" destination="D4F-qV-iRf" id="TUa-by-V3t"/>
-                        <outlet property="setBarWeightButton" destination="Mi0-yZ-noZ" id="s9n-t2-dAm"/>
                         <outlet property="settingsTableView" destination="XAc-w8-w8K" id="0l3-KD-gB5"/>
-                        <outlet property="tableViewHeight" destination="eBD-R4-1Xe" id="7yO-P3-144"/>
-                        <outlet property="textField" destination="xmx-Ga-LjF" id="Rfd-yc-KXn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1qs-lB-ELg" userLabel="First Responder" sceneMemberID="firstResponder"/>

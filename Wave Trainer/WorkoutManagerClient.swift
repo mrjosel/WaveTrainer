@@ -70,14 +70,27 @@ class WorkoutManagerClient: AnyObject {
         static let JSON = "json"
     }
     
+    //plates available for useage
+    struct PlatesAvailable {
+        static let FORTYFIVE = "45.0"
+        static let TWENTYFIVE = "25.0"
+        static let TEN = "10.0"
+        static let FIVE = "5.0"
+        static let TWOPOINTFIVE = "2.5"
+        static let ALLPLATES : [String] = [PlatesAvailable.FORTYFIVE, PlatesAvailable.TWENTYFIVE, PlatesAvailable.TEN, PlatesAvailable.FIVE, PlatesAvailable.TWOPOINTFIVE]
+    }
+    
+    //placeholder for barWeight
+    static let barWeightPlaceHolder = "Enter a weight between 1 - 99.9 lbs"
+    
     //variable set by user to denote whether a deload cycle is to be used or not
     var deload : Bool?               //MUST BE ADDED TO NSUSERDEFULATS
     
     //available plate options for calculating plates on bars, empty until user creates
-    var plates = [Double]() {
+    var platesSelected = [Double]() {
         didSet {
             //if plates change, perform assending sort
-            plates = plates.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
+            platesSelected = platesSelected.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
         }
     }
     
@@ -107,7 +120,7 @@ class WorkoutManagerClient: AnyObject {
         }
         
         //check if targetWeight can be calculatd from barWeight and available plates
-        guard (targetWeight - barWeight).truncatingRemainder(dividingBy: plates.last!) == 0 else {
+        guard (targetWeight - barWeight).truncatingRemainder(dividingBy: platesSelected.last!) == 0 else {
             //throw error
             throw PlateError.ivalidWeight
         }
@@ -124,7 +137,7 @@ class WorkoutManagerClient: AnyObject {
         }
         
         //calculate plates
-        for plate in self.plates {
+        for plate in self.platesSelected {
             //as long as remainder is greater than the current plate, subtract the plate and append it to result
             while remainder >= plate {
                 result.append(plate)
@@ -225,14 +238,10 @@ class WorkoutManagerClient: AnyObject {
         let deload = UserDefaults.standard.value(forKey: "deload") as? Bool
         let plates = UserDefaults.standard.value(forKey: "plates") as? [Double]
         
-        print(barWeight)
-        print(deload)
-        print(plates)
-        
         //set values
         WorkoutManagerClient.sharedInstance.barWeight = barWeight
         WorkoutManagerClient.sharedInstance.deload = deload
-        WorkoutManagerClient.sharedInstance.plates = plates ?? [Double]()
+        WorkoutManagerClient.sharedInstance.platesSelected = plates ?? [Double]()
     }
     
     //----------
