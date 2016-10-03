@@ -295,6 +295,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: - textField Delegate Methods
     
+    //called to determine if editing should end or not
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("should end editing")
+        //TODO:  WHY IS THIS NOT CALLED WHEN I COLLAPSE USING ANOTHER HEADER?????
+        return true
+    }
+    
     //ending editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         
