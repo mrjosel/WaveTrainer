@@ -306,15 +306,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         //set barWeight to textField string
-        guard let text = textField.text, text != "" else {
+        guard let text = textField.text, text != "", let barWeight = Double(text), barWeight > 0 else {
             
-            //clear text
-            textField.text = nil
-            return
-        }
-        
-        //create barWeight from text
-        guard let barWeight = Double(text), barWeight > 0 else {
             //clear text
             textField.text = nil
             return
@@ -335,7 +328,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         //limit the number of characters to four (1-99, a decimal, and one significant figure)
-        guard range.location <= 3 else {
+        if range.location > 3 {
             return false
         }
         
@@ -349,13 +342,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return true
         }
         
-        //if incoming string is a delete character, remove last char
-        guard string != "" else {
-            return true
-        }
-        
         //decimal only allowed if one doesn't exist, if one does, then only one digit allowed
-        guard text.range(of: ".") == nil else {
+        if text.range(of: ".") != nil {
             if string == "." {
                 return false
             }
@@ -365,8 +353,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 //allow entry
                 return true
             }
-            //decimal exists, not last char, disallow
-            return false
+            //decimal exists, not last char, disallow unless deletion
+            return string == ""
         }
         
         //at this point, text exists and text can be added within range
@@ -375,8 +363,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return true
         }
         
-        //two characters input, only allow decimal
-        return string == "."
+        //two characters input, only allow decimal or deletion
+        return string == "." || string == ""
     }
     
     // MARK: - Keyboard resizing methods
