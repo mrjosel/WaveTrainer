@@ -275,6 +275,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case .plates:
             cell.textField.isHidden = true
             cell.textLabel?.isHidden = false
+            //TODO:     ADD CHECK IMAGE, TOGGLE DISPLAY WHEN CHECKED
         default:
             //TODO: RESOLVE
             cell.textField.isHidden = true
