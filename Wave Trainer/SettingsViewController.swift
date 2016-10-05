@@ -218,9 +218,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             //if expandedHeader is barWeight, call delegate method to end textField editing
             if expandedHeader.section == Setting.barWeight.rawValue {
                 
-                //get open cell, call method
+                //get open cell
                 let cell = self.settingsTableView.cellForRow(at: IndexPath(row: 0, section: expandedHeader.section)) as! SettingItemCell
-                cell.textField.delegate?.textFieldDidEndEditing!(cell.textField)
+                
+                //resign first responder
+                if cell.textField.isEditing {
+                    _ = cell.textField.resignFirstResponder()   //WHY IS THIS REQUIRED FOR OTHER HEADERS BUT NOT BARWEIGHT HEADER?
+                }
             }
             
             //collapse header and clear var
@@ -297,25 +301,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //called to determine if editing should end or not
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("should end editing")
-        //TODO:  WHY IS THIS NOT CALLED WHEN I COLLAPSE USING ANOTHER HEADER?????
-        return true
-    }
-    
-    //ending editing
-    func textFieldDidEndEditing(_ textField: UITextField) {
         
         //set barWeight to textField string
         guard let text = textField.text, text != "", let barWeight = Double(text), barWeight > 0 else {
-            
-            //clear text
-            textField.text = nil
-            return
+            return true
         }
         
         //set barWeight, clear text
         WorkoutManagerClient.sharedInstance.barWeight = barWeight
-        textField.text = nil
+        return true
     }
     
     //called whenever text is added to field
