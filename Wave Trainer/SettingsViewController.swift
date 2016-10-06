@@ -201,7 +201,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //handle behavior of cell when its selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        //TODO:  WHY DOES FIRST TAP ALWAYS FAIL???
         //get setting for section
         let setting = Setting(rawValue: indexPath.section)!
         
