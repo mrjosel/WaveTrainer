@@ -202,6 +202,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     //handle behavior of cell when its selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+        //get setting for section
+        let setting = Setting(rawValue: indexPath.section)!
+        
+        //get cell that is selected
+        let cell = tableView.cellForRow(at: indexPath) as! SettingItemCell
+        
+        //selection of cells differ with setting behavior
+        switch setting {
+        case .plates:
+            //toggle checkbox appearence
+                DispatchQueue.main.async {
+                    cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none
+                }
+        default:
+            //remaining sections do nothing when selected
+            break
+        }
     }
     
     //collapsing cells delegate
@@ -266,16 +283,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 let string = String(barWeight)
                 cell.textField.text = string
             }
+            cell.selectionStyle = .none
             cell.textField.sizeToFit()
             cell.textField.isHidden = false
             cell.textField.keyboardType = .decimalPad
             cell.textField.delegate = self
             cell.textLabel?.isHidden = true
             cell.contentView.bringSubview(toFront: cell.textField)
+            
+            //hide checkmark
+            cell.accessoryView?.isHidden = true
         case .plates:
+            //hide textField, show label
             cell.textField.isHidden = true
             cell.textLabel?.isHidden = false
-            //TODO:     ADD CHECK IMAGE, TOGGLE DISPLAY WHEN CHECKED
+            
+            //show checkmark
+            cell.accessoryView?.isHidden = false    //TODO: SHOW ONLY IF IN SELECTED PLATES
         default:
             //TODO: RESOLVE
             cell.textField.isHidden = true
