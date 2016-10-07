@@ -87,12 +87,12 @@ class WorkoutManagerClient: AnyObject {
     var deload : Bool?               //MUST BE ADDED TO NSUSERDEFUALTS
     
     //available plate options for calculating plates on bars, empty until user creates
-    var platesSelected = [Double]() {
-        didSet {
-            //if plates change, perform assending sort
-            platesSelected = platesSelected.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
-        }
-    }
+    var platesSelected = [Double]() //{
+//        didSet {
+//            //if plates change, perform assending sort
+//            platesSelected = platesSelected.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
+//        }
+//    }
     
     //bar weight, set by user
     var barWeight : Double? {

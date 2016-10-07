@@ -289,6 +289,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             cell.textLabel?.text = values[indexPath.row]
             
         case .plates:
+            
+            //cell not selectable
+            cell.selectionStyle = .none
+            
             //hide textField, show label
             cell.textField.isHidden = true
             cell.textLabel?.isHidden = false
@@ -300,13 +304,24 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
                 return
             }
             
-            //set text label
-            cell.textLabel?.text = values[indexPath.row]
+            //get desired plate for row
+            let plateString = values[indexPath.row]
             
-            //show checkmark only if plate selected
-            for plate in WorkoutManagerClient.sharedInstance.platesSelected {
-                //TODO: MAKE PLATES ARRAY A DICT STORY TRUE OR FALSE FOR INCLUSION
+            //set text label
+            cell.textLabel?.text = plateString
+            
+            //create double from string
+            guard let plate = Double(plateString) else{
+                return
             }
+            
+            //if plate is in stored plate array, create checkbox, else do not include checkbox
+            if WorkoutManagerClient.sharedInstance.platesSelected.index(of: plate) != nil {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+            
         default:
             //TODO: RESOLVE
             cell.textField.isHidden = true
