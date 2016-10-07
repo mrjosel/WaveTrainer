@@ -9,7 +9,7 @@
 import UIKit
 
 //views settings for the app
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, CollapsibleTableViewHeaderDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, CollapsibleTableViewHeaderDelegate {
     
     //outlets
     @IBOutlet weak var settingsTableView: UITableView!
@@ -26,84 +26,31 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        //hide textField and button by default
-//        self.textField.isHidden = true
-//        self.setBarWeightButton.isHidden = true
-//        
-//        //set clear button for textField
-//        self.textField.clearButtonMode = .whileEditing
-//        
-//        //placeholderfor textField
-//        self.textField.placeholder = "Enter a weight between 1-99.9 lbs"
-//        
-//        //setup button
-//        self.setBarWeightButton.setTitle("Cancel", for: UIControlState()) //weight text completes as typed
-//        self.setBarWeightButton.addTarget(self, action: #selector(self.setBarWeightButtonPressed(_:)), for: .touchUpInside)
-//        
         //set delegates
         self.settingsTableView.delegate = self
         self.settingsTableView.dataSource = self
         self.navigationController?.delegate = self
         
         //set height of tableView based on content, disallow scrolling
-//        self.settingsTableView.addObserver(self, forKeyPath: "contentSize", options: .initial, context: nil)
-//        self.settingsTableView.frame.size = self.settingsTableView.contentSize
         self.settingsTableView.isScrollEnabled = false
-        
-        //numberPad keyBoard
-//        self.textField.keyboardType = .decimalPad
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
-//    //sets weight of bar in WorkoutManager singleton
-//    func setBarWeightButtonPressed(_ sender: UIButton) {
-//        //if button text is cancel, resign first responder and ignore
-//        if sender.titleLabel?.text == "Cancel" {
-//            self.textField.resignFirstResponder()
-//        } else {
-//            
-//            //ensure text in textField
-//            guard let weightString = self.textField.text else {
-//                //no text in field, should never get to this point
-//                print("error, no text in textField")
-//                self.textField.resignFirstResponder()
-//                return
-//            }
-//            
-//            //create double from weightText and set in client singleton
-//            let weightDouble = Double(weightString)!
-//            WorkoutManagerClient.sharedInstance.barWeight = weightDouble
-//            self.textField.resignFirstResponder()
-//            self.settingsTableView.reloadData()
-//        }
-//    }
-    
     //perform the following before view appears
     override func viewWillAppear(_ animated: Bool) {
         
         //subscribe to keyboard notifications to allow for view resizing
-//        self.subscribeToKeyboardNotifications()
+        self.subscribeToKeyboardNotifications()
     }
     
     //perform the following before the view disappears
     override func viewWillDisappear(_ animated: Bool) {
         
         //unsubscribe to keyboard notifications to prevent any race conditions
-//        self.unsubscribeFromKeyboardNotifications()
+        self.unsubscribeFromKeyboardNotifications()
     }
-    
-//    //perform the following based on keyPath
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        
-//        //check keypath
-//        if keyPath == "contentSize" {
-//            
-//            //adjust settings tableVoew height
-//            self.tableViewHeight.constant = self.settingsTableView.contentSize.height
-//        }
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -113,12 +60,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view data source
     
     //one section in table per setting
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return Setting.caseCount
     }
 
     //one row for each Settings case
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         //get setting at section
         guard let setting = Setting(rawValue: section) else {
@@ -135,7 +82,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //customize header
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         //get setting at section
         guard let setting = Setting(rawValue: section) else {
@@ -158,17 +105,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //height for header
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
     
     //height for footer
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
     }
     
     //configure cell
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //create cell
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "item") as? SettingItemCell else {
@@ -188,7 +135,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //cponfigure height of cells
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         //get header
         guard let header = tableView.headerView(forSection: indexPath.section) as? CollapsibleTableViewHeader else {
@@ -200,7 +147,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     //handle behavior of cell when its selected
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO:  WHY DOES FIRST TAP ALWAYS FAIL???
         //get setting for section
         let setting = Setting(rawValue: indexPath.section)!
