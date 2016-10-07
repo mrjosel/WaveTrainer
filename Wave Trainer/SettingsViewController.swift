@@ -278,28 +278,40 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             //no checkmark accessory view
             cell.accessoryType = .none
             
+            //set value if it exists
+            guard let values = setting.valueString else {
+                
+                //no value, return
+                return
+            }
+            
+            //set text label
+            cell.textLabel?.text = values[indexPath.row]
+            
         case .plates:
             //hide textField, show label
             cell.textField.isHidden = true
             cell.textLabel?.isHidden = false
             
-            //show checkmark
-            cell.accessoryType = .checkmark    //TODO: SHOW ONLY IF IN SELECTED PLATES
+            //set value if it exists
+            guard let values = setting.valueString else {
+                
+                //no value, return
+                return
+            }
+            
+            //set text label
+            cell.textLabel?.text = values[indexPath.row]
+            
+            //show checkmark only if plate selected
+            for plate in WorkoutManagerClient.sharedInstance.platesSelected {
+                //TODO: MAKE PLATES ARRAY A DICT STORY TRUE OR FALSE FOR INCLUSION
+            }
         default:
             //TODO: RESOLVE
             cell.textField.isHidden = true
             return
         }
-        
-        //set value if it exists
-        guard let values = setting.valueString else {
-            
-            //no value, return
-            return
-        }
-        
-        //set text label
-        cell.textLabel?.text = values[indexPath.row]
         
         //layout cell
         cell.layoutSubviews()
