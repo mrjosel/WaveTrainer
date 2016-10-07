@@ -84,7 +84,7 @@ class WorkoutManagerClient: AnyObject {
     static let barWeightPlaceHolder = "Enter a weight between 1 - 99.9 lbs"
     
     //variable set by user to denote whether a deload cycle is to be used or not
-    var deload : Bool?               //MUST BE ADDED TO NSUSERDEFULATS
+    var deload : Bool?               //MUST BE ADDED TO NSUSERDEFUALTS
     
     //available plate options for calculating plates on bars, empty until user creates
     var platesSelected = [Double]() {
@@ -101,6 +101,31 @@ class WorkoutManagerClient: AnyObject {
         didSet {
             UserDefaults.standard.setValue(barWeight, forKey: "barWeight")
         }
+    }
+    
+    //updates the selected plates array by passing in viewController (or table or cells?)
+    func updatedPlatesSelected(_ settingsVC: SettingsViewController) {
+        print("updating plates")
+//        //get tableView
+//        let tableView = settingsVC.tableView
+//        
+//        //if this function is called, then section 1 (plates) is opened, get cells from that section
+//        let cells = tableView?.visibleCells as! [SettingItemCell]
+//        
+//        //array output
+//        var platesArray = [Double]()
+//        
+//        //iterate through cells, if checkBox visible, then add to array
+//        for cell in cells {
+//            
+//            //check for box
+//            if cell.accessoryType == .checkmark {
+//                platesArray.append(Double(cell.textField.text!)!)
+//            }
+//        }
+//        
+//        //set platesSelected to array
+//        self.platesSelected = platesArray
     }
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL

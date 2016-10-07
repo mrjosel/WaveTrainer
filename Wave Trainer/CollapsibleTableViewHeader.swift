@@ -10,7 +10,12 @@ import UIKit
 
 //manages collapsing/expanding views
 protocol CollapsibleTableViewHeaderDelegate {
+    
+    //called whenever header cell is tapped
     func toggleSection(header: CollapsibleTableViewHeader)
+    
+    //called whenever a header collapses and hides its content
+    func didCollapseHeader(header: CollapsibleTableViewHeader)
 }
 
 //header view for settings table
@@ -26,7 +31,14 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     let titleLabel = UILabel()
     
     //boolean to managed whether section is collapsed or not
-    var isCollapsed : Bool
+    var isCollapsed : Bool {
+        didSet {
+            //if header is set to collapse, then call delegate
+            if isCollapsed {
+                self.delegate?.didCollapseHeader(header: self)
+            }
+        }
+    }
     
     //initializer
     override init(reuseIdentifier: String?) {
@@ -70,7 +82,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
 
     //function called whenever header is tapped
     func tapHeader(_ gestureRecognizer: UITapGestureRecognizer) {
-        
+        //call delegate
         self.delegate?.toggleSection(header: self)
     }
 }

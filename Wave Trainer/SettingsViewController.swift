@@ -201,18 +201,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         //collapse open header, if header is open
         if let expandedHeader = self.expandedHeader, expandedHeader != header {
             
-            //if expandedHeader is barWeight, call delegate method to end textField editing
-            if expandedHeader.section == Setting.barWeight.rawValue {
-                
-                //get open cell
-                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: expandedHeader.section)) as! SettingItemCell
-                
-                //resign first responder
-                if cell.textField.isEditing {
-                    _ = cell.textField.resignFirstResponder()   //WHY IS THIS REQUIRED FOR OTHER HEADERS BUT NOT BARWEIGHT HEADER?
-                }
-            }
-            
             //collapse header and clear var
             expandedHeader.isCollapsed = true
         }
@@ -238,6 +226,33 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         self.expandedHeader = self.expandedHeader == header ? nil : header
     }
     
+    //manage headers when they collapse
+    func didCollapseHeader(header: CollapsibleTableViewHeader) {
+        
+        //get header section, get setting based on section
+        guard let section = header.section, let setting = Setting(rawValue: section) else {
+            return
+        }
+        
+        //different action depending on section
+        switch setting {
+        case .barWeight:
+            //get open cell
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: section)) as! SettingItemCell
+
+            //resign first responder, sets weight in textField delegate methods
+            if cell.textField.isEditing {
+                _ = cell.textField.resignFirstResponder()   //WHY IS THIS REQUIRED FOR OTHER HEADERS BUT NOT BARWEIGHT HEADER?
+            }
+        case .plates:
+            //update plates
+            WorkoutManagerClient.sharedInstance.updatedPlatesSelected(self)
+        default:
+            break
+        }
+    }
+    
+    //configure individual cell
     func configureSettingItemCell(_ cell: SettingItemCell, withSetting setting : Setting, atIndexPath indexPath: IndexPath) {
         
         //set cell image
