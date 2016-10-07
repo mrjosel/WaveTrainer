@@ -87,12 +87,12 @@ class WorkoutManagerClient: AnyObject {
     var deload : Bool?               //MUST BE ADDED TO NSUSERDEFUALTS
     
     //available plate options for calculating plates on bars, empty until user creates
-    var platesSelected = [Double]() //{
-//        didSet {
-//            //if plates change, perform assending sort
-//            platesSelected = platesSelected.sorted(by: >)   //MUST BE ADDED TO NSUSERDEFULATS
-//        }
-//    }
+    var platesSelected = [Double]() {
+        //if set, update NSUserDefaults
+        didSet {
+            UserDefaults.standard.setValue(platesSelected, forKey: "platesSelected")
+        }
+    }
     
     //bar weight, set by user
     var barWeight : Double? {
@@ -106,26 +106,31 @@ class WorkoutManagerClient: AnyObject {
     //updates the selected plates array by passing in viewController (or table or cells?)
     func updatedPlatesSelected(_ settingsVC: SettingsViewController) {
         print("updating plates")
-//        //get tableView
-//        let tableView = settingsVC.tableView
-//        
-//        //if this function is called, then section 1 (plates) is opened, get cells from that section
-//        let cells = tableView?.visibleCells as! [SettingItemCell]
-//        
-//        //array output
-//        var platesArray = [Double]()
-//        
-//        //iterate through cells, if checkBox visible, then add to array
-//        for cell in cells {
-//            
-//            //check for box
-//            if cell.accessoryType == .checkmark {
-//                platesArray.append(Double(cell.textField.text!)!)
-//            }
-//        }
-//        
-//        //set platesSelected to array
-//        self.platesSelected = platesArray
+        //get tableView
+        let tableView = settingsVC.tableView
+        
+        //if this function is called, then section 1 (plates) is opened, get cells from that section
+        let cells = tableView?.visibleCells as! [SettingItemCell]
+        
+        //array output
+        var platesArray = [Double]()
+        
+        //iterate through cells, if checkBox visible, then add to array
+        for cell in cells {
+            
+            //check for box
+            if cell.accessoryType == .checkmark {
+                
+                //create double from textLabel
+                guard let plateText = cell.textLabel?.text, let plate = Double(plateText) else {
+                    return
+                }
+                platesArray.append(plate)
+            }
+        }
+        
+        //set platesSelected to array
+        self.platesSelected = platesArray
     }
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
@@ -261,7 +266,7 @@ class WorkoutManagerClient: AnyObject {
         //get defaults for values that are stored in defaults
         let barWeight = UserDefaults.standard.value(forKey: "barWeight") as? Double
         let deload = UserDefaults.standard.value(forKey: "deload") as? Bool
-        let plates = UserDefaults.standard.value(forKey: "plates") as? [Double]
+        let plates = UserDefaults.standard.value(forKey: "platesSelected") as? [Double]
         
         //set values
         WorkoutManagerClient.sharedInstance.barWeight = barWeight
