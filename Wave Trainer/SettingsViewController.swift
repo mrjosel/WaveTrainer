@@ -218,6 +218,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         default:
             //remaining sections do nothing when selected
             break
+            //TODO: WHY IS CHECKMARK ARTIFACT ALWAYS VISIBLE?
         }
     }
     
@@ -291,15 +292,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.isHidden = true
             cell.contentView.bringSubview(toFront: cell.textField)
             
-            //hide checkmark
-            cell.accessoryView?.isHidden = true
+            //no checkmark accessory view
+            cell.accessoryType = .none
+            
         case .plates:
             //hide textField, show label
             cell.textField.isHidden = true
             cell.textLabel?.isHidden = false
             
             //show checkmark
-            cell.accessoryView?.isHidden = false    //TODO: SHOW ONLY IF IN SELECTED PLATES
+            cell.accessoryType = .checkmark    //TODO: SHOW ONLY IF IN SELECTED PLATES
         default:
             //TODO: RESOLVE
             cell.textField.isHidden = true
