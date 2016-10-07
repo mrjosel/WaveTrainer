@@ -27,15 +27,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         //set delegates
-        self.settingsTableView.delegate = self
-        self.settingsTableView.dataSource = self
         self.navigationController?.delegate = self
         
         //set height of tableView based on content, disallow scrolling
-        self.settingsTableView.isScrollEnabled = false
+        self.tableView.isScrollEnabled = false
         
         //remove whitespace
-        self.automaticallyAdjustsScrollViewInsets = false
+        self.automaticallyAdjustsScrollViewInsets = true
     }
     
     //perform the following before view appears
@@ -51,10 +49,33 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         //unsubscribe to keyboard notifications to prevent any race conditions
         self.unsubscribeFromKeyboardNotifications()
     }
+    
+    //perform after view disappears
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        //collapse all views
+        self.collapseAllHeaders()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //collapses all headers
+    func collapseAllHeaders() {
+        
+        //iterate through each section
+        for i in 0 ..< self.tableView.numberOfSections {
+            
+            //get header at section
+            let header = self.tableView.headerView(forSection: i) as! CollapsibleTableViewHeader
+            
+            //collapse if expanded
+            if !header.isCollapsed {
+                self.toggleSection(header: header)
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -171,7 +192,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
     
     //collapsing cells delegate
     func toggleSection(header: CollapsibleTableViewHeader) {
-        //TODO:  FIX TOGGLING SECTION TO END EDITING OF TEXTFIELD
+        
         //get setting at section
         guard let setting = Setting(rawValue: header.section) else {
             return
@@ -184,7 +205,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             if expandedHeader.section == Setting.barWeight.rawValue {
                 
                 //get open cell
-                let cell = self.settingsTableView.cellForRow(at: IndexPath(row: 0, section: expandedHeader.section)) as! SettingItemCell
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: expandedHeader.section)) as! SettingItemCell
                 
                 //resign first responder
                 if cell.textField.isEditing {
@@ -205,13 +226,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         header.isCollapsed = !header.isCollapsed
         
         //adjust rows height
-        self.settingsTableView.beginUpdates()
+        self.tableView.beginUpdates()
         for i in 0 ..< values.count {
             //create indexPath, update tableView
             let indexPath = IndexPath(row: i, section: header.section)
-            self.settingsTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        self.settingsTableView.endUpdates()
+        self.tableView.endUpdates()
         
         //if expandedHeader is the header itself, then clear variable, otherwise set it
         self.expandedHeader = self.expandedHeader == header ? nil : header
@@ -268,8 +289,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         //layout cell
         cell.layoutSubviews()
     }
-
-    
     
     // MARK: - textField Delegate Methods
     

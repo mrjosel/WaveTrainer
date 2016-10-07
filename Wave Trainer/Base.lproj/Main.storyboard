@@ -508,6 +508,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bt9-rC-qih" kind="relationship" relationship="rootViewController" id="ZlW-si-0xm"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hEi-yV-eiw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -523,7 +526,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="7VR-xR-pZa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7VR-xR-pZa" id="GiJ-md-dqQ">
                                     <frame key="frameInset" width="375" height="43"/>
@@ -531,12 +534,28 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="qWY-yF-sJH" customClass="SettingItemCell" customModule="WaveTrainer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="136" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qWY-yF-sJH" id="d6M-Nr-19V">
                                     <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DBU-Sw-btd">
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DBU-Sw-btd" firstAttribute="top" secondItem="d6M-Nr-19V" secondAttribute="top" constant="6" id="JlV-6g-wo1"/>
+                                        <constraint firstAttribute="trailing" secondItem="DBU-Sw-btd" secondAttribute="trailing" constant="8" id="Zrf-KA-qTn"/>
+                                        <constraint firstAttribute="bottom" secondItem="DBU-Sw-btd" secondAttribute="bottom" constant="7" id="b0d-dC-e8i"/>
+                                        <constraint firstItem="DBU-Sw-btd" firstAttribute="leading" secondItem="d6M-Nr-19V" secondAttribute="leading" constant="18" id="kSc-Ve-WLs"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="DBU-Sw-btd" id="VFY-Fm-ULn"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -544,10 +563,11 @@
                             <outlet property="delegate" destination="Bt9-rC-qih" id="y1O-rK-RWh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="dae-1K-LMy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJL-3m-afL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2804" y="2474"/>
+            <point key="canvasLocation" x="2580" y="2473.313343328336"/>
         </scene>
     </scenes>
 </document>
