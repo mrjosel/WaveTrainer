@@ -125,6 +125,9 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNotNil(potentialWorkout1)
     }
     
+    //Exercise tests
+    //TODO: CREATE EXERCISE TESTS
+    
     
     
     //

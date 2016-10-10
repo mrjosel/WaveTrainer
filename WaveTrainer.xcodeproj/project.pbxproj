@@ -11,6 +11,7 @@
 		B70563411D8DFE4900224337 /* ExercisePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */; };
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B75061D41DA1F77500EE84F7 /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */; };
+		B75061E01DABFE5700EE84F7 /* OneRMTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */; };
 		B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
 		B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */; };
 		B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */; };
@@ -58,6 +59,7 @@
 		B7212F571D80217400E8C33F /* Wave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wave.swift; sourceTree = "<group>"; };
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
+		B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneRMTestViewController.swift; sourceTree = "<group>"; };
 		B7533F031D99E65D00FC37C8 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
 				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
 				B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */,
+				B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
 				B771D9AB1D99DED6005CE96C /* SettingsViewController.swift in Sources */,
 				B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */,
+				B75061E01DABFE5700EE84F7 /* OneRMTestViewController.swift in Sources */,
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,

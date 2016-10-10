@@ -12,6 +12,36 @@ import UIKit
 
 @objc(Exercise)
 
+//enum for core exercises
+enum CoreLift : Int, CustomStringConvertible, CaseCountable {
+    case OHP = 0, Deadlift, BenchPress, Squat
+    
+    //names of lifts
+    static let CoreLiftNames = [
+        OHP : "Overhead Press",
+        Deadlift : "Deadlift",
+        BenchPress : "Bench Press",
+        Squat : "Squat"
+    ]
+    
+    //count of number of settings
+    static let caseCount: Int = CoreLift.countCases()
+    
+    //var for CustomStringConvertible conformance
+    var description: String {
+        get {
+            return CoreLift.CoreLiftNames[self]!
+        }
+    }
+    
+    //image
+    var imagePath : String? {
+        get {
+            return nil  //TODO: GET IMAGE FROM URLs
+        }
+    }
+}
+
 //class for exercises
 class Exercise : NSManagedObject {
     
@@ -30,6 +60,7 @@ class Exercise : NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
     
+    //creating any type of exercise from a dict
     init?(dict: [String: AnyObject], isCore: Bool, reps: Int?, order: Int?, context: NSManagedObjectContext) {
         
         //create entity and call superclass initializer
@@ -43,6 +74,20 @@ class Exercise : NSManagedObject {
         self.imagePath = dict[WorkoutManagerClient.Keys.IMAGE] as? String
         self.category = dict[WorkoutManagerClient.Keys.CATEGORY] as? String
         
+    }
+    
+    //creating a specific core lift from core lift enum
+    init?(coreLift: CoreLift, context: NSManagedObjectContext) {
+        //create entity and call superclass initializer
+        guard let entity = NSEntityDescription.entity(forEntityName: "Exercise", in: context) else {
+            return nil
+        }
+        super.init(entity: entity, insertInto: context)
+        
+        //set params
+        self.name = coreLift.description
+        self.imagePath = coreLift.imagePath
+        self.category = nil     //TODO: REVISE USE OF CATEGORY?
     }
     
     //intermediate vars

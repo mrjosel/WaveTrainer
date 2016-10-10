@@ -105,7 +105,7 @@ class WorkoutManagerClient: AnyObject {
     
     //updates the selected plates array by passing in viewController (or table or cells?)
     func updatedPlatesSelected(_ settingsVC: SettingsViewController) {
-        print("updating plates")
+
         //get tableView
         let tableView = settingsVC.tableView
         
