@@ -126,13 +126,14 @@ class Wave_TrainerTests: XCTestCase {
     }
     
     //Exercise tests
-    //TODO: CREATE EXERCISE TESTS
     func exerciseTests() {
         
         //tests
         let potentialExercise1 = Exercise(coreLift: CoreLift.OHP, context: self.dummyContext!)
         XCTAssertNotNil(potentialExercise1)
-        //TODO: CREATE TEST FOR CORE
+        XCTAssertTrue((potentialExercise1?.isCore)!)    //should be TRUE
+        potentialExercise1?.order = 1                   //should not be allowed to change
+        XCTAssertFalse(potentialExercise1?.order == 1)  //should be false
         
         //create real dict
         let data : [String: AnyObject] = [
@@ -147,6 +148,7 @@ class Wave_TrainerTests: XCTestCase {
         //test with realDict
         let potentialExercise2 = Exercise(dict: realDict, reps: nil, order: nil, context: self.dummyContext!)
         XCTAssertNotNil(potentialExercise2)
+        XCTAssertFalse((potentialExercise2?.isCore)!)  //should be false
         
         
         //create phony dict
@@ -155,6 +157,7 @@ class Wave_TrainerTests: XCTestCase {
         //test with phony dict
         let potentialExercise3 = Exercise(dict: phonyDict, reps: nil, order: nil, context: self.dummyContext!)
         XCTAssertNil(potentialExercise3)
+       
     }
     
     //

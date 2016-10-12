@@ -94,7 +94,7 @@ class Exercise : NSManagedObject {
         self.name = data[WorkoutManagerClient.Keys.NAME] as! String
         self.imagePath = data[WorkoutManagerClient.Keys.IMAGE] as? String
         self.category = data[WorkoutManagerClient.Keys.CATEGORY] as? String
-        self.isCore = false //using a dict is NEVER for a core lift
+        self.isCorePersisted = 0 //using a dict is NEVER for a core lift
     }
     
     //creating a specific core lift from core lift enum
@@ -109,7 +109,7 @@ class Exercise : NSManagedObject {
         self.name = coreLift.description
         self.imagePath = coreLift.imagePath
         self.category = coreLift.category
-        self.isCore = true //using core lift enum is always for a core lift
+        self.isCorePersisted = 1 //using core lift enum is always for a core lift
     }
     
     //intermediate vars
@@ -138,17 +138,6 @@ class Exercise : NSManagedObject {
             //return true if isCorePersisted is 1
             return self.isCorePersisted == 1
         }
-        set {
-            //if setting true, then set order to 0 as well
-            if newValue {
-                self.isCorePersisted = 1
-                self.order = 0
-            } else {
-                //not a core exercise, don't force order
-                self.isCorePersisted = 0
-            }
-            
-        }
     }
     
     //image from imagePath
@@ -157,6 +146,5 @@ class Exercise : NSManagedObject {
     //set all intermediate vars from persisted vars during awake from fetch
     override func awakeFromFetch() {
         self.order = self.orderPersisted as Int?
-        self.isCore = self.isCorePersisted == 1
     }
 }
