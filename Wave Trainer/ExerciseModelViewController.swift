@@ -90,14 +90,15 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
         }
         
         //create dictionary for new exercise
-        let dict : [String: Any] = [
+        let data : [String: Any] = [
             WorkoutManagerClient.Keys.NAME : exercise.name,
             WorkoutManagerClient.Keys.IMAGE : exercise.imagePath,
             WorkoutManagerClient.Keys.CATEGORY : exercise.category
         ]
+        let dict = [WorkoutManagerClient.Keys.DATA : data]
         
         //create new exercise and save context
-        guard let newExercise = Exercise(dict: dict as [String : AnyObject], isCore: false, reps: nil, order: nil, context: self.sharedContext) else {
+        guard let newExercise = Exercise(dict: dict as [String : AnyObject], reps: nil, order: nil, context: self.sharedContext) else {
             print("failed to create exercise")
             //TODO: MAKE ALERT
             return

@@ -59,7 +59,18 @@ class WorkoutManagerClient: AnyObject {
         static let FULL_NAME = "full_name"
         static let CATEGORY = "category"
         static let IMAGE = "image"
+        static let SUGGESTIONS = "suggestions"
+        static let VALUE = "value"
+        static let DATA = "data"
         
+    }
+    
+    //categories of exercises
+    struct CoreCategories {
+        static let SHOULDERS = "Shoulders"
+        static let BACK = "Back"
+        static let CHEST = "Chest"
+        static let LEGS = "Legs"
     }
     
     //values of interest
@@ -101,36 +112,6 @@ class WorkoutManagerClient: AnyObject {
         didSet {
             UserDefaults.standard.setValue(barWeight, forKey: "barWeight")
         }
-    }
-    
-    //updates the selected plates array by passing in viewController (or table or cells?)
-    func updatedPlatesSelected(_ settingsVC: SettingsViewController) {
-
-        //get tableView
-        let tableView = settingsVC.tableView
-        
-        //if this function is called, then section 1 (plates) is opened, get cells from that section
-        let cells = tableView?.visibleCells as! [SettingItemCell]
-        
-        //array output
-        var platesArray = [Double]()
-        
-        //iterate through cells, if checkBox visible, then add to array
-        for cell in cells {
-            
-            //check for box
-            if cell.accessoryType == .checkmark {
-                
-                //create double from textLabel
-                guard let plateText = cell.textLabel?.text, let plate = Double(plateText) else {
-                    return
-                }
-                platesArray.append(plate)
-            }
-        }
-        
-        //set platesSelected to array
-        self.platesSelected = platesArray
     }
     
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
@@ -246,17 +227,17 @@ class WorkoutManagerClient: AnyObject {
     }
     
     //takes in Swift dictionary from JSON and returns sorted exercise objects array
-    class func makeExercisesFromJSON(jsonData : [[String: AnyObject]], context: NSManagedObjectContext) -> [Exercise] {
+    class func makeExercisesFromJSON(jsonData : [String: AnyObject], context: NSManagedObjectContext) -> [Exercise] {
         
         //exercises stored under "results"
-        guard !jsonData.isEmpty else {
+        guard let jsonArray = jsonData[WorkoutManagerClient.Keys.SUGGESTIONS] as? [[String: AnyObject]] else {
             //nothing in dict, return empty array
-            return []
+            return [Exercise]()
         }
         
         //map array of dicts into exercise objects
-        let excercises : [Exercise] = jsonData.map() {
-            Exercise(dict: $0, isCore: false, reps: nil, order: nil, context: context)!
+        let excercises : [Exercise] = jsonArray.map() {
+            Exercise(dict: $0, reps: nil, order: nil, context: context)!
         }
         return excercises
     }

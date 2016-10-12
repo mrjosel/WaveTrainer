@@ -127,8 +127,35 @@ class Wave_TrainerTests: XCTestCase {
     
     //Exercise tests
     //TODO: CREATE EXERCISE TESTS
-    
-    
+    func exerciseTests() {
+        
+        //tests
+        let potentialExercise1 = Exercise(coreLift: CoreLift.OHP, context: self.dummyContext!)
+        XCTAssertNotNil(potentialExercise1)
+        //TODO: CREATE TEST FOR CORE
+        
+        //create real dict
+        let data : [String: AnyObject] = [
+            WorkoutManagerClient.Keys.NAME : "Exercise Name" as AnyObject,
+            WorkoutManagerClient.Keys.CATEGORY : "Phony" as AnyObject,
+            WorkoutManagerClient.Keys.IMAGE : "no string" as AnyObject
+            ]
+        let realDict : [String: AnyObject] = [
+            WorkoutManagerClient.Keys.DATA : data as AnyObject
+        ]
+        
+        //test with realDict
+        let potentialExercise2 = Exercise(dict: realDict, reps: nil, order: nil, context: self.dummyContext!)
+        XCTAssertNotNil(potentialExercise2)
+        
+        
+        //create phony dict
+        let phonyDict : [String: AnyObject] = ["not a dict" : String() as AnyObject]
+        
+        //test with phony dict
+        let potentialExercise3 = Exercise(dict: phonyDict, reps: nil, order: nil, context: self.dummyContext!)
+        XCTAssertNil(potentialExercise3)
+    }
     
     //
     //    func testExample() {

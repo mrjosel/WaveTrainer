@@ -101,15 +101,15 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             
             //no error, clear out searchTask, continue to get exercise objects from JSON data
             self.searchTask = nil
-            
+
             //ensure parsed JSON is a dict before proceeding
-            guard let parsedJSON = parsedJSON as? [[String: AnyObject]] else {
+            guard let parsedJSON = parsedJSON as? [String: AnyObject] else {
                 //TODO: CREATE ALERT THAT THERE WAS A FAILURE TO CAST
                 print(error)
                 print("failed to cast into dict")
                 return
             }
-            
+
             //use parsed JSON and dummy context to create exercise objects
             self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
             
@@ -185,7 +185,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
         //get exercise
         let exercise = self.exercises[indexPath.row]
-        
+        print(exercise.category)
         //call delegate with exercise
         self.delegate?.exercisePicker(didAddExercise: exercise)
         

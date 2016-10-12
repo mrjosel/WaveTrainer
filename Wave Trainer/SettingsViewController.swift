@@ -77,6 +77,33 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             }
         }
     }
+    
+    //updates the selected plates array
+    func updatedPlatesSelected() {
+        
+        //if this function is called, then section 1 (plates) is opened, get cells from that section
+        let cells = tableView?.visibleCells as! [SettingItemCell]
+        
+        //array output
+        var platesArray = [Double]()
+        
+        //iterate through cells, if checkBox visible, then add to array
+        for cell in cells {
+            
+            //check for box
+            if cell.accessoryType == .checkmark {
+                
+                //create double from textLabel
+                guard let plateText = cell.textLabel?.text, let plate = Double(plateText) else {
+                    return
+                }
+                platesArray.append(plate)
+            }
+        }
+        
+        //set platesSelected to array
+        WorkoutManagerClient.sharedInstance.platesSelected = platesArray
+    }
 
     // MARK: - Table view data source
     
@@ -246,7 +273,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             }
         case .plates:
             //update plates
-            WorkoutManagerClient.sharedInstance.updatedPlatesSelected(self)
+            self.updatedPlatesSelected()
         default:
             break
         }

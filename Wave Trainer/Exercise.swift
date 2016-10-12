@@ -34,6 +34,22 @@ enum CoreLift : Int, CustomStringConvertible, CaseCountable {
         }
     }
     
+    //category
+    var category : String {
+        get {
+            switch self {
+            case .OHP:
+                return WorkoutManagerClient.CoreCategories.SHOULDERS
+            case .Deadlift:
+                return WorkoutManagerClient.CoreCategories.BACK
+            case .BenchPress:
+                return WorkoutManagerClient.CoreCategories.CHEST
+            case .Squat:
+                return WorkoutManagerClient.CoreCategories.LEGS
+            }
+        }
+    }
+    
     //image
     var imagePath : String? {
         get {
@@ -61,7 +77,7 @@ class Exercise : NSManagedObject {
     }
     
     //creating any type of exercise from a dict
-    init?(dict: [String: AnyObject], isCore: Bool, reps: Int?, order: Int?, context: NSManagedObjectContext) {
+    init?(dict: [String: AnyObject], reps: Int?, order: Int?, context: NSManagedObjectContext) {
         
         //create entity and call superclass initializer
         guard let entity = NSEntityDescription.entity(forEntityName: "Exercise", in: context) else {
@@ -69,11 +85,16 @@ class Exercise : NSManagedObject {
         }
         super.init(entity: entity, insertInto: context)
         
-        //set params
-        self.name = dict[WorkoutManagerClient.Keys.NAME] as! String
-        self.imagePath = dict[WorkoutManagerClient.Keys.IMAGE] as? String
-        self.category = dict[WorkoutManagerClient.Keys.CATEGORY] as? String
+        //get data from dict
+        guard let data = dict[WorkoutManagerClient.Keys.DATA] as? [String : AnyObject] else {
+            return nil
+        }
         
+        //set params
+        self.name = data[WorkoutManagerClient.Keys.NAME] as! String
+        self.imagePath = data[WorkoutManagerClient.Keys.IMAGE] as? String
+        self.category = data[WorkoutManagerClient.Keys.CATEGORY] as? String
+        self.isCore = false //using a dict is NEVER for a core lift
     }
     
     //creating a specific core lift from core lift enum
@@ -87,7 +108,8 @@ class Exercise : NSManagedObject {
         //set params
         self.name = coreLift.description
         self.imagePath = coreLift.imagePath
-        self.category = nil     //TODO: REVISE USE OF CATEGORY?
+        self.category = coreLift.category
+        self.isCore = true //using core lift enum is always for a core lift
     }
     
     //intermediate vars
@@ -101,14 +123,12 @@ class Exercise : NSManagedObject {
         }
         
         set {
-            guard let val = newValue else {
-                self.orderPersisted = nil
+            //can only set var if not core and not nil
+            guard let num = newValue, !self.isCore else {
                 return
             }
+            self.orderPersisted = NSNumber(value: num)
             
-            if !self.isCore {
-                self.orderPersisted = NSNumber(value: val)
-            }
         }
     }
     

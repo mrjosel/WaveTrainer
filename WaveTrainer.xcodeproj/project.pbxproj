@@ -12,6 +12,10 @@
 		B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72A28391D76EC0C0074057F /* SignUpViewController.swift */; };
 		B75061D41DA1F77500EE84F7 /* SettingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */; };
 		B75061E01DABFE5700EE84F7 /* OneRMTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */; };
+		B75061E11DADB79100EE84F7 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */; };
+		B75061E21DADB80800EE84F7 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
+		B75061E31DADB81B00EE84F7 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
+		B75061E41DADB91900EE84F7 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
 		B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
 		B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */; };
 		B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */; };
@@ -327,10 +331,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B75061E11DADB79100EE84F7 /* Exercise.swift in Sources */,
 				B78516351D8DED4D00B130AA /* Wave.swift in Sources */,
+				B75061E21DADB80800EE84F7 /* Setting.swift in Sources */,
 				B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */,
+				B75061E31DADB81B00EE84F7 /* WorkoutManagerClient.swift in Sources */,
 				B78516361D8DED5100B130AA /* Cycle.swift in Sources */,
 				B78516341D8DED2E00B130AA /* Workout.swift in Sources */,
+				B75061E41DADB91900EE84F7 /* WorkoutManagerREST.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
