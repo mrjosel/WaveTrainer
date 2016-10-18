@@ -9,13 +9,13 @@
 import UIKit
 
 //views settings for the app
-class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, CollapsibleTableViewHeaderDelegate {
+class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, SettingsTableViewHeaderDelegate {
     
     //outlets
     @IBOutlet weak var settingsTableView: UITableView!
     
     //keeper variable for which collapsible header is currently expanded
-    var expandedHeader : CollapsibleTableViewHeader?
+    var expandedHeader : SettingsTableViewHeader?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         for i in 0 ..< self.tableView.numberOfSections {
             
             //get header at section
-            let header = self.tableView.headerView(forSection: i) as! CollapsibleTableViewHeader
+            let header = self.tableView.headerView(forSection: i) as! SettingsTableViewHeader
             
             //collapse if expanded
             if !header.isCollapsed {
@@ -140,7 +140,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         }
         
         //get cell, set section
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? SettingsTableViewHeader ?? SettingsTableViewHeader(reuseIdentifier: "header")
         header.section = section
         
         //set delegate
@@ -186,7 +186,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         //get header
-        guard let header = tableView.headerView(forSection: indexPath.section) as? CollapsibleTableViewHeader else {
+        guard let header = tableView.headerView(forSection: indexPath.section) as? SettingsTableViewHeader else {
             return 0
         }
         
@@ -217,8 +217,34 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         }
     }
     
+    //perform action depending header
+    func didTapHeader(header: SettingsTableViewHeader) {
+        
+        //get setting
+        guard let setting = Setting(rawValue: header.section) else {
+            //should never get to this point
+            //TODO: ERROR???
+            return
+        }
+        
+        //perform function depending on which section was tapped
+        switch setting {
+        case .oneRMTest:
+            //TODO: SEGUE TO ONE RM MAX VC
+            print(setting.description)
+            self.collapseAllHeaders()
+        case .routine:
+            //TODO: SEGUE TO ROUTINE CONFIG VC
+            print(setting.description)
+            self.collapseAllHeaders()
+        default:
+            //section is plates or barweight, toggle
+            self.toggleSection(header: header)
+        }
+    }
+    
     //collapsing cells delegate
-    func toggleSection(header: CollapsibleTableViewHeader) {
+    func toggleSection(header: SettingsTableViewHeader) {
         
         //get setting at section
         guard let setting = Setting(rawValue: header.section) else {
@@ -254,7 +280,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
     }
     
     //manage headers when they collapse
-    func didCollapseHeader(header: CollapsibleTableViewHeader) {
+    func didCollapseHeader(header: SettingsTableViewHeader) {
         
         //get header section, get setting based on section
         guard let section = header.section, let setting = Setting(rawValue: section) else {

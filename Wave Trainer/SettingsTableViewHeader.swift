@@ -1,5 +1,5 @@
 //
-//  CollapsibleTableViewHeader.swift
+//  SettingsTableViewHeader.swift
 //  WaveTrainer
 //
 //  Created by Brian Josel on 10/2/16.
@@ -9,23 +9,23 @@
 import UIKit
 
 //manages collapsing/expanding views
-protocol CollapsibleTableViewHeaderDelegate {
+protocol SettingsTableViewHeaderDelegate {
     
     //called whenever header cell is tapped
-    func toggleSection(header: CollapsibleTableViewHeader)
+    func didTapHeader(header: SettingsTableViewHeader)
     
     //called whenever a header collapses and hides its content
-    func didCollapseHeader(header: CollapsibleTableViewHeader)
+    func didCollapseHeader(header: SettingsTableViewHeader)
 }
 
 //header view for settings table
-class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
+class SettingsTableViewHeader: UITableViewHeaderFooterView {
     
     //section that header resides in
     var section : Int!
     
     //delegate
-    var delegate : CollapsibleTableViewHeaderDelegate?
+    var delegate : SettingsTableViewHeaderDelegate?
 
     //label for each cell, populated by Setting enum
     let titleLabel = UILabel()
@@ -83,6 +83,6 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     //function called whenever header is tapped
     func tapHeader(_ gestureRecognizer: UITapGestureRecognizer) {
         //call delegate
-        self.delegate?.toggleSection(header: self)
+        self.delegate?.didTapHeader(header: self)
     }
 }

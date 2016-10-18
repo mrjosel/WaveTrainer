@@ -16,9 +16,10 @@
 		B75061E21DADB80800EE84F7 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
 		B75061E31DADB81B00EE84F7 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B75061E41DADB91900EE84F7 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
+		B75061E61DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75061E51DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift */; };
 		B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7533F031D99E65D00FC37C8 /* Setting.swift */; };
 		B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */; };
-		B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */; };
+		B7536FE01DA15431006F6E74 /* SettingsTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7536FDF1DA15431006F6E74 /* SettingsTableViewHeader.swift */; };
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
@@ -64,9 +65,10 @@
 		B72A28391D76EC0C0074057F /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItemCell.swift; sourceTree = "<group>"; };
 		B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneRMTestViewController.swift; sourceTree = "<group>"; };
+		B75061E51DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneRepMaxTableViewCell.swift; sourceTree = "<group>"; };
 		B7533F031D99E65D00FC37C8 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
-		B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		B7536FDF1DA15431006F6E74 /* SettingsTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewHeader.swift; sourceTree = "<group>"; };
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		B7540FDA1D5E31F40034D806 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B79E1C9E1D81781D00DED411 /* CoreDataViewers */,
 				B7F338DA1D789A8D00DE41B7 /* TabBarVCs */,
 				B7EC15971D53AD6900C3D5F1 /* LoginViewController.swift */,
 				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
@@ -129,8 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				B7536FDD1D9AF52E006F6E74 /* ExtensionUIButton.swift */,
-				B7536FDF1DA15431006F6E74 /* CollapsibleTableViewHeader.swift */,
+				B7536FDF1DA15431006F6E74 /* SettingsTableViewHeader.swift */,
 				B75061D31DA1F77500EE84F7 /* SettingItemCell.swift */,
+				B75061E51DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -216,7 +220,6 @@
 		B7F338DA1D789A8D00DE41B7 /* TabBarVCs */ = {
 			isa = PBXGroup;
 			children = (
-				B79E1C9E1D81781D00DED411 /* CoreDataViewers */,
 				B7F338CE1D77432000DE41B7 /* TabParentViewController.swift */,
 				B7F338D01D77433B00DE41B7 /* WorkoutViewController.swift */,
 				B7F338D31D789A6500DE41B7 /* CalendarViewController.swift */,
@@ -370,7 +373,8 @@
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
 				B7F338CF1D77432000DE41B7 /* TabParentViewController.swift in Sources */,
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
-				B7536FE01DA15431006F6E74 /* CollapsibleTableViewHeader.swift in Sources */,
+				B7536FE01DA15431006F6E74 /* SettingsTableViewHeader.swift in Sources */,
+				B75061E61DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift in Sources */,
 				B78516331D8B813200B130AA /* Workout.swift in Sources */,
 				B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */,
 			);

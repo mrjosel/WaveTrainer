@@ -569,5 +569,51 @@
             </objects>
             <point key="canvasLocation" x="2580" y="2473.313343328336"/>
         </scene>
+        <!--OneRM Test View Controller-->
+        <scene sceneID="ibW-WP-KBc">
+            <objects>
+                <tableViewController storyboardIdentifier="OneRMTestViewController" id="Uoy-6r-JUW" customClass="OneRMTestViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="egl-Oa-7eh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="max" id="0Uo-OQ-OLa" customClass="OneRepMaxTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Uo-OQ-OLa" id="Iaw-mn-JhG">
+                                    <frame key="frameInset" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Sc-8B-NIL">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="97" id="KFk-rJ-kuU"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="6Sc-8B-NIL" secondAttribute="bottom" constant="7" id="W2w-W4-BEF"/>
+                                        <constraint firstItem="6Sc-8B-NIL" firstAttribute="top" secondItem="Iaw-mn-JhG" secondAttribute="top" constant="6" id="eyY-uq-nb6"/>
+                                        <constraint firstAttribute="trailing" secondItem="6Sc-8B-NIL" secondAttribute="trailing" constant="8" id="xmY-V9-TV5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="6Sc-8B-NIL" id="Vhm-W5-9Nk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Uoy-6r-JUW" id="tPA-iO-Iji"/>
+                            <outlet property="delegate" destination="Uoy-6r-JUW" id="eMB-PT-wa5"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vj-fn-kfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2580" y="3151"/>
+        </scene>
     </scenes>
 </document>

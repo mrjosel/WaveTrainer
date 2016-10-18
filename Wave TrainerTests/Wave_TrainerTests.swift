@@ -9,7 +9,6 @@
 import XCTest
 import CoreData
 
-
 class Wave_TrainerTests: XCTestCase {
     
     //MARK: Wave Trainer Tests

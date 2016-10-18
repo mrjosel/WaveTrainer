@@ -117,9 +117,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             DispatchQueue.main.async {
                 self.exerciseTableView.reloadData()
             }
-            
         })
-        
     }
     
     //invoked when the search button is clicked
@@ -191,6 +189,11 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
         //dismiss
         self.exitPickerVC()
+    }
+    
+    //if view is scrolled, hide keyboard
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.searchBar.resignFirstResponder()
     }
 
     /*
