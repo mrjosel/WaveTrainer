@@ -570,50 +570,58 @@
             <point key="canvasLocation" x="2580" y="2473.313343328336"/>
         </scene>
         <!--OneRM Test View Controller-->
-        <scene sceneID="ibW-WP-KBc">
+        <scene sceneID="7UZ-nB-wkS">
             <objects>
-                <tableViewController storyboardIdentifier="OneRMTestViewController" id="Uoy-6r-JUW" customClass="OneRMTestViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="egl-Oa-7eh">
+                <viewController storyboardIdentifier="OneRMTestViewController" id="oZ1-op-dxb" customClass="OneRMTestViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZvR-Np-QeG"/>
+                        <viewControllerLayoutGuide type="bottom" id="RgX-sj-N08"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VGd-NE-KDa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ds-G7-n8Q">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="m2h-U9-AuP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G9y-qQ-ib5">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="601" id="olm-eK-MCA"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="max" id="fqg-GD-BsC" customClass="OneRepMaxTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fqg-GD-BsC" id="tee-wA-b13">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="max" id="0Uo-OQ-OLa" customClass="OneRepMaxTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Uo-OQ-OLa" id="Iaw-mn-JhG">
-                                    <frame key="frameInset" width="375" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Sc-8B-NIL">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="97" id="KFk-rJ-kuU"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="6Sc-8B-NIL" secondAttribute="bottom" constant="7" id="W2w-W4-BEF"/>
-                                        <constraint firstItem="6Sc-8B-NIL" firstAttribute="top" secondItem="Iaw-mn-JhG" secondAttribute="top" constant="6" id="eyY-uq-nb6"/>
-                                        <constraint firstAttribute="trailing" secondItem="6Sc-8B-NIL" secondAttribute="trailing" constant="8" id="xmY-V9-TV5"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="textField" destination="6Sc-8B-NIL" id="Vhm-W5-9Nk"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Uoy-6r-JUW" id="tPA-iO-Iji"/>
-                            <outlet property="delegate" destination="Uoy-6r-JUW" id="eMB-PT-wa5"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vj-fn-kfw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="RgX-sj-N08" firstAttribute="top" secondItem="3Ds-G7-n8Q" secondAttribute="bottom" id="3x9-cB-LUz"/>
+                            <constraint firstItem="3Ds-G7-n8Q" firstAttribute="leading" secondItem="VGd-NE-KDa" secondAttribute="leading" id="6MG-Ml-Ayt"/>
+                            <constraint firstAttribute="trailing" secondItem="3Ds-G7-n8Q" secondAttribute="trailing" id="9dw-yd-oZ8"/>
+                            <constraint firstAttribute="trailing" secondItem="G9y-qQ-ib5" secondAttribute="trailing" id="DNf-un-4FR"/>
+                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="top" secondItem="ZvR-Np-QeG" secondAttribute="bottom" constant="8" id="al7-Fy-MB5"/>
+                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="leading" secondItem="VGd-NE-KDa" secondAttribute="leading" id="kkW-9H-e6z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="3Ds-G7-n8Q" id="pKh-0c-7MW"/>
+                        <outlet property="tableView" destination="G9y-qQ-ib5" id="cmj-m6-7Dt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ifn-Tf-s90" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="3151"/>
+            <point key="canvasLocation" x="2580" y="3208"/>
         </scene>
     </scenes>
 </document>

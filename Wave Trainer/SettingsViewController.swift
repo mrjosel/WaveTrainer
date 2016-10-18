@@ -11,12 +11,6 @@ import UIKit
 //views settings for the app
 class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, SettingsTableViewHeaderDelegate {
     
-    //outlets
-    @IBOutlet weak var settingsTableView: UITableView!
-    
-    //keeper variable for which collapsible header is currently expanded
-    var expandedHeader : SettingsTableViewHeader?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +23,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         //set delegates
         self.navigationController?.delegate = self
         
-        //set height of tableView based on content, disallow scrolling
+        //disallow scrolling
         self.tableView.isScrollEnabled = false
         
         //remove whitespace
@@ -230,13 +224,26 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
         //perform function depending on which section was tapped
         switch setting {
         case .oneRMTest:
-            //TODO: SEGUE TO ONE RM MAX VC
-            print(setting.description)
+            
+            //collapse all headers
             self.collapseAllHeaders()
+            
+            //create new VC
+            guard let oneRMVC = self.storyboard?.instantiateViewController(withIdentifier: "OneRMTestViewController") as? OneRMTestViewController else {
+                //if fail, just return
+                //TODO: ERROR?
+                return
+            }
+            
+            //modally present VC
+            self.present(oneRMVC, animated: true, completion: nil)
+            
         case .routine:
-            //TODO: SEGUE TO ROUTINE CONFIG VC
-            print(setting.description)
+            
+            //collapse all headers
             self.collapseAllHeaders()
+            //TODO: SEGUE TO NEW VC
+            print(setting.description)
         default:
             //section is plates or barweight, toggle
             self.toggleSection(header: header)
@@ -247,19 +254,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
     func toggleSection(header: SettingsTableViewHeader) {
         
         //get setting at section
-        guard let setting = Setting(rawValue: header.section) else {
-            return
-        }
-        
-        //collapse open header, if header is open
-        if let expandedHeader = self.expandedHeader, expandedHeader != header {
-            
-            //collapse header and clear var
-            expandedHeader.isCollapsed = true
-        }
-        
-        //get values of setting
-        guard let values = setting.valueString else {
+        guard let setting = Setting(rawValue: header.section), let values = setting.valueString else {
             return
         }
         
@@ -274,9 +269,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         self.tableView.endUpdates()
-        
-        //if expandedHeader is the header itself, then clear variable, otherwise set it
-        self.expandedHeader = self.expandedHeader == header ? nil : header
+
     }
     
     //manage headers when they collapse
