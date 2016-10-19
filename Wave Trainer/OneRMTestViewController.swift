@@ -23,6 +23,15 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         //set heightof tableView
         self.tableView.frame = CGRect(x: self.tableView.frame.origin.x, y: self.tableView.frame.origin.y, width: self.tableView.frame.size.width, height: self.tableView.contentSize.height)
         //TODO: FIX THIS
+        
+        //subscribe to keyboard notifications
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //unsubscrib from keyboard notifications
+        //subscribe to keyboard notifications
+        self.unsubscribeFromKeyboardNotifications()
     }
     
     override func viewDidLoad() {
@@ -55,6 +64,7 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
     //called when applyButton is pressed
     func cancelButtonPressed(_ sender: UIButton) {
         print("cancelButtonPressed")
+        //TODO:  NEED TO RESIGN FIRST RESPONDER
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -95,6 +105,46 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textField.becomeFirstResponder()
     }
     
+    // MARK: KEYBOARD METHODS
+    //subscribes to notifications from keyboard, usually called in a VCs viewWillAppear method
+    func subscribeToKeyboardNotifications() {
+        //adds notifications to notification center
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    //unsubscribes to notifications from keyboard, usually called in a VCs viewWillDisappear method
+    func unsubscribeFromKeyboardNotifications() {
+        //removes keyboard notifications from notification center
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    //carry out following when keyboard is about to show
+    func keyboardWillShow(_ notification: Notification) {
+        
+        //only adjust if keyboard is not showing, else do nothing
+        self.buttonsViewBottomLayoutGuide.constant = self.getKeyboardHeight(notification)
+        
+        //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    //carry out following when keyboard is about to hide
+    func keyboardWillHide(_ notification: Notification) {
+        
+        //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
+        self.buttonsViewBottomLayoutGuide.constant = 0
+        
+    }
+    
+    //gets size of keyboard to be used in resizing the view
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = (notification as NSNotification).userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
+    }
+    // MARK: END OF KEYBOARD METHODS
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
