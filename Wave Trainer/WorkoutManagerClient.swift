@@ -91,8 +91,9 @@ class WorkoutManagerClient: AnyObject {
         static let ALLPLATES : [String] = [PlatesAvailable.FORTYFIVE, PlatesAvailable.TWENTYFIVE, PlatesAvailable.TEN, PlatesAvailable.FIVE, PlatesAvailable.TWOPOINTFIVE]
     }
     
-    //placeholder for barWeight
+    //placeholder for barWeight and oneRepMax weights
     static let barWeightPlaceHolder = "Enter a weight between 1 - 99.9 lbs"
+    static let oneRepMaxPlaceHolder = "Enter test weight"
     
     //variable set by user to denote whether a deload cycle is to be used or not
     var deload : Bool?               //MUST BE ADDED TO NSUSERDEFUALTS
@@ -111,6 +112,14 @@ class WorkoutManagerClient: AnyObject {
         //if set, update NSUserDefaults
         didSet {
             UserDefaults.standard.setValue(barWeight, forKey: "barWeight")
+        }
+    }
+    
+    //one rep maxes, set by user
+    var oneRepMaxes = [String : Int]() {
+        //if set, update NSUserDefaults
+        didSet {
+            UserDefaults.standard.setValue(oneRepMaxes, forKey: "oneRepMaxes")
         }
     }
     

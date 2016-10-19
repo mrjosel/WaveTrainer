@@ -11,6 +11,7 @@ import UIKit
 //allows for editing and viewing of 1 Rep Max numbers
 class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    //outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -60,9 +61,26 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
             return UITableViewCell()
         }
         
-        //set title for lift and return
+        //set title for lift
         cell.textLabel?.text = lift.description
+        
+        //set textField properties
+        cell.selectionStyle = .none
+        cell.textField.sizeToFit()
+        cell.textField.borderStyle = .none
+        cell.textField.isHidden = false
+        cell.textField.keyboardType = .numberPad
+        cell.textField.delegate = self
+        cell.textField.placeholder = WorkoutManagerClient.oneRepMaxPlaceHolder
         return cell
+    }
+    
+    //when cell is tapped anywhere, textField becomes first responder
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //get cell, set textField as first responder
+        let cell = tableView.cellForRow(at: indexPath) as! OneRepMaxTableViewCell
+        cell.textField.becomeFirstResponder()
     }
     
     
