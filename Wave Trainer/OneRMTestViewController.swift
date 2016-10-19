@@ -13,8 +13,11 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var buttonsView: UIView!
+    @IBOutlet weak var applyButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonsViewBottomLayoutGuide: NSLayoutConstraint!
     
     override func viewDidAppear(_ animated: Bool) {
         //set heightof tableView
@@ -35,16 +38,25 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
         
-        //set button
-        self.button.addTarget(self, action: #selector(self.buttonPressed(_:)), for: .touchUpInside)
-        self.button.setTitle("OK", for: .normal)
+        //set buttons
+        self.applyButton.addTarget(self, action: #selector(self.applyButtonPressed(_:)), for: .touchUpInside)
+        self.applyButton.setTitle("Apply", for: .normal)
+        self.applyButton.isEnabled = false
+        self.cancelButton.addTarget(self, action: #selector(self.cancelButtonPressed(_:)), for: .touchUpInside)
+        self.cancelButton.setTitle("Cancel", for: .normal)
+        self.cancelButton.isEnabled = true
     }
     
-    //called when button is pressed
-    func buttonPressed(_ sender: UIButton) {
+    //called when applyButton is pressed
+    func applyButtonPressed(_ sender: UIButton) {
+        print("applyButtonPressed")
+    }
+    
+    //called when applyButton is pressed
+    func cancelButtonPressed(_ sender: UIButton) {
+        print("cancelButtonPressed")
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     // MARK: DATA SOURCE METHODS
     
