@@ -9,7 +9,7 @@
 import UIKit
 
 //allows for editing and viewing of 1 Rep Max numbers
-class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //outlets
     @IBOutlet weak var tableView: UITableView!
@@ -57,8 +57,14 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
             return UITableViewCell()
         }
         
+        //set lift in cell (used in textField delegate)
+        cell.coreLift = lift
+        
         //set title for lift
         cell.textLabel?.text = lift.description
+        
+        //set textField's delegate as the cell
+        cell.textField.delegate = cell
         
         //set textField properties
         cell.selectionStyle = .none
@@ -66,7 +72,6 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textField.borderStyle = .none
         cell.textField.isHidden = false
         cell.textField.keyboardType = .numberPad
-        cell.textField.delegate = self
         cell.textField.placeholder = WorkoutManagerClient.oneRepMaxPlaceHolder
         return cell
     }
