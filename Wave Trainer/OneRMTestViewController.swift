@@ -66,6 +66,11 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         //set textField's delegate as the cell
         cell.textField.delegate = cell
         
+        //if weight exists for max, set it as text
+        if let weight = WorkoutManagerClient.sharedInstance.oneRepMaxes[lift.description] {
+            cell.textField.text = String(weight)
+        }
+        
         //set textField properties
         cell.selectionStyle = .none
         cell.textField.sizeToFit()
@@ -73,6 +78,7 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textField.isHidden = false
         cell.textField.keyboardType = .numberPad
         cell.textField.placeholder = WorkoutManagerClient.oneRepMaxPlaceHolder
+        cell.textField.textAlignment = .right
         return cell
     }
     

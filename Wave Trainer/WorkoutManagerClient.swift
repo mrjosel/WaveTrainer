@@ -257,11 +257,13 @@ class WorkoutManagerClient: AnyObject {
         let barWeight = UserDefaults.standard.value(forKey: "barWeight") as? Double
         let deload = UserDefaults.standard.value(forKey: "deload") as? Bool
         let plates = UserDefaults.standard.value(forKey: "platesSelected") as? [Double]
+        let oneRepMaxes = UserDefaults.standard.value(forKey: "oneRepMaxes") as? [String: Int]
         
         //set values
         WorkoutManagerClient.sharedInstance.barWeight = barWeight
         WorkoutManagerClient.sharedInstance.deload = deload
         WorkoutManagerClient.sharedInstance.platesSelected = plates ?? [Double]()
+        WorkoutManagerClient.sharedInstance.oneRepMaxes = oneRepMaxes ?? [String: Int]()
     }
     
     //----------

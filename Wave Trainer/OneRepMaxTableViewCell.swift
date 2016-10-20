@@ -20,25 +20,18 @@ class OneRepMaxTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
     
     //when editing ends, check which lift and update
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        //get core lift
-        guard let lift = coreLift else {
-            //should never get to this point
-            //TODO: ERROR?
+        //get core lift and text in Int format
+        guard let lift = self.coreLift, let text = textField.text, let weight = Int(text) else {
+            //do nothing
             return
         }
-        
-        //set coreLift parameter based on lift
-        switch lift {
-//        case .OHP:
-//            print(<#T##items: Any...##Any#>)
-        default:
-            print(lift.description)
-        }
+        WorkoutManagerClient.sharedInstance.oneRepMaxes[lift.description] = weight
     }
     
     
