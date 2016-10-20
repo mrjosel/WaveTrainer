@@ -23,6 +23,7 @@
 		B7540FD21D53AEB90034D806 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7540FD01D53AEB90034D806 /* Main.storyboard */; };
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
+		B75E193F1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */; };
 		B771D9AB1D99DED6005CE96C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */; };
 		B78516331D8B813200B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
 		B78516341D8DED2E00B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
@@ -72,6 +73,7 @@
 		B7540FD11D53AEB90034D806 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
+		B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutConfigCoreSelectorViewController.swift; sourceTree = "<group>"; };
 		B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B78516321D8B813200B130AA /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				B72A28391D76EC0C0074057F /* SignUpViewController.swift */,
 				B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */,
 				B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */,
+				B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				B7533F041D99E65D00FC37C8 /* Setting.swift in Sources */,
 				B7F338D41D789A6500DE41B7 /* CalendarViewController.swift in Sources */,
 				B771D9AB1D99DED6005CE96C /* SettingsViewController.swift in Sources */,
+				B75E193F1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift in Sources */,
 				B79E1CA01D81791100DED411 /* CoreDataStackManager.swift in Sources */,
 				B75061E01DABFE5700EE84F7 /* OneRMTestViewController.swift in Sources */,
 				B7F338D91D789A8600DE41B7 /* GraphViewController.swift in Sources */,
