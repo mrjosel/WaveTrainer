@@ -235,8 +235,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
                 return
             }
             
-            //modally present VC
-            self.present(oneRMVC, animated: true, completion: nil)
+            //push VC
+            self.navigationController?.pushViewController(oneRMVC, animated: true)
             
         case .routine:
             

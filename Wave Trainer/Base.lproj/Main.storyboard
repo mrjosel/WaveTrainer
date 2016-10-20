@@ -584,14 +584,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G9y-qQ-ib5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="601" id="olm-eK-MCA"/>
+                                    <constraint firstAttribute="height" constant="601" id="Oiz-i3-77D"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="max" id="fqg-GD-BsC" customClass="OneRepMaxTableViewCell" customModule="WaveTrainer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fqg-GD-BsC" id="tee-wA-b13">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-vY-8Wx">
@@ -615,51 +615,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRT-lO-n5z">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDU-Ot-6f1">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="Gw5-OP-eyi"/>
-                                            <constraint firstAttribute="height" constant="30" id="Irb-th-MTj"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2W-nP-KxV">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="awn-z4-FFf"/>
-                                            <constraint firstAttribute="height" constant="30" id="gHM-2i-KJv"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="uDU-Ot-6f1" firstAttribute="top" secondItem="LRT-lO-n5z" secondAttribute="top" constant="4" id="9VL-IK-wuZ"/>
-                                    <constraint firstItem="Z2W-nP-KxV" firstAttribute="top" secondItem="LRT-lO-n5z" secondAttribute="top" constant="4" id="G7v-g6-ld0"/>
-                                    <constraint firstItem="uDU-Ot-6f1" firstAttribute="leading" secondItem="LRT-lO-n5z" secondAttribute="leading" constant="8" id="LU7-jH-y6b"/>
-                                    <constraint firstAttribute="height" constant="40" id="TO1-Nh-iVo"/>
-                                    <constraint firstAttribute="trailing" secondItem="Z2W-nP-KxV" secondAttribute="trailing" constant="8" id="zSd-bk-nVr"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LRT-lO-n5z" firstAttribute="leading" secondItem="VGd-NE-KDa" secondAttribute="leading" id="3u9-Ze-N9m"/>
-                            <constraint firstItem="LRT-lO-n5z" firstAttribute="top" secondItem="G9y-qQ-ib5" secondAttribute="bottom" constant="-2" id="CqB-d8-MUm"/>
-                            <constraint firstAttribute="trailing" secondItem="G9y-qQ-ib5" secondAttribute="trailing" id="DNf-un-4FR"/>
-                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="top" secondItem="ZvR-Np-QeG" secondAttribute="bottom" constant="8" id="al7-Fy-MB5"/>
-                            <constraint firstAttribute="trailing" secondItem="LRT-lO-n5z" secondAttribute="trailing" id="cAX-Hx-nEN"/>
-                            <constraint firstItem="RgX-sj-N08" firstAttribute="top" secondItem="LRT-lO-n5z" secondAttribute="bottom" id="chZ-Z2-dfF"/>
-                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="leading" secondItem="VGd-NE-KDa" secondAttribute="leading" id="kkW-9H-e6z"/>
+                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="leading" secondItem="VGd-NE-KDa" secondAttribute="leading" id="52W-Mn-sq6"/>
+                            <constraint firstAttribute="trailing" secondItem="G9y-qQ-ib5" secondAttribute="trailing" id="FQJ-pv-Z9W"/>
+                            <constraint firstItem="G9y-qQ-ib5" firstAttribute="top" secondItem="ZvR-Np-QeG" secondAttribute="bottom" constant="8" id="m7x-sx-fT0"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="applyButton" destination="Z2W-nP-KxV" id="iww-0X-HML"/>
-                        <outlet property="buttonsView" destination="LRT-lO-n5z" id="cAt-qS-ef7"/>
-                        <outlet property="buttonsViewBottomLayoutGuide" destination="chZ-Z2-dfF" id="Dpb-NF-ZbO"/>
-                        <outlet property="cancelButton" destination="uDU-Ot-6f1" id="Hq9-fJ-C98"/>
                         <outlet property="tableView" destination="G9y-qQ-ib5" id="cmj-m6-7Dt"/>
-                        <outlet property="tableViewHeightConstraint" destination="DNf-un-4FR" id="Xfa-HF-dhH"/>
+                        <outlet property="tableViewHeightConstraint" destination="Oiz-i3-77D" id="qVy-AN-bUj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifn-Tf-s90" userLabel="First Responder" sceneMemberID="firstResponder"/>

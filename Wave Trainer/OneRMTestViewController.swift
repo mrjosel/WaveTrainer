@@ -13,19 +13,13 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonsView: UIView!
-    @IBOutlet weak var applyButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var buttonsViewBottomLayoutGuide: NSLayoutConstraint!
     
-    override func viewDidAppear(_ animated: Bool) {
-        //set heightof tableView
-        self.tableView.frame = CGRect(x: self.tableView.frame.origin.x, y: self.tableView.frame.origin.y, width: self.tableView.frame.size.width, height: self.tableView.contentSize.height)
-        //TODO: FIX THIS
+    override func viewWillAppear(_ animated: Bool) {
         
         //subscribe to keyboard notifications
         self.subscribeToKeyboardNotifications()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,26 +40,6 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        //set buttons
-        self.applyButton.addTarget(self, action: #selector(self.applyButtonPressed(_:)), for: .touchUpInside)
-        self.applyButton.setTitle("Apply", for: .normal)
-        self.applyButton.isEnabled = false
-        self.cancelButton.addTarget(self, action: #selector(self.cancelButtonPressed(_:)), for: .touchUpInside)
-        self.cancelButton.setTitle("Cancel", for: .normal)
-        self.cancelButton.isEnabled = true
-    }
-    
-    //called when applyButton is pressed
-    func applyButtonPressed(_ sender: UIButton) {
-        print("applyButtonPressed")
-    }
-    
-    //called when applyButton is pressed
-    func cancelButtonPressed(_ sender: UIButton) {
-        print("cancelButtonPressed")
-        //TODO:  NEED TO RESIGN FIRST RESPONDER
-        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: DATA SOURCE METHODS
@@ -105,6 +79,15 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textField.becomeFirstResponder()
     }
     
+    //used to limit tableViewHeight based on content, content does not change, so no method for updating required
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+        //if last row, update tableViewHeightConstraint, else do nothing
+        if indexPath.row == self.tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+        }
+    }
+    
     // MARK: KEYBOARD METHODS
     //subscribes to notifications from keyboard, usually called in a VCs viewWillAppear method
     func subscribeToKeyboardNotifications() {
@@ -123,9 +106,6 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
     //carry out following when keyboard is about to show
     func keyboardWillShow(_ notification: Notification) {
         
-        //only adjust if keyboard is not showing, else do nothing
-        self.buttonsViewBottomLayoutGuide.constant = self.getKeyboardHeight(notification)
-        
         //stop listening to keyboardWillShow so that view is not altered everytime a textfield is selected
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
@@ -134,7 +114,7 @@ class OneRMTestViewController: UIViewController, UITableViewDelegate, UITableVie
     func keyboardWillHide(_ notification: Notification) {
         
         //add height of keyboard back to bottom layout origin, if all UI elements oriented/constrained about bottom layout, layout should shift downward when keyboard hides
-        self.buttonsViewBottomLayoutGuide.constant = 0
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
     }
     
