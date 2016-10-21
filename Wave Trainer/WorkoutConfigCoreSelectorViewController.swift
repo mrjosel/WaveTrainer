@@ -12,7 +12,6 @@ import UIKit
 class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //outlets
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -21,6 +20,13 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //remove whitespace
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        //set text of labels
+        self.directionLabel.text = "Select up to two Core Lifts"
+        self.directionLabel.textAlignment = .center
     }
     
     // MARK : Table View Datasource

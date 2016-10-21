@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -640,11 +639,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k8-Qz-wmD">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLD-ZQ-hqh">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="uDC-Ku-wyU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -652,14 +649,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6vZ-Oi-4EQ">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="310" id="JjX-oM-SgJ"/>
+                                    <constraint firstAttribute="height" constant="557" id="JjX-oM-SgJ"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="coreLift" id="jJW-Q0-Cpr">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jJW-Q0-Cpr" id="ecM-7a-Y8h">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -668,29 +665,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xLD-ZQ-hqh" firstAttribute="top" secondItem="2k8-Qz-wmD" secondAttribute="bottom" constant="56" id="7mX-6J-YYR"/>
-                            <constraint firstItem="2k8-Qz-wmD" firstAttribute="leading" secondItem="oEX-PS-E0f" secondAttribute="leadingMargin" constant="150" id="BXu-jX-6pA"/>
-                            <constraint firstItem="J6H-6g-hp0" firstAttribute="top" secondItem="2k8-Qz-wmD" secondAttribute="bottom" constant="583" id="Jw0-gJ-a79"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xLD-ZQ-hqh" secondAttribute="trailing" constant="151" id="KxO-El-HXB"/>
-                            <constraint firstItem="J6H-6g-hp0" firstAttribute="top" secondItem="xLD-ZQ-hqh" secondAttribute="bottom" constant="506" id="ar4-73-xCr"/>
-                            <constraint firstItem="xLD-ZQ-hqh" firstAttribute="leading" secondItem="oEX-PS-E0f" secondAttribute="leadingMargin" constant="150" id="dXz-yv-5Cb"/>
-                            <constraint firstItem="6vZ-Oi-4EQ" firstAttribute="leading" secondItem="oEX-PS-E0f" secondAttribute="leading" id="dtp-wl-zzZ"/>
-                            <constraint firstItem="2k8-Qz-wmD" firstAttribute="top" secondItem="wSW-jS-9gw" secondAttribute="bottom" constant="43" id="hql-cM-vkQ"/>
-                            <constraint firstAttribute="trailing" secondItem="6vZ-Oi-4EQ" secondAttribute="trailing" id="vRE-mk-VEs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2k8-Qz-wmD" secondAttribute="trailing" constant="151" id="xy3-bs-f6u"/>
-                            <constraint firstItem="6vZ-Oi-4EQ" firstAttribute="top" secondItem="xLD-ZQ-hqh" secondAttribute="bottom" constant="35" id="zmH-gv-zhY"/>
+                            <constraint firstItem="6vZ-Oi-4EQ" firstAttribute="top" secondItem="2k8-Qz-wmD" secondAttribute="bottom" constant="26" id="3f3-Ju-0Ur"/>
+                            <constraint firstItem="6vZ-Oi-4EQ" firstAttribute="leading" secondItem="oEX-PS-E0f" secondAttribute="leading" id="Ttj-T0-Wq1"/>
+                            <constraint firstItem="2k8-Qz-wmD" firstAttribute="top" secondItem="wSW-jS-9gw" secondAttribute="bottom" constant="43" id="n7Z-vt-OMD"/>
+                            <constraint firstAttribute="trailing" secondItem="6vZ-Oi-4EQ" secondAttribute="trailing" id="q8m-vn-p7Q"/>
+                            <constraint firstItem="2k8-Qz-wmD" firstAttribute="centerX" secondItem="oEX-PS-E0f" secondAttribute="centerX" id="rNB-CH-RzU"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="directionLabel" destination="xLD-ZQ-hqh" id="gz8-lJ-0dp"/>
+                        <outlet property="directionLabel" destination="2k8-Qz-wmD" id="1Tr-2b-TVg"/>
                         <outlet property="tableView" destination="6vZ-Oi-4EQ" id="Ene-hK-zR2"/>
                         <outlet property="tableViewHeightConstraint" destination="JjX-oM-SgJ" id="0a3-01-XLx"/>
-                        <outlet property="titleLabel" destination="2k8-Qz-wmD" id="f4a-0r-wub"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bg-68-d5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4620" y="2240"/>
+            <point key="canvasLocation" x="4620" y="2229.5352323838083"/>
         </scene>
         <!--OneRM Test View Controller-->
         <scene sceneID="7UZ-nB-wkS">
