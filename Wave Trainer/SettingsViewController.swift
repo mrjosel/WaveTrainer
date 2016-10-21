@@ -238,7 +238,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             //push VC
             self.navigationController?.pushViewController(oneRMVC, animated: true)
             
-        case .routine:
+        case .routines:
             
             //collapse all headers
             self.collapseAllHeaders()

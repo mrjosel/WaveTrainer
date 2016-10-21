@@ -31,13 +31,13 @@ extension CaseCountable where Self : RawRepresentable, Self.RawValue == Int {
 
 //enum for settings in SettingsViewController
 enum Setting : Int, CustomStringConvertible, CaseCountable {
-    case barWeight = 0, plates, routine, oneRMTest
+    case barWeight = 0, plates, routines, oneRMTest
     
     //names for settings
     static let SettingNames = [
         barWeight : "Bar Weight",
         plates : "Plates",
-        routine : "Routine",
+        routines : "Routines",
         oneRMTest : "1RM Test"
     ]
     
@@ -46,7 +46,7 @@ enum Setting : Int, CustomStringConvertible, CaseCountable {
         //TODO: CREATE IMAGES
         barWeight : nil,
         plates : nil,
-        routine : nil,
+        routines : nil,
         oneRMTest : nil
     ]
     
@@ -61,7 +61,7 @@ enum Setting : Int, CustomStringConvertible, CaseCountable {
                 return [String(barWeight)]
             case .plates :
                 return WorkoutManagerClient.PlatesAvailable.ALLPLATES
-            case .routine :
+            case .routines :
                 return nil
             case .oneRMTest :
                 return nil

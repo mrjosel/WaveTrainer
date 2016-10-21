@@ -15,6 +15,8 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
     //outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noWorkoutsLabel: UILabel!
+    @IBOutlet weak var instructionsLabel: UILabel!
     
     //MOC
     let sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
@@ -57,8 +59,17 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
         guard self.cycle != nil else {
             //no cycle passed in, so no waves present
             
-            //hide tableView
-            self.tableView.isHidden = true
+            //hide tableView, show labels, set label text
+            //self.tableView.isHidden = true
+            self.noWorkoutsLabel.isHidden = false
+            self.noWorkoutsLabel.textAlignment = .center
+//            self.view.bringSubview(toFront: self.noWorkoutsLabel)
+            self.noWorkoutsLabel.text = "No Routines"
+            self.instructionsLabel.isHidden = false
+            self.instructionsLabel.textAlignment = .center
+            self.instructionsLabel.numberOfLines = 2
+//            self.view.bringSubview(toFront: self.instructionsLabel)
+            self.instructionsLabel.text = "Click the add button \n to add a new routine"
             return
         }
         
@@ -105,11 +116,6 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
     //add workout to cycle
     func addWorkout(_ sender : UIButton) {
         print("adding workout")
-    }
-    
-    //edit workout, allows deletion and reordering
-    func editWorkout(_ sender : UIButton) {
-        print("editing workout")
     }
     
     override func didReceiveMemoryWarning() {
