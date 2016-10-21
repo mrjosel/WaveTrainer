@@ -119,7 +119,12 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
     
     //add workout to cycle
     func addWorkout(_ sender : UIButton) {
-        print("adding workout")
+        
+        //create VC
+        let coreConfigVC = self.storyboard?.instantiateViewController(withIdentifier: "WorkoutConfigCoreSelectorViewController") as! WorkoutConfigCoreSelectorViewController
+        
+        //push VC
+        self.navigationController?.pushViewController(coreConfigVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
