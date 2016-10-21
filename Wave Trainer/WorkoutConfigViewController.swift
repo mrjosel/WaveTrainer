@@ -32,7 +32,7 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
         //if no cycle, return empty FRC,
         if let cycle = self.cycle  {
             //create search predicate to get cycles for specific wave
-            fetchRequest.predicate = NSPredicate(format: "cycle == %@", cycle)  //safely using implicitly unwrapping since wave is not nil if VC ever gets to this point
+            fetchRequest.predicate = NSPredicate(format: "cycle == %@", cycle)
         }
         
         //set sort descriptors

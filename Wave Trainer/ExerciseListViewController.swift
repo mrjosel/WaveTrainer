@@ -1,17 +1,26 @@
 //
-//  ExerciseModelViewController.swift
+//  ExerciseListViewController.swift
 //  WaveTrainer
 //
-//  Created by Brian Josel on 9/12/16.
+//  Created by Brian Josel on 10/21/16.
 //  Copyright © 2016 Brian Josel. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-//view controller for viewing exercises
-class ExerciseModelViewController: UITableViewController, NSFetchedResultsControllerDelegate, ExercisePickerViewControllerDelegate {
+//protocol for picking exercises in pickerVC
+protocol ExercisePickerViewControllerDelegate {
+    func exercisePicker(didAddExercise exercise: Exercise?) -> Void
+}
 
+//view controller for viewing exercises
+class ExerciseListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, ExercisePickerViewControllerDelegate {
+    
+    //outlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     //var for local reference to CoreData singleton
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
     
@@ -24,47 +33,43 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
         //create fetch request
         let fetchRequest = NSFetchRequest<Exercise>(entityName: "Exercise")
         
-        //create search predicate to get workouts for specific wave
-        fetchRequest.predicate = NSPredicate(format: "workout == %@", self.workout!)  //safely using implicitly unwrapping since wave is not nil if VC ever gets to this point
+        //create search predicate to get workouts for specific workout, if workout exists
+        if let workout = self.workout {
+            fetchRequest.predicate = NSPredicate(format: "workout == %@", workout)
+        }
+        //set sort descriptor
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "orderPersisted", ascending: false)]
         
         //create and return fetch controller
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         return frc
     }()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //ensure workout was successfully passed in from previous view controller
-        guard workout != nil else {
-            
-            //workout not passed in, dismiss VC
-            print("error: failed to pass in workout, dismissing")
-            self.dismiss(animated: true, completion: nil)
-            return
-        }
-        
-        //set delegate
-        self.exerciseFetchedResultsController.delegate = self
         
         //add button to add exercises
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addExercise(_:)))
         self.navigationItem.setRightBarButton(addButton, animated: false)
         
+        //ensure workout was successfully passed in from previous view controller
+        guard workout != nil else {
+            //do not finish routines involving tableViewor FRC
+            return
+        }
+        
+        //set delegates and dataSource
+        self.exerciseFetchedResultsController.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
         //perform fetch
         do {
             try self.exerciseFetchedResultsController.performFetch()
         } catch {
             print(error)
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     //adds exercise to CoreData
@@ -101,16 +106,16 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
         newExercise.workout = self.workout
         CoreDataStackManager.sharedInstance.saveContext()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     
     //gets number of sections to be displayed in table
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         //get sections info from fetch
         let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
@@ -118,7 +123,7 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
     }
     
     //gets number of rows for each table section
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //get rows in each section
         let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
@@ -127,7 +132,7 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
     }
     
     //configure cell
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //get workout for row
         let exercise = self.exerciseFetchedResultsController.object(at: indexPath)
@@ -149,21 +154,8 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
     
     
     // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
-    }
-    
-    //selecting workout shows list of exercises
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        //get workout at row
-        let exercise = self.exerciseFetchedResultsController.object(at: indexPath)
-        
-        //create controller, pass wave in, present
-        let controller = storyboard?.instantiateViewController(withIdentifier: "ExerciseModelViewController") as! ExerciseModelViewController
-        controller.workout = workout
-        self.navigationController?.pushViewController(controller, animated: true)
-        */
     }
     
     //fetch results controller delegate methods

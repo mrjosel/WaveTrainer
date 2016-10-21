@@ -45,7 +45,12 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
     
     //sends to exerciseVC
     func addExercise(_ sender : UIButton) {
-        print("adding exercise")
+        
+        //create VC
+        let exerciseVC = self.storyboard?.instantiateViewController(withIdentifier: "ExerciseListViewController") as! ExerciseListViewController
+        
+        //move onto exercise listVC
+        self.navigationController?.pushViewController(exerciseVC, animated: true)
     }
     
     // MARK : Table View Datasource

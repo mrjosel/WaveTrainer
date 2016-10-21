@@ -30,6 +30,7 @@
 		B78516341D8DED2E00B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
 		B78516351D8DED4D00B130AA /* Wave.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7212F571D80217400E8C33F /* Wave.swift */; };
 		B78516361D8DED5100B130AA /* Cycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C8B1D80828800DED411 /* Cycle.swift */; };
+		B786C7861DBAA8B700D3DE87 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B786C7851DBAA8B700D3DE87 /* ExerciseListViewController.swift */; };
 		B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */; };
 		B79E1C7B1D802D0E00DED411 /* Wave_TrainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */; };
 		B79E1C9D1D81751300DED411 /* WaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */; };
@@ -78,6 +79,7 @@
 		B75E19401DB984F0001B2CD8 /* WorkoutConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutConfigViewController.swift; sourceTree = "<group>"; };
 		B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B78516321D8B813200B130AA /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		B786C7851DBAA8B700D3DE87 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		B79E1C621D80224A00DED411 /* WaveTrainer.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaveTrainer.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B79E1C641D80224A00DED411 /* Wave_TrainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wave_TrainerTests.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */,
 				B75E19401DB984F0001B2CD8 /* WorkoutConfigViewController.swift */,
 				B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */,
+				B786C7851DBAA8B700D3DE87 /* ExerciseListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				B7EC159E1D53AD6900C3D5F1 /* Wave_Trainer.xcdatamodeld in Sources */,
 				B7536FE01DA15431006F6E74 /* SettingsTableViewHeader.swift in Sources */,
 				B75061E61DAEA5C300EE84F7 /* OneRepMaxTableViewCell.swift in Sources */,
+				B786C7861DBAA8B700D3DE87 /* ExerciseListViewController.swift in Sources */,
 				B78516331D8B813200B130AA /* Workout.swift in Sources */,
 				B79A3FCD1D8B7E9B00274B83 /* Exercise.swift in Sources */,
 			);
