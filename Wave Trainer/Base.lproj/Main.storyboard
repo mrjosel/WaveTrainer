@@ -570,6 +570,51 @@
             </objects>
             <point key="canvasLocation" x="2580" y="2473.313343328336"/>
         </scene>
+        <!--Workout Config View Controller-->
+        <scene sceneID="Veq-aK-j7U">
+            <objects>
+                <viewController storyboardIdentifier="WorkoutConfigViewController" id="XlR-c2-q6E" customClass="WorkoutConfigViewController" customModule="WaveTrainer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1PP-og-Pu6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Msr-Cn-wFT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CDK-Be-Euo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bEF-kV-14Y">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="310" id="46e-XR-xON"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="coreLift" id="D0D-TL-3kM">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D0D-TL-3kM" id="O2X-e0-bB7">
+                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bEF-kV-14Y" firstAttribute="leading" secondItem="CDK-Be-Euo" secondAttribute="leading" id="0JG-34-zmy"/>
+                            <constraint firstItem="bEF-kV-14Y" firstAttribute="top" secondItem="1PP-og-Pu6" secondAttribute="bottom" constant="40" id="FsU-tP-ddU"/>
+                            <constraint firstAttribute="trailing" secondItem="bEF-kV-14Y" secondAttribute="trailing" id="dre-XD-YCB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="bEF-kV-14Y" id="Di5-AM-2zI"/>
+                        <outlet property="tableViewHeightConstraint" destination="46e-XR-xON" id="9xS-HU-BIy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="trj-9j-phl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3798" y="2230"/>
+        </scene>
         <!--Workout Config Core Selector View Controller-->
         <scene sceneID="qrG-bZ-vLr">
             <objects>
@@ -602,7 +647,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jJW-Q0-Cpr" id="ecM-7a-Y8h">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -633,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bg-68-d5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3792.8000000000002" y="2222.3388305847079"/>
+            <point key="canvasLocation" x="4620" y="2240"/>
         </scene>
         <!--OneRM Test View Controller-->
         <scene sceneID="7UZ-nB-wkS">

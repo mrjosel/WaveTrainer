@@ -24,6 +24,7 @@
 		B7540FE31D6620E90034D806 /* WorkoutManagerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */; };
 		B7540FE51D6F5CB30034D806 /* WorkoutManagerREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */; };
 		B75E193F1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */; };
+		B75E19411DB984F0001B2CD8 /* WorkoutConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E19401DB984F0001B2CD8 /* WorkoutConfigViewController.swift */; };
 		B771D9AB1D99DED6005CE96C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */; };
 		B78516331D8B813200B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
 		B78516341D8DED2E00B130AA /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78516321D8B813200B130AA /* Workout.swift */; };
@@ -74,6 +75,7 @@
 		B7540FE21D6620E90034D806 /* WorkoutManagerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerClient.swift; sourceTree = "<group>"; };
 		B7540FE41D6F5CB30034D806 /* WorkoutManagerREST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutManagerREST.swift; sourceTree = "<group>"; };
 		B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutConfigCoreSelectorViewController.swift; sourceTree = "<group>"; };
+		B75E19401DB984F0001B2CD8 /* WorkoutConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutConfigViewController.swift; sourceTree = "<group>"; };
 		B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B78516321D8B813200B130AA /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		B79A3FCC1D8B7E9B00274B83 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -127,6 +129,8 @@
 				B771D9AA1D99DED6005CE96C /* SettingsViewController.swift */,
 				B75061DF1DABFE5700EE84F7 /* OneRMTestViewController.swift */,
 				B75E193E1DB97AFF001B2CD8 /* WorkoutConfigCoreSelectorViewController.swift */,
+				B75E19401DB984F0001B2CD8 /* WorkoutConfigViewController.swift */,
+				B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -181,7 +185,6 @@
 		B79E1C9E1D81781D00DED411 /* CoreDataViewers */ = {
 			isa = PBXGroup;
 			children = (
-				B70563401D8DFE4900224337 /* ExercisePickerViewController.swift */,
 				B705633D1D8DF88800224337 /* ExerciseModelViewController.swift */,
 				B79E1C9C1D81751300DED411 /* WaveModelViewController.swift */,
 				B79E1CAF1D8715A800DED411 /* CycleModelViewController.swift */,
@@ -356,6 +359,7 @@
 				B7536FDE1D9AF52E006F6E74 /* ExtensionUIButton.swift in Sources */,
 				B72A283A1D76EC0C0074057F /* SignUpViewController.swift in Sources */,
 				B7EC15981D53AD6900C3D5F1 /* LoginViewController.swift in Sources */,
+				B75E19411DB984F0001B2CD8 /* WorkoutConfigViewController.swift in Sources */,
 				B7F338D61D789A7500DE41B7 /* HistoryViewController.swift in Sources */,
 				B79E1CA51D817B3200DED411 /* Cycle.swift in Sources */,
 				B70563411D8DFE4900224337 /* ExercisePickerViewController.swift in Sources */,

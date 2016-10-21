@@ -242,8 +242,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate, UINavi
             
             //collapse all headers
             self.collapseAllHeaders()
-            //TODO: SEGUE TO NEW VC
-            print(setting.description)
+            
+            //present workoutCFGVC
+            let workCFGvc = self.storyboard?.instantiateViewController(withIdentifier: "WorkoutConfigViewController") as! WorkoutConfigViewController
+            self.navigationController?.pushViewController(workCFGvc, animated: true)
+            
         default:
             //section is plates or barweight, toggle
             self.toggleSection(header: header)

@@ -8,6 +8,7 @@
 
 import UIKit
 
+//allows configuration of new workout by selecting core exercises first
 class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     //outlets
