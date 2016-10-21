@@ -16,7 +16,6 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noWorkoutsLabel: UILabel!
-    @IBOutlet weak var instructionsLabel: UILabel!
     
     //MOC
     let sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
@@ -47,7 +46,6 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //add button to add exercises
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWorkout(_:)))
         self.navigationItem.setRightBarButton(addButton, animated: false)
@@ -55,23 +53,22 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
         //set title
         self.navigationItem.title = "Routines"
         
+        //set never changing params of UI elements
+        self.noWorkoutsLabel.textAlignment = .center
+        self.noWorkoutsLabel.numberOfLines = 4
+        self.noWorkoutsLabel.text = "No Routines\nClick the add button\nto add a new routine"
+        
         //ensure cycle was passed in from prevoious VC
         guard self.cycle != nil else {
             //no cycle passed in, so no waves present
             
-            //hide tableView, show labels, set label text
-            //self.tableView.isHidden = true
-            self.noWorkoutsLabel.isHidden = false
-            self.noWorkoutsLabel.textAlignment = .center
-//            self.view.bringSubview(toFront: self.noWorkoutsLabel)
-            self.noWorkoutsLabel.text = "No Routines"
-            self.instructionsLabel.isHidden = false
-            self.instructionsLabel.textAlignment = .center
-            self.instructionsLabel.numberOfLines = 2
-//            self.view.bringSubview(toFront: self.instructionsLabel)
-            self.instructionsLabel.text = "Click the add button \n to add a new routine"
+            //config layout for no workouts
+            self.layoutForWorkouts(false)
             return
         }
+        
+        //layout views for workouts
+        self.layoutForWorkouts(true)
         
         //set delegate and dataSource
         self.tableView.delegate = self
@@ -111,6 +108,13 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
 //            CoreDataStackManager.sharedInstance.saveContext()
 //            return
 //        }
+    }
+    
+    //layout config for when tableView is hidden or not
+    func layoutForWorkouts(_ workoutsPresent : Bool) {
+        //hide tableView, show labels, set label text
+        self.tableView.isHidden = !workoutsPresent
+        self.noWorkoutsLabel.isHidden = workoutsPresent
     }
     
     //add workout to cycle
