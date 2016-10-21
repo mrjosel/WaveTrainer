@@ -47,7 +47,7 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         //add button to add exercises
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWorkout(_:)))
+        let addButton = UIBarButtonItem(title: "New >", style: .plain, target: self, action: #selector(self.addWorkout(_:)))
         self.navigationItem.setRightBarButton(addButton, animated: false)
         
         //set title
@@ -56,7 +56,7 @@ class WorkoutConfigViewController: UIViewController, UITableViewDelegate, UITabl
         //set never changing params of UI elements
         self.noWorkoutsLabel.textAlignment = .center
         self.noWorkoutsLabel.numberOfLines = 4
-        self.noWorkoutsLabel.text = "No Routines\nClick the add button\nto add a new routine"
+        self.noWorkoutsLabel.text = "No Routines\nClick the \"New\" button\nto add a new routine"
         
         //ensure cycle was passed in from prevoious VC
         guard self.cycle != nil else {
