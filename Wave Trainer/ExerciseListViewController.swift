@@ -63,6 +63,7 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         self.exerciseFetchedResultsController.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        //TODO:  ADJUST DELEGATE METHODS TO WORK IF NO WORKOUT PRESENT
 
         //perform fetch
         do {
