@@ -16,10 +16,17 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
+    //selected indicies - keeps trackof which coreLifts are selected
+    var selectedIndicies = [IndexPath]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //set delegate and dataSource
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
@@ -53,9 +60,43 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         //set title
         cell.textLabel?.text = coreLift.description
         
-        //set accessory view and return
-        cell.accessoryType = .none  //TODO: SET IT IF EXISTS IN ROUTINE
+        //set accessory view, selecttion style and return
+        cell.accessoryType = .none
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    //toggle checkbox view when selected, only allow display of two checkboxes
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        ////get cell, if selectedIndicies is size 2, then exit routine (two coreLifts per routine only)
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        
+        //check if selected cell is in selectedIndicies
+        guard let selectedIndex = self.selectedIndicies.index(of: indexPath) else {
+            
+            //not in selectedIndicies, append to array and turn on checkmark iff less than 2 selectedIndicies
+            if self.selectedIndicies.count < 2 {
+                cell.accessoryType = .checkmark
+                self.selectedIndicies.append(indexPath)
+            }
+            return
+        }
+        
+        //found in selectedIndicies, turn off checkmark and remove indexPath from array
+        cell.accessoryType = .none
+        self.selectedIndicies.remove(at: selectedIndex)
+    }
+    
+    //limit tableViewheightto content view only
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        //if last row, update tableViewHeightConstraint, else do nothing
+        if indexPath.row == self.tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            self.tableViewHeightConstraint.constant = self.tableView.contentSize.height
+        }
     }
 
     override func didReceiveMemoryWarning() {
