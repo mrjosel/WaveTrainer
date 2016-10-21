@@ -19,6 +19,8 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
     //selected indicies - keeps trackof which coreLifts are selected
     var selectedIndicies = [IndexPath]()
     
+    var addButton : UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,9 +33,19 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         //remove whitespace
         self.automaticallyAdjustsScrollViewInsets = false
         
-        //set text of labels
+        //set text of label
         self.directionLabel.text = "Select up to two Core Lifts"
         self.directionLabel.textAlignment = .center
+        
+        //add button to add exercises
+        self.addButton = UIBarButtonItem(title: "Exercise >", style: .plain, target: self, action: #selector(self.addExercise(_:)))
+        self.navigationItem.setRightBarButton(addButton, animated: false)
+        self.addButton.isEnabled = self.selectedIndicies.count > 0
+    }
+    
+    //sends to exerciseVC
+    func addExercise(_ sender : UIButton) {
+        print("adding exercise")
     }
     
     // MARK : Table View Datasource
@@ -77,10 +89,11 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         //check if selected cell is in selectedIndicies
         guard let selectedIndex = self.selectedIndicies.index(of: indexPath) else {
             
-            //not in selectedIndicies, append to array and turn on checkmark iff less than 2 selectedIndicies
+            //not in selectedIndicies, append to array and turn on checkmark iff less than 2 selectedIndicies, enable add button
             if self.selectedIndicies.count < 2 {
                 cell.accessoryType = .checkmark
                 self.selectedIndicies.append(indexPath)
+                self.addButton.isEnabled = true
             }
             return
         }
@@ -88,6 +101,9 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         //found in selectedIndicies, turn off checkmark and remove indexPath from array
         cell.accessoryType = .none
         self.selectedIndicies.remove(at: selectedIndex)
+        
+        //enable addButton depending on size of selectedIndicies
+        self.addButton.isEnabled = self.selectedIndicies.count > 0
     }
     
     //limit tableViewheightto content view only
