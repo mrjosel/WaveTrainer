@@ -53,6 +53,9 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addExercise(_:)))
         self.navigationItem.setRightBarButton(addButton, animated: false)
         
+        //set title
+        self.navigationItem.title = "Exercises"
+        
         //ensure workout was successfully passed in from previous view controller
         guard workout != nil else {
             //do not finish routines involving tableViewor FRC
@@ -104,8 +107,9 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
             //TODO: MAKE ALERT
             return
         }
-        newExercise.workout = self.workout
-        CoreDataStackManager.sharedInstance.saveContext()
+//        newExercise.workout = self.workout
+//        CoreDataStackManager.sharedInstance.saveContext()
+        //TODO:  IMPLEMENT SAVING WORKOUT
     }
     
     override func didReceiveMemoryWarning() {

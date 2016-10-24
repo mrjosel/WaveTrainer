@@ -19,7 +19,8 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
     //selected indicies - keeps trackof which coreLifts are selected
     var selectedIndicies = [IndexPath]()
     
-    var addButton : UIBarButtonItem!
+    //exercises button
+    var exercisesButton : UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,12 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         self.directionLabel.textAlignment = .center
         
         //add button to add exercises
-        self.addButton = UIBarButtonItem(title: "Exercise >", style: .plain, target: self, action: #selector(self.addExercise(_:)))
-        self.navigationItem.setRightBarButton(addButton, animated: false)
-        self.addButton.isEnabled = self.selectedIndicies.count > 0
+        self.exercisesButton = UIBarButtonItem(title: "Exercises >", style: .plain, target: self, action: #selector(self.addExercise(_:)))
+        self.navigationItem.setRightBarButton(exercisesButton, animated: false)
+        self.exercisesButton.isEnabled = self.selectedIndicies.count > 0
+        
+        //set title
+        self.navigationItem.title = "Core Lifts"
     }
     
     //sends to exerciseVC
@@ -48,6 +52,8 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         
         //create VC
         let exerciseVC = self.storyboard?.instantiateViewController(withIdentifier: "ExerciseListViewController") as! ExerciseListViewController
+        
+        //
         
         //move onto exercise listVC
         self.navigationController?.pushViewController(exerciseVC, animated: true)
@@ -98,7 +104,7 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
             if self.selectedIndicies.count < 2 {
                 cell.accessoryType = .checkmark
                 self.selectedIndicies.append(indexPath)
-                self.addButton.isEnabled = true
+                self.exercisesButton.isEnabled = true
             }
             return
         }
@@ -108,7 +114,7 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         self.selectedIndicies.remove(at: selectedIndex)
         
         //enable addButton depending on size of selectedIndicies
-        self.addButton.isEnabled = self.selectedIndicies.count > 0
+        self.exercisesButton.isEnabled = self.selectedIndicies.count > 0
     }
     
     //limit tableViewheightto content view only

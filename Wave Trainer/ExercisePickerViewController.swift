@@ -183,7 +183,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         
         //get exercise
         let exercise = self.exercises[indexPath.row]
-        print(exercise.category)
+
         //call delegate with exercise
         self.delegate?.exercisePicker(didAddExercise: exercise)
         
