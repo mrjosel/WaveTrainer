@@ -63,9 +63,9 @@ class Exercise : NSManagedObject {
     
     //managed vars
     @NSManaged var sets : NSNumber?
-    @NSManaged private var repsPersisted : NSNumber?
+    @NSManaged var reps : NSNumber?
     @NSManaged var name : String
-    @NSManaged private var orderPersisted : NSNumber?
+    @NSManaged var order : NSNumber?
     @NSManaged private var isCorePersisted : NSNumber
     @NSManaged var category : String?
     @NSManaged var imagePath : String?
@@ -113,24 +113,6 @@ class Exercise : NSManagedObject {
     }
     
     //intermediate vars
-    //order of exercise for workout
-    var order : Int? {
-        get {
-            guard let val = self.orderPersisted else {
-                return nil
-            }
-            return Int(val)
-        }
-        
-        set {
-            //can only set var if not core and not nil
-            guard let num = newValue, !self.isCore else {
-                return
-            }
-            self.orderPersisted = NSNumber(value: num)
-            
-        }
-    }
     
     //boolean to denote if exercise is core or not
     var isCore : Bool {
@@ -143,8 +125,27 @@ class Exercise : NSManagedObject {
     //image from imagePath
     var image : UIImage? //TODO: GETTER AND SETTER USING IMAGE CACHING
     
+    //returns dict of Exercise from self, similar to a JSON
+    func makeExerciseDict() -> [String : AnyObject] {
+        
+        //output data
+        var output = [String : AnyObject]()
+        
+        //add all managed vars to dict EXCEPT workout
+        output["name"] = self.name as AnyObject?
+        output["isCorePersisted"] = self.isCorePersisted as AnyObject?
+        output["sets"] = self.sets as AnyObject?
+        output["reps"] = self.reps as AnyObject?
+        output["order"] = self.order as AnyObject?
+        output["category"] = self.category as AnyObject?
+        output["imagePath"] = self.imagePath as AnyObject?
+        
+        //return output dict
+        return output
+    }
+    
     //set all intermediate vars from persisted vars during awake from fetch
     override func awakeFromFetch() {
-        self.order = self.orderPersisted as Int?
+        
     }
 }

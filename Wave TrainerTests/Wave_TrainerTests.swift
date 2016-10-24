@@ -149,6 +149,16 @@ class Wave_TrainerTests: XCTestCase {
         XCTAssertNotNil(potentialExercise2)
         XCTAssertFalse((potentialExercise2?.isCore)!)  //should be false
         
+        //create exerciseDict from exercise, compare values
+        let exerciseDict = potentialExercise2?.makeExerciseDict()
+        XCTAssertNotNil(exerciseDict)
+        XCTAssertTrue(exerciseDict?[WorkoutManagerClient.Keys.NAME] as! String == data[WorkoutManagerClient.Keys.NAME] as! String)
+        XCTAssertTrue(exerciseDict?[WorkoutManagerClient.Keys.CATEGORY] as! String == data[WorkoutManagerClient.Keys.CATEGORY] as! String)
+        XCTAssertTrue(exerciseDict?[WorkoutManagerClient.Keys.IMAGE] as! String == data[WorkoutManagerClient.Keys.IMAGE] as! String)
+        XCTAssertTrue(exerciseDict?["isCorePersisted"] as? Bool == potentialExercise2?.isCore)
+        XCTAssertNil(exerciseDict?["reps"])
+        XCTAssertNil(exerciseDict?["sets"])
+        XCTAssertNil(exerciseDict?["order"])
         
         //create phony dict
         let phonyDict : [String: AnyObject] = ["not a dict" : String() as AnyObject]
