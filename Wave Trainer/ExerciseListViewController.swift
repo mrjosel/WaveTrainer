@@ -25,25 +25,28 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     var sharedContext = CoreDataStackManager.sharedInstance.managedObjectContext
     
     //workout passed in from previous viewController
-    var workout : Workout?
+    var workout : Workout?  //TODO: MAY HAVE TO REMOVE
     
-    //fetched results controller for Workout objects
-    lazy var exerciseFetchedResultsController : NSFetchedResultsController<Exercise> = { () -> NSFetchedResultsController<Exercise> in
-        
-        //create fetch request
-        let fetchRequest = NSFetchRequest<Exercise>(entityName: "Exercise")
-        
-        //create search predicate to get workouts for specific workout, if workout exists
-        if let workout = self.workout {
-            fetchRequest.predicate = NSPredicate(format: "workout == %@", workout)
-        }
-        //set sort descriptor
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "orderPersisted", ascending: false)]
-        
-        //create and return fetch controller
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
-        return frc
-    }()
+    //exercise array
+    var exercises = [Exercise]()
+    
+//    //fetched results controller for Workout objects
+//    lazy var exerciseFetchedResultsController : NSFetchedResultsController<Exercise> = { () -> NSFetchedResultsController<Exercise> in
+//        
+//        //create fetch request
+//        let fetchRequest = NSFetchRequest<Exercise>(entityName: "Exercise")
+//        
+//        //create search predicate to get workouts for specific workout, if workout exists
+//        if let workout = self.workout {
+//            fetchRequest.predicate = NSPredicate(format: "workout == %@", workout)
+//        }
+//        //set sort descriptor
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "orderPersisted", ascending: false)]
+//        
+//        //create and return fetch controller
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+//        return frc
+//    }()
     
     
     override func viewDidLoad() {
@@ -56,24 +59,24 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         //set title
         self.navigationItem.title = "Exercises"
         
-        //ensure workout was successfully passed in from previous view controller
-        guard workout != nil else {
-            //do not finish routines involving tableViewor FRC
-            return
-        }
+//        //ensure workout was successfully passed in from previous view controller
+//        guard workout != nil else {
+//            //do not finish routines involving tableViewor FRC
+//            return
+//        }
         
         //set delegates and dataSource
-        self.exerciseFetchedResultsController.delegate = self
+//        self.exerciseFetchedResultsController.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         //TODO:  ADJUST DELEGATE METHODS TO WORK IF NO WORKOUT PRESENT
 
-        //perform fetch
-        do {
-            try self.exerciseFetchedResultsController.performFetch()
-        } catch {
-            print(error)
-        }
+//        //perform fetch
+//        do {
+//            try self.exerciseFetchedResultsController.performFetch()
+//        } catch {
+//            print(error)
+//        }
     }
     
     //adds exercise to CoreData
@@ -104,9 +107,11 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
             //TODO: MAKE ALERT
             return
         }
-//        newExercise.workout = self.workout
-//        CoreDataStackManager.sharedInstance.saveContext()
-        //TODO:  IMPLEMENT SAVING WORKOUT
+
+        //add to array, reload table
+        self.exercises.append(newExercise)
+        self.tableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,25 +124,27 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     //gets number of sections to be displayed in table
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        //get sections info from fetch
-        let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
-        return sections.count
+//        //get sections info from fetch
+//        let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+//        return sections.count
+        return 1
     }
     
     //gets number of rows for each table section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //get rows in each section
-        let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
-        let sectionInfo = sections[section]
-        return sectionInfo.numberOfObjects
+//        let sections = self.exerciseFetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+//        let sectionInfo = sections[section]
+//        return sectionInfo.numberOfObjects
+        return self.exercises.count
     }
     
     //configure cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //get workout for row
-        let exercise = self.exerciseFetchedResultsController.object(at: indexPath)
+        let exercise = self.exercises[indexPath.row]//self.exerciseFetchedResultsController.object(at: indexPath)
         
         //set reuseID
         let reuseID = "ExerciseCell"
@@ -154,68 +161,96 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
+    //delete or move cells
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        //different behavior depending on editing style
+        switch editingStyle {
+        case .delete:
+            self.exercises.remove(at: indexPath.row)
+        default:
+            break
+        }
+    }
+    
+    //can move rows while in edit mode
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //adjust order of exercises in array
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        //get exercise at sourceIndexPath
+        let exercise = self.exercises.remove(at: sourceIndexPath.row)
+        
+        //insert exercise at destinationIndexPath
+        self.exercises.insert(exercise, at: destinationIndexPath.row)
+        
+    }
+    
     
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
     
-    //fetch results controller delegate methods
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        //begin the tableView updates
-        self.tableView.beginUpdates()
-    }
-    
-    //manages adding sections in the event of different sections in fetch
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        //check change type
-        switch type {
-        //insert new section
-        case .insert:
-            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-        //delete section
-        case .delete:
-            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-        default:
-            print("error: reached default of didChangeSection in fetchController")
-            return
-        }
-    }
-    
-    //manages the changing of an object in the fetch
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        //check change type
-        switch type {
-        //insert new object
-        case .insert:
-            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
-        //delete object
-        case .delete:
-            self.tableView.deleteRows(at: [indexPath!], with: .fade)
-        //update object
-        case .update:
-            //get wave from fetch
-            let exercise = self.exerciseFetchedResultsController.object(at: indexPath!)
-            
-            //get cell
-            let cell = self.tableView.cellForRow(at: indexPath!)! as UITableViewCell
-            
-            //set label of cell as wave name, return cell
-            cell.textLabel?.text = exercise.name
-        //move object
-        case .move:
-            self.tableView.deleteRows(at: [indexPath!], with: .fade)
-            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
-            
-        }
-    }
-    
-    //end updates when finished
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.endUpdates()
-    }
+//    //fetch results controller delegate methods
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        //begin the tableView updates
+//        self.tableView.beginUpdates()
+//    }
+//    
+//    //manages adding sections in the event of different sections in fetch
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        
+//        //check change type
+//        switch type {
+//        //insert new section
+//        case .insert:
+//            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+//        //delete section
+//        case .delete:
+//            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+//        default:
+//            print("error: reached default of didChangeSection in fetchController")
+//            return
+//        }
+//    }
+//    
+//    //manages the changing of an object in the fetch
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        
+//        //check change type
+//        switch type {
+//        //insert new object
+//        case .insert:
+//            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
+//        //delete object
+//        case .delete:
+//            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+//        //update object
+//        case .update:
+//            //get wave from fetch
+//            let exercise = self.exerciseFetchedResultsController.object(at: indexPath!)
+//            
+//            //get cell
+//            let cell = self.tableView.cellForRow(at: indexPath!)! as UITableViewCell
+//            
+//            //set label of cell as wave name, return cell
+//            cell.textLabel?.text = exercise.name
+//        //move object
+//        case .move:
+//            self.tableView.deleteRows(at: [indexPath!], with: .fade)
+//            self.tableView.insertRows(at: [newIndexPath!], with: .fade)
+//            
+//        }
+//    }
+//    
+//    //end updates when finished
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        self.tableView.endUpdates()
+//    }
     
     /*
      // MARK: - Navigation
