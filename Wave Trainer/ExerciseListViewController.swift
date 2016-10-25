@@ -152,6 +152,7 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         //create cell
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
         
+        
         // Configure the cell and return
         cell.textLabel?.text = exercise.name
         guard let category = exercise.category else {
@@ -163,11 +164,14 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     
     //delete or move cells
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+    
         //different behavior depending on editing style
         switch editingStyle {
         case .delete:
             self.exercises.remove(at: indexPath.row)
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
         default:
             break
         }
