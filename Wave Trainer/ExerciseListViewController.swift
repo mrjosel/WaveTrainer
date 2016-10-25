@@ -11,7 +11,7 @@ import CoreData
 
 //protocol for picking exercises in pickerVC
 protocol ExercisePickerViewControllerDelegate {
-    func exercisePicker(didAddExercise exercise: Exercise?) -> Void
+    func exercisePicker(didPickExercise exercise: Exercise?) -> Void
 }
 
 //view controller for viewing exercises
@@ -86,19 +86,16 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     }
     
     //method called by picker controller, handles when user selects exercise in pickerVC
-    func exercisePicker(didAddExercise exercise: Exercise?) {
+    func exercisePicker(didPickExercise exercise: Exercise?) {
         
         //incoming exercise has dummyContext, recreate new object using sharedContext
-        guard let exercise = exercise else {
+        guard let pickedExercise = exercise as Exercise? else {
             return
         }
-        
+        //TODO: WHY DOES THIS BREAK?
+        //      RECURSION (INIFINITE LOOP?) http://stackoverflow.com/questions/21212988/xcode-continuously-crashes-given-thread-1-exc-bad-access-code-2-address-0x8
         //create dictionary for new exercise
-        let data : [String: Any] = [
-            WorkoutManagerClient.Keys.NAME : exercise.name,
-            WorkoutManagerClient.Keys.IMAGE : exercise.imagePath,
-            WorkoutManagerClient.Keys.CATEGORY : exercise.category
-        ]
+        let data = Exercise.makeExerciseDict(pickedExercise)
         let dict = [WorkoutManagerClient.Keys.DATA : data]
         
         //create new exercise and save context

@@ -77,18 +77,18 @@ class ExerciseModelViewController: UITableViewController, NSFetchedResultsContro
     }
     
     //method called by picker controller, handles when user selects exercise in pickerVC
-    func exercisePicker(didAddExercise exercise: Exercise?) {
+    func exercisePicker(didPickExercise exercise: Exercise?) {
         
         //incoming exercise has dummyContext, recreate new object using sharedContext
-        guard let exercise = exercise else {
+        guard let pickedExercise = exercise else {
             return
         }
         
         //create dictionary for new exercise
         let data : [String: Any] = [
-            WorkoutManagerClient.Keys.NAME : exercise.name,
-            WorkoutManagerClient.Keys.IMAGE : exercise.imagePath,
-            WorkoutManagerClient.Keys.CATEGORY : exercise.category
+            WorkoutManagerClient.Keys.NAME : pickedExercise.name,
+            WorkoutManagerClient.Keys.IMAGE : pickedExercise.imagePath,
+            WorkoutManagerClient.Keys.CATEGORY : pickedExercise.category
         ]
         let dict = [WorkoutManagerClient.Keys.DATA : data]
         

@@ -123,6 +123,18 @@ class WorkoutManagerClient: AnyObject {
         }
     }
     
+    //routines - this is a dict containing an array of exercise dicts (used in Exercise initializers) as well as identifiers
+    //routines are used to create persisted Workout objects
+    //since persisted Workouts are constantly created, the base routines are stored in NSUserDefaults, while Workouts are persisted in Core Data
+    //routines can be created from the Workout class func makeRoutine(_:), conversely, routines can be used in Workout initializers
+    var routines = [String: AnyObject]() {
+        
+        //if set, update NSUserDefaults
+        didSet {
+            UserDefaults.standard.setValue(routines, forKey: "routines")
+        }
+    }
+    
     //plate calculator function, using barWeight and plates and target weight, returns array of plates required for ONE SIDE OF BARBELL
     //output is always assuming unlimited number of plates for each available weight, therefore output is always comprised of largest available plates
     func plateCalc(_ targetWeight: Double) throws -> [Double] {
@@ -258,12 +270,14 @@ class WorkoutManagerClient: AnyObject {
         let deload = UserDefaults.standard.value(forKey: "deload") as? Bool
         let plates = UserDefaults.standard.value(forKey: "platesSelected") as? [Double]
         let oneRepMaxes = UserDefaults.standard.value(forKey: "oneRepMaxes") as? [String: Int]
+        let routines = UserDefaults.standard.value(forKey: "Routines") as? [String: AnyObject]
         
         //set values
         WorkoutManagerClient.sharedInstance.barWeight = barWeight
         WorkoutManagerClient.sharedInstance.deload = deload
         WorkoutManagerClient.sharedInstance.platesSelected = plates ?? [Double]()
         WorkoutManagerClient.sharedInstance.oneRepMaxes = oneRepMaxes ?? [String: Int]()
+        WorkoutManagerClient.sharedInstance.routines = routines ?? [String: AnyObject]()
     }
     
     //----------

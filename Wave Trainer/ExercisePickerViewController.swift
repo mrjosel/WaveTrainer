@@ -111,7 +111,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
             }
 
             //use parsed JSON and dummy context to create exercise objects
-            self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON,context: self.dummyContext)
+            self.exercises = WorkoutManagerClient.makeExercisesFromJSON(jsonData: parsedJSON, context: self.dummyContext)
             
             // Reload the table on the main thread
             DispatchQueue.main.async {
@@ -133,7 +133,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
         //call delegate with no exercise object
-        self.delegate?.exercisePicker(didAddExercise: nil)
+        self.delegate?.exercisePicker(didPickExercise: nil)
         
         //dismiss
         self.exitPickerVC()
@@ -185,7 +185,7 @@ class ExercisePickerViewController: UIViewController, UITableViewDelegate, UITab
         let exercise = self.exercises[indexPath.row]
 
         //call delegate with exercise
-        self.delegate?.exercisePicker(didAddExercise: exercise)
+        self.delegate?.exercisePicker(didPickExercise: exercise)
         
         //dismiss
         self.exitPickerVC()

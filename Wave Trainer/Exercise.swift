@@ -126,19 +126,19 @@ class Exercise : NSManagedObject {
     var image : UIImage? //TODO: GETTER AND SETTER USING IMAGE CACHING
     
     //returns dict of Exercise from self, similar to a JSON
-    func makeExerciseDict() -> [String : AnyObject] {
+    class func makeExerciseDict(_ exercise : Exercise) -> [String : AnyObject] {
         
         //output data
         var output = [String : AnyObject]()
         
         //add all managed vars to dict EXCEPT workout
-        output["name"] = self.name as AnyObject?
-        output["isCorePersisted"] = self.isCorePersisted as AnyObject?
-        output["sets"] = self.sets as AnyObject?
-        output["reps"] = self.reps as AnyObject?
-        output["order"] = self.order as AnyObject?
-        output["category"] = self.category as AnyObject?
-        output["imagePath"] = self.imagePath as AnyObject?
+        output["name"] = exercise.name as AnyObject?
+        output["isCorePersisted"] = exercise.isCorePersisted as AnyObject?
+        output["sets"] = exercise.sets as AnyObject?
+        output["reps"] = exercise.reps as AnyObject?
+        output["order"] = exercise.order as AnyObject?
+        output["category"] = exercise.category as AnyObject?
+        output["imagePath"] = exercise.imagePath as AnyObject?
         
         //return output dict
         return output
