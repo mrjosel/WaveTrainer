@@ -53,7 +53,7 @@ class WorkoutConfigCoreSelectorViewController: UIViewController, UITableViewDele
         //create VC
         let exerciseVC = self.storyboard?.instantiateViewController(withIdentifier: "ExerciseListViewController") as! ExerciseListViewController
         
-        //
+        //TODO: SEND CORE LIFTS TO NEXT VC WITH ORDERS SET
         
         //move onto exercise listVC
         self.navigationController?.pushViewController(exerciseVC, animated: true)
