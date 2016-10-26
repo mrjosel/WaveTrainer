@@ -98,6 +98,15 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     //edit rows of table and allow new placement
     func editDoneButtonPressed(_ sender: UIBarButtonItem) {
         
+        //if already editing when button is pressed, then editing is finished ("Done" button), then set exercise order values
+        if self.tableView.isEditing {
+            for i in 0..<self.exercises.count {
+                //get exercise at index, set exercise order to index value
+                let exercise = self.exercises[i]
+                exercise.order = i as NSNumber?
+            }
+        }
+        
         //toggle tableView editMode
         self.tableView.setEditing(!self.tableView.isEditing, animated: true)
         
@@ -130,8 +139,9 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
             return
         }
 
-        //add to array, reload table
+        //add to array, set exercise order, reload table
         self.exercises.append(newExercise)
+        newExercise.order = self.exercises.count - 1 as NSNumber
         self.tableView.reloadData()
         
     }
@@ -208,11 +218,11 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     //adjust order of exercises in array
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        //get exercise at sourceIndexPath
-        let exercise = self.exercises.remove(at: sourceIndexPath.row)
-        
-        //insert exercise at destinationIndexPath
-        self.exercises.insert(exercise, at: destinationIndexPath.row)
+//        //get exercise at sourceIndexPath
+//        let exercise = self.exercises.remove(at: sourceIndexPath.row)
+//        
+//        //insert exercise at destinationIndexPath
+//        self.exercises.insert(exercise, at: destinationIndexPath.row)
         
     }
     
