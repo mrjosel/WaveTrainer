@@ -30,6 +30,9 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
     //exercise array
     var exercises = [Exercise]()
     
+    //edit/done button used while editing
+    var editDoneButton : UIBarButtonItem!
+    
 //    //fetched results controller for Workout objects
 //    lazy var exerciseFetchedResultsController : NSFetchedResultsController<Exercise> = { () -> NSFetchedResultsController<Exercise> in
 //        
@@ -54,7 +57,11 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         
         //add button to add exercises
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addExercise(_:)))
-        self.navigationItem.setRightBarButton(addButton, animated: false)
+//        self.navigationItem.setRightBarButton(addButton, animated: false)
+        
+        //edit button for adjusting placement of exercises
+        self.editDoneButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editDoneButtonPressed(_:)))
+        self.navigationItem.setRightBarButtonItems([addButton, self.editDoneButton], animated: false)
         
         //set title
         self.navigationItem.title = "Exercises"
@@ -88,6 +95,22 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         self.present(controller, animated: true, completion: nil)
     }
     
+    //edit rows of table and allow new placement
+    func editDoneButtonPressed(_ sender: UIBarButtonItem) {
+        
+        //toggle tableView editMode
+        self.tableView.setEditing(!self.tableView.isEditing, animated: true)
+        
+        //change button type depending on mode
+        self.editDoneButton = !self.tableView.isEditing ? UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(self.editDoneButtonPressed(_:))) : UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.editDoneButtonPressed(_:)))
+        DispatchQueue.main.async {
+            _ = self.navigationItem.rightBarButtonItems?.popLast()
+            self.navigationItem.rightBarButtonItems?.append(self.editDoneButton)
+        }
+
+        
+    }
+    
     //method called by picker controller, handles when user selects exercise in pickerVC
     func exercisePicker(didPickExercise exercise: Exercise?) {
         
@@ -95,8 +118,7 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         guard let pickedExercise = exercise as Exercise? else {
             return
         }
-        //TODO: WHY DOES THIS BREAK?
-        //      RECURSION (INIFINITE LOOP?) http://stackoverflow.com/questions/21212988/xcode-continuously-crashes-given-thread-1-exc-bad-access-code-2-address-0x8
+        
         //create dictionary for new exercise
         let data = Exercise.makeExerciseDict(pickedExercise)
         let dict = [WorkoutManagerClient.Keys.DATA : data]
@@ -149,8 +171,9 @@ class ExerciseListViewController : UIViewController, UITableViewDelegate, UITabl
         //set reuseID
         let reuseID = "ExerciseCell"
         
-        //create cell
+        //create cell, set showsReorderControl to true to allow for moving cells about in edit mode
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath)
+        cell.showsReorderControl = true
         
         
         // Configure the cell and return
